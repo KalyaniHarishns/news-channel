@@ -57,7 +57,7 @@ const NewsApp = () => {
                        
                             <img className='news-img' src={getImageUrl(article.urlToImage)} alt={article.title || 'News Image'} />
                         
-                        {console.log(article)}
+                        {/* {console.log(article)} */}
                         <a href={article.url} target="_blank" rel="noopener noreferrer">
                             <h2>{article.title}</h2>
                         </a>

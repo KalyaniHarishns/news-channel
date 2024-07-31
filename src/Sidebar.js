@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
-
 const Sidebar = () => {
   const navigate = useNavigate();
 
@@ -15,8 +14,11 @@ const Sidebar = () => {
     <div className="sidebar">
       <ul>
         <li>
-          <Link to="/News">Home</Link>
+          <Link to="/News">Home</Link> 
+          
+         
         </li>
+        
         <li>
           <Link to="/saved">Saved</Link>
         </li>
@@ -33,6 +35,7 @@ const Sidebar = () => {
           </button>
         </li>
       </ul>
+    
     </div>
   );
 };
