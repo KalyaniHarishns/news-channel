@@ -1,41 +1,32 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
 import './Sidebar.css';
 
-import logo from './logo.png';
 import channelImage1 from './Images/abcNews.jpg';
-import channelImage2 from './Images/stockImage.jpg';
-import channelImage3 from './Images/News7.jpg';
-import channelImage4 from './Images/BBCNews.jpg';
-import channelImage5 from './Images/News.jpg';
-import channelImage6 from './Images/FoxImage.jpg';
-import image1 from './Images/BreakingNews1.jpg';
-import image2 from './Images/MorningNews.jpg';
-import image3 from './Images/stockImage.jpg';
-import image4 from './Images/skyNews.jpg';
-import image5 from './Images/WorldNews.jpg';
-import image6 from './Images/Live.jpg';
+import channelImage2 from './Images/ABC News.jpg';
+import channelImage3 from './Images/Aftenpost.jpg';
+import channelImage4 from './Images/Aljazeera.jpg';
+import channelImage5 from './Images/Ansa.it.jpg';
+import channelImage6 from './Images/Argaam.jpg';
+import channelImage7 from './Images/ARS.jpg';
+import channelImage8 from './Images/AryNews.jpg';
+import channelImage9 from './Images/AssociatedPress.jpg';
+import channelImage10 from './Images/AFR.jpg';
+import channelImage11 from './Images/Axios.jpg';
+import channelImage12 from './Images/BBCNews.jpg';
+import channelImage13 from './Images/BBCSport.png';
+import channelImage14 from './Images/Bild.jpg';
+import channelImage15 from './Images/BlastingNewsBR.png';
 
 const staticImages = [
-  channelImage1,
-  channelImage2,
-  channelImage3,
-  channelImage4,
-  channelImage5,
-  channelImage6,
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  image6
-];
-
-const App = () => {
+  channelImage1,channelImage2,channelImage3,channelImage4, channelImage5,channelImage6,channelImage7,
+  channelImage8, channelImage9,channelImage10, channelImage11, channelImage12,channelImage13, channelImage14, 
+  channelImage15];
+   const App = () => {
   const [channels, setChannels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAllChannels, setShowAllChannels] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,7 +42,10 @@ const App = () => {
     fetchData();
   }, []);
 
-  const visibleChannels = showAllChannels ? channels : channels.slice(0, 6);
+
+  const maxChannelsToShow = 15;
+  const visibleChannels = showAllChannels ? channels.slice(0, maxChannelsToShow) : channels.slice(0, Math.min(channels.length, maxChannelsToShow));
+
   return (
     <div className="App">
       <main className="App-main">
@@ -85,7 +79,7 @@ const App = () => {
             </div>
           </div>
         </section>
-         </main>
+      </main>
     </div>
   );
 };

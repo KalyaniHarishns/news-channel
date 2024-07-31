@@ -1,90 +1,96 @@
-
+/* General Styles */
 .App {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-sizing: border-box;
-    height: 100vh;
-  }
-  
-  .App-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .section {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .section-header h2 {
-    margin: 0;
-  }
-  
-  .see-all-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .see-all-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .channels-list-container {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    max-width: 100%;
-  }
-  
-  .channels-list {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .channel {
-    flex: 0 0 auto;
-    width: 200px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .channel:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .channel-img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  .channel-name {
-    padding: 10px;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  
-  
-  
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 0; /* Removed padding to check for spacing issues */
+  margin: 0; /* Ensure no extra margin */
+}
+
+.App-main {
+  max-width: 1200px;
+  margin: 0 auto; /* Center the main container */
+  padding: 0 20px; /* Add horizontal padding for responsiveness */
+}
+
+/* Section Styles */
+.section {
+  margin: 20px 0; /* Add vertical margin */
+}
+
+/* Section Header Styles */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.see-all-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.see-all-button:hover {
+  background-color: #0056b3;
+}
+
+/* Channels List Container Styles */
+.channels-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0; /* Remove any extra padding */
+  margin: 0 auto; /* Center the list container */
+}
+
+/* Channels List Styles */
+.channels-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0; /* Remove any extra padding */
+  margin: 0 auto; /* Center the list container */
+}
+
+/* Channel Styles */
+.channel {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 150px;
+  text-align: center;
+}
+
+.channel:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.channel-img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.channel-name {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}

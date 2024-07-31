@@ -7,14 +7,24 @@ import './Sidebar.css';
 import Sidebar from './Sidebar.js';
 import image from './NewsImage.jpg';
 import logo from './logo.png';
-
+import userPhoto from './userPhoto.jpg'; 
+import { useNavigate } from 'react-router-dom';
 
 import channelImage1 from './Images/abcNews.jpg';
-import channelImage2 from './Images/stockImage.jpg';
-import channelImage3 from './Images/News7.jpg';
-import channelImage4 from './Images/BBCNews.jpg';
-import channelImage5 from './Images/News.jpg';
-import channelImage6 from './Images/FoxImage.jpg';
+import channelImage2 from './Images/ABC News.jpg';
+import channelImage3 from './Images/Aftenpost.jpg';
+import channelImage4 from './Images/Aljazeera.jpg';
+import channelImage5 from './Images/Ansa.it.jpg';
+import channelImage6 from './Images/Argaam.jpg';
+import channelImage7 from './Images/ARS.jpg';
+import channelImage8 from './Images/AryNews.jpg';
+import channelImage9 from './Images/AssociatedPress.jpg';
+import channelImage10 from './Images/AFR.jpg';
+import channelImage11 from './Images/Axios.jpg';
+import channelImage12 from './Images/BBCNews.jpg';
+import channelImage13 from './Images/BBCSport.png';
+import channelImage14 from './Images/Bild.jpg';
+import channelImage15 from './Images/BlastingNewsBR.png';
 
 import image1 from './Images/BreakingNews1.jpg';
 import image2 from './Images/MorningNews.jpg';
@@ -24,14 +34,9 @@ import image5 from './Images/WorldNews.jpg';
 import image6 from './Images/Live.jpg';
 
 const channelImages = [
-  channelImage1,
-  channelImage2,
-  channelImage3,
-  channelImage4,
-  channelImage5,
-  channelImage6
-];
-
+  channelImage1,channelImage2,channelImage3, channelImage4,channelImage5, channelImage6,channelImage7,
+  channelImage8,channelImage9, channelImage10,channelImage11,channelImage12,channelImage13,channelImage14,
+  channelImage15];
 const newsImages = [
   image1,
   image2,
@@ -45,12 +50,18 @@ const App = () => {
   const [channels, setChannels] = useState([]);
   const [todayNews, setTodayNews] = useState([]);
   const [featuredNews, setFeaturedNews] = useState([]);
-  const [allNews, setAllNews] = useState([]); 
+  const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredNews, setFilteredNews] = useState([]);
   const [showAllChannels, setShowAllChannels] = useState(false);
   const [showAllTodayNews, setShowAllTodayNews] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/login'); 
+  };
 
   const sliderRef = useRef(null);
 
@@ -60,16 +71,14 @@ const App = () => {
         const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         setChannels(channelsResponse?.data?.sources);
 
-        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
-        const todayNewsData = todayNewsResponse?.data?.articles || [];
+         const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+         const todayNewsData = todayNewsResponse?.data?.articles || [];
 
         const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         const featuredNewsData = featuredNewsResponse?.data?.articles || [];
 
-        setTodayNews(todayNewsData);
+         setTodayNews(todayNewsData);
         setFeaturedNews(featuredNewsData);
-        
-        
         setAllNews([...todayNewsData, ...featuredNewsData]);
 
         setLoading(false);
@@ -83,7 +92,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-  
     const filteredArticles = allNews.filter(article =>
       article.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -132,11 +140,21 @@ const App = () => {
     sliderRef.current.slickNext();
   };
 
-  const visibleChannels = showAllChannels ? channels : channels.slice(0, 6);
+  const maxChannelsToShow = 15;
+  const visibleChannels = showAllChannels ? channels.slice(0, maxChannelsToShow) : channels.slice(0, Math.min(channels.length, maxChannelsToShow));
+
 
   const getChannelImage = (index) => channelImages[index % channelImages.length];
 
   const getNewsImage = (index) => newsImages[index % newsImages.length];
+
+  const handleLogoClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="App">
@@ -152,10 +170,9 @@ const App = () => {
               className="search-input"
             />
             <button onClick={() => setSearchQuery(searchQuery)} className="search-button">Search</button>
-          
           </div>
-          <div className='logo'>
-          <img src={logo} className='logo' alt='Logo'/>
+          <div className='logo' onClick={handleLogoClick}>
+            <img src={logo} className='logo' alt='Logo'/>
           </div>
         </div>
       </header>
@@ -266,12 +283,27 @@ const App = () => {
               )}
             </Slider>
             <div className="carousel-controls">
-              <button className="carousel-control left" onClick={scrollLeft}>◀</button>
-              <button className="carousel-control right" onClick={scrollRight}>▶</button>
-            </div>
+  <button className="carousel-control left" onClick={scrollLeft}>←</button> {/* Left arrow */}
+  <button className="carousel-control right" onClick={scrollRight}>→</button> {/* Right arrow */}
+</div>
+
           </div>
         </section>
       </main>
+
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <span className="close-button" onClick={handleCloseModal}>&times;</span>
+            <div className="modal-header">
+              <img src={userPhoto} alt="User" className="modal-photo" />
+              <h2>Kalyani</h2>
+              <p>kalyani@gmail.com</p>
+            </div>
+            <button onClick={handleLogout} className="logout-button">Logout</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
