@@ -8,7 +8,7 @@ const NewsApp = () => {
 
     const fetchNews = useCallback(async () => {
         try {
-            const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+            const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
             const latestNews = response.data.articles;
             setLastFetched(Date.now());
 

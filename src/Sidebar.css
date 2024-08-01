@@ -80,7 +80,6 @@
   justify-content: center;
   color: black;
   font-weight: bold;
-  border:white;
 }
 
 
@@ -293,14 +292,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 5px;
-  gap:30px;
+  padding: 0 15px; 
 }
 
 .slick-slide img {
   max-width: 100%;
   border-radius: 5px;
 }
+
+.slick-track {
+  display: flex;
+  align-items: center; 
+}
+
 
 .slick-dots {
   display: none !important;
@@ -358,6 +362,7 @@
   cursor: pointer;
   margin-right: 20px;
   transition: transform 0.3s ease;
+ 
 }
 
 .logo:hover {
@@ -394,10 +399,56 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top:-12px;
 }
 
 .search-button:hover {
   background-color: #0056b3;
+}
+/* .featured-news-container {
+  position: relative;
+  width: 100%;
+  overflow-x: auto; 
+  white-space: nowrap; 
+  padding: 10px 0;
+} */
+
+.featured-news-container::-webkit-scrollbar {
+  display: none; 
+}
+
+.news-item1 {
+  display: inline-block; 
+  width: 300px; 
+  margin-right: 20px; 
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  box-sizing: border-box; 
+}
+
+.news-item1:hover {
+  border: 1px solid black;
+}
+
+.news-item-img1 {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.news-item-img1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-item-content {
+  padding: 10px;
 }
 
 @media (max-width: 992px) {
@@ -413,16 +464,20 @@
   }
 
   .search-input {
-    max-width: 80%;
+    max-width: 40%;
     margin-bottom: 10px;
   }
-
+  .logo{
+    margin-top:-50px;
+    margin-left:80px;
+    }
   .news-item {
     width: calc(50% - 20px);
   }
 
   .sidebar {
     width: 160px;
+    margin-right:300px;
   }
 
   .App {
@@ -435,12 +490,44 @@
     width: 100%;
     margin-bottom: 10px;
   }
-
+ .logo{
+  margin-top:-50px;
+  margin-left:80px;
+  }
+ 
   .news-item {
     width: calc(100% - 20px);
   }
-
-  .App {
-    margin-left: 0;
+  .sidebar {
+    width: 160px;
+    margin-right:300px;
   }
+  .App {
+    margin-left: 180px;
+  }
+}
+@media (max-width: 576px) {
+  .search-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .search-button{
+    width:50px;
+    
+  }
+  .news-item {
+    width: calc(100% - 20px);
+  }
+  .sidebar {
+    width: 150px;
+}
+.App {
+  margin-left: 80px;
+  width: 80%;
+}
+
+  .logo{
+    margin-top:-50px;
+    margin-left:75px;
+    }
 }

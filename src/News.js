@@ -68,18 +68,19 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
-        setChannels(channelsResponse?.data?.sources);
+       
+        // const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        // setChannels(channelsResponse?.data?.sources);
 
-         const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
-         const todayNewsData = todayNewsResponse?.data?.articles || [];
+        //  const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        //  const todayNewsData = todayNewsResponse?.data?.articles || [];
 
-        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
-        const featuredNewsData = featuredNewsResponse?.data?.articles || [];
+        // const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        // const featuredNewsData = featuredNewsResponse?.data?.articles || [];
 
-         setTodayNews(todayNewsData);
-        setFeaturedNews(featuredNewsData);
-        setAllNews([...todayNewsData, ...featuredNewsData]);
+        // setTodayNews(todayNewsData);
+        // setFeaturedNews(featuredNewsData);
+        // setAllNews([...todayNewsData, ...featuredNewsData]);
 
         setLoading(false);
       } catch (error) {
@@ -102,6 +103,13 @@ const App = () => {
     setSearchQuery(event.target.value);
   };
 
+  const handleSearch = () => {
+    const filteredArticles = allNews.filter(article =>
+      article.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredNews(filteredArticles);
+  };
+
   const getImageUrl = (url) => url || image;
 
   const displayedNews = searchQuery ? filteredNews : todayNews;
@@ -112,8 +120,11 @@ const App = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1,
+   slidesToScroll: 1,
+   rowsToShow:1,
     arrows: false,
+    centerMode: true,  
+  centerPadding: '15px',
     responsive: [
       {
         breakpoint: 1024,
@@ -143,7 +154,6 @@ const App = () => {
   const maxChannelsToShow = 15;
   const visibleChannels = showAllChannels ? channels.slice(0, maxChannelsToShow) : channels.slice(0, Math.min(channels.length, maxChannelsToShow));
 
-
   const getChannelImage = (index) => channelImages[index % channelImages.length];
 
   const getNewsImage = (index) => newsImages[index % newsImages.length];
@@ -169,7 +179,7 @@ const App = () => {
               onChange={handleSearchInputChange}
               className="search-input"
             />
-            <button onClick={() => setSearchQuery(searchQuery)} className="search-button">Search</button>
+            <button onClick={handleSearch} className="search-button">Search</button>
           </div>
           <div className='logo' onClick={handleLogoClick}>
             <img src={logo} className='logo' alt='Logo'/>
@@ -217,6 +227,7 @@ const App = () => {
           </div>
           <div className="news-container">
             <div className="news-items">
+
               {topNews.length === 0 ? (
                 <p>No news available.</p>
               ) : (
@@ -283,10 +294,9 @@ const App = () => {
               )}
             </Slider>
             <div className="carousel-controls">
-  <button className="carousel-control left" onClick={scrollLeft}>←</button> {/* Left arrow */}
-  <button className="carousel-control right" onClick={scrollRight}>→</button> {/* Right arrow */}
-</div>
-
+              <button className="carousel-control left" onClick={scrollLeft}>←</button> 
+              <button className="carousel-control right" onClick={scrollRight}>→</button> 
+            </div>
           </div>
         </section>
       </main>
