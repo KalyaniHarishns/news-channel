@@ -1,108 +1,39 @@
-import React, { useState, useEffect } from 'react';
 
+import React from 'react';
+import { useNews } from './NewsContext'; 
+import './Saved.css'; 
 
-const SAMPLE_VIDEOS = [
-  {
-    id: 1,
-    title: 'Breaking News: Major Event',
-    description: 'A major event just occurred in the world of news.',
-    thumbnail: 'https://via.placeholder.com/200x100?text=Updated+Video+1', 
-    videoUrl: 'https://abcnews.go.com/Video'
-  },
-  {
-    id: 2,
-    title: 'Technology Update',
-    description: 'Latest advancements in technology.',
-    thumbnail: 'https://via.placeholder.com/200x100?text=Updated+Video+2', 
-    videoUrl: 'https://www.example.com/video2.mp4'
-  },
-  {
-    id: 3,
-    title: 'Sports Highlights',
-    description: 'Highlights from recent sports events.',
-    thumbnail: 'https://via.placeholder.com/200x100?text=Updated+Video+3', 
-    videoUrl: 'https://www.example.com/video3.mp4'
-  }
-];
-
-const App = () => {
-  const [savedVideos, setSavedVideos] = useState([]);
-  const [videoList, setVideoList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const storedVideos = JSON.parse(localStorage.getItem('savedVideos')) || [];
-    setSavedVideos(storedVideos);
-
-    const fetchVideos = async () => {
-      setLoading(true);
-      try {
-        setTimeout(() => {
-          setVideoList(SAMPLE_VIDEOS);
-          setLoading(false);
-        }, 1000); 
-      } catch (error) {
-        console.error('Error fetching videos:', error);
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchVideos();
-  }, []);
-
-  const handleSaveVideo = (video) => {
-    const newSavedVideos = [...savedVideos, video];
-    setSavedVideos(newSavedVideos);
-    localStorage.setItem('savedVideos', JSON.stringify(newSavedVideos));
-  };
-
-  const handleRemoveVideo = (id) => {
-    const updatedVideos = savedVideos.filter(video => video.id !== id);
-    setSavedVideos(updatedVideos);
-    localStorage.setItem('savedVideos', JSON.stringify(updatedVideos));
-  };
+const Saved = () => {
+  const { savedNews } = useNews(); 
 
   return (
-    <div>
-      <h1>Video List</h1>
-      <div className='video-list-1'>
-        {loading && <p>Loading videos...</p>}
-        {error && <p>Error fetching videos: {error}</p>}
-        {videoList.length === 0 ? (
-          <p>No videos available.</p>
+    <section className="section saved-news-section">
+      <div className="section-header">
+        <h2>Saved News</h2>
+      </div>
+      <div className="saved-news-container">
+        {savedNews.length === 0 ? (
+          <p>No saved news available.</p>
         ) : (
-          videoList.map((video) => (
-            <div key={video.id}>
-              <h3>{video.title}</h3>
-              <img src={video.thumbnail} alt={video.title} style={{ width: '200px' }} />
-              <p>{video.description}</p>
-              <a href={video.videoUrl} target="_blank" rel="noopener noreferrer">Watch Video</a>
-              <button onClick={() => handleSaveVideo(video)}>Save</button>
+          savedNews.map((article, index) => (
+            <div key={index} className="news-item">
+              <div className='news-item-img'>
+                <img
+                  src={article.urlToImage || './NewsImage.jpg'}
+                  alt={article.title || 'News Image'}
+                />
+              </div>
+              <div className='news-item-content'>
+                <h3 className="news-item-title">{article.title}</h3>
+                <p>{article.description}</p>
+                <a href={article.url} target="_blank" rel="noopener noreferrer">Read more</a>
+              </div>
             </div>
           ))
         )}
       </div>
-
-      <h2>Saved Videos</h2>
-      <div className='video-list-2'>
-        {savedVideos.length === 0 ? (
-          <p>No videos saved.</p>
-        ) : (
-          savedVideos.map((video) => (
-            <div key={video.id}>
-              <h3>{video.title}</h3>
-              <img src={video.thumbnail} alt={video.title} style={{ width: '200px' }} />
-              <p>{video.description}</p>
-              <a href={video.videoUrl} target="_blank" rel="noopener noreferrer">Watch Video</a>
-              <button onClick={() => handleRemoveVideo(video.id)}>Remove</button>
-            </div>
-          ))
-        )}
-      </div>
-    </div>
+    </section>
   );
 };
 
-export default App;
+export default Saved;

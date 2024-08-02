@@ -9,6 +9,7 @@ import image from './NewsImage.jpg';
 import logo from './logo.png';
 import userPhoto from './userPhoto.jpg'; 
 import { useNavigate } from 'react-router-dom';
+import { useNews } from './NewsContext'; 
 
 import channelImage1 from './Images/abcNews.jpg';
 import channelImage2 from './Images/ABC News.jpg';
@@ -57,6 +58,7 @@ const App = () => {
   const [showAllChannels, setShowAllChannels] = useState(false);
   const [showAllTodayNews, setShowAllTodayNews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addSavedNews } = useNews(); 
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -69,18 +71,18 @@ const App = () => {
     const fetchData = async () => {
       try {
        
-        // const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
-        // setChannels(channelsResponse?.data?.sources);
+        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        setChannels(channelsResponse?.data?.sources);
 
-        //  const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
-        //  const todayNewsData = todayNewsResponse?.data?.articles || [];
+         const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+         const todayNewsData = todayNewsResponse?.data?.articles || [];
 
-        // const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
-        // const featuredNewsData = featuredNewsResponse?.data?.articles || [];
+        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        const featuredNewsData = featuredNewsResponse?.data?.articles || [];
 
-        // setTodayNews(todayNewsData);
-        // setFeaturedNews(featuredNewsData);
-        // setAllNews([...todayNewsData, ...featuredNewsData]);
+        setTodayNews(todayNewsData);
+        setFeaturedNews(featuredNewsData);
+        setAllNews([...todayNewsData, ...featuredNewsData]);
 
         setLoading(false);
       } catch (error) {
@@ -242,6 +244,7 @@ const App = () => {
                     </div>
                     <div className='news-item-content'>
                       <h3 className="news-item-title">{article.title}</h3>
+                      <button onClick={() => addSavedNews(article)} className="save-button">Save</button> 
                     </div>
                   </div>
                 ))
@@ -261,6 +264,7 @@ const App = () => {
                     </div>
                     <div className='news-item-content'>
                       <h3 className="news-item-title">{article.title}</h3>
+                      <button onClick={() => addSavedNews(article)} className="save-button">Save</button> 
                     </div>
                   </div>
                 ))
@@ -286,10 +290,11 @@ const App = () => {
                         alt={article.title || 'News Image'}
                       />
                     </div>
-                    <div className='news-item-content'>
+                  
                       <h3 className="news-item-title1">{article.title}</h3>
+                      <button onClick={() => addSavedNews(article)} className="save-button">Save</button> 
                     </div>
-                  </div>
+                 
                 ))
               )}
             </Slider>

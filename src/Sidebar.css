@@ -1,5 +1,5 @@
 
-.sidebar {
+ .sidebar {
   background-color: white;
   overflow: hidden;
   width: 180px;
@@ -80,8 +80,86 @@
   justify-content: center;
   color: black;
   font-weight: bold;
+} 
+/* Sidebar container */
+/* .sidebar {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: auto;
+  transition: transform 0.3s ease-in-out;
+} */
+
+/* Sidebar open and closed states */
+.sidebar.open {
+  transform: translateX(0);
 }
 
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+/* Sidebar header styles */
+/* .sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #444;
+} */
+
+/* .globe img {
+  width: 40px;
+  height: auto;
+} */
+
+/* Hamburger button styles */
+.hamburger {
+  display: none; /* Hide hamburger button by default */
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+}
+
+/* List styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  width: 100%;
+  margin-left: -20px;
+}
+
+li a, .logout-button {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+/* Show hamburger button on smaller screens */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}
+@media (max-width: 576px) {
+  .hamburger {
+    display: block;
+  }
+}
 
 
 
@@ -399,19 +477,19 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top:-12px;
+  margin-top:0px;
 }
 
 .search-button:hover {
   background-color: #0056b3;
 }
-/* .featured-news-container {
+.featured-news-container {
   position: relative;
   width: 100%;
   overflow-x: auto; 
   white-space: nowrap; 
   padding: 10px 0;
-} */
+} 
 
 .featured-news-container::-webkit-scrollbar {
   display: none; 
@@ -429,6 +507,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   box-sizing: border-box; 
+  height:270px;
 }
 
 .news-item1:hover {
@@ -498,10 +577,10 @@
   .news-item {
     width: calc(100% - 20px);
   }
-  .sidebar {
+  /* .sidebar {
     width: 160px;
     margin-right:300px;
-  }
+  } */
   .App {
     margin-left: 180px;
   }
@@ -511,16 +590,23 @@
     width: 100%;
     margin-bottom: 10px;
   }
-  .search-button{
-    width:50px;
-    
-  }
+  
+  @media (max-width: 576px) {
+    .search-button {
+        width: 50%;
+        padding: 8px 10px;
+        font-size: 14px;
+        max-width: 60px;
+        margin-top:-15px;
+    }
+}
+
   .news-item {
     width: calc(100% - 20px);
   }
-  .sidebar {
+  /* .sidebar {
     width: 150px;
-}
+} */
 .App {
   margin-left: 80px;
   width: 80%;

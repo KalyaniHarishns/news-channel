@@ -29,7 +29,7 @@
 
 
 .news-item1 {
-  padding: 10px;
+  /* padding: 10px;
   border: 1px solid #ccc;
   border-radius: 50px;
   background-color: #f9f9f9;
@@ -37,7 +37,19 @@
   margin: 0 10px; 
   height:300px;
   flex-direction: column;
-  
+   */
+   display: inline-block; 
+   width: 300px; 
+   margin-right: 20px; 
+   background-color: #f0f0f0;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   overflow: hidden;
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+   cursor: pointer;
+   box-sizing: border-box; 
+   height:270px;
 }
 
 

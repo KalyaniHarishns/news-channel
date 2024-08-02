@@ -1,33 +1,30 @@
-
-
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import SignUp from './SignUp';
 import Sidebar from './Sidebar';
 import News from './News'; 
-import Explore from'./Explore';
-import Notifications from'./Notifications';
-import Saved from'./Saved';
-
+import Explore from './Explore';
+import Notifications from './Notifications';
+import Saved from './Saved'; // Default import
+import { useNews } from './NewsContext'; // Correct import path
 
 const App = () => {
+  const { savedNews, addSavedNews } = useNews();
+
   return (
     <Router>
       <Routes>
-      
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Sidebar" element={<Sidebar />} />
-        <Route path="/News" element={<News />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Explore" element={<Explore />} />
-        <Route path="/Notifications" element={<Notifications />} />
-        <Route path="/Saved" element={<Saved/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/news" element={<News addSavedNews={addSavedNews} />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/saved" element={<Saved savedNews={savedNews} />} />
       </Routes>
     </Router>
   );
 };
 
 export default App;
-
