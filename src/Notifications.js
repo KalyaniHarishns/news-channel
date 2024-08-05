@@ -2,24 +2,33 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import './Notifications.css';
 import image from './NewsImage.jpg';
+
 const NewsApp = () => {
     const [news, setNews] = useState([]);
     const [lastFetched, setLastFetched] = useState(null);
 
     const fetchNews = useCallback(async () => {
         try {
-            const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
-            const latestNews = response.data.articles;
+            
+            const response = await axios.get('/api/search', {
+                params: {
+                    'api-key': 'ba57ab6e-280b-465c-8972-89f0aece932d',
+                    'show-fields': 'thumbnail,trailText,headline',
+                    'page-size': 10,
+                    'order-by': 'newest',
+                },
+            });
+            const latestNews = response.data.response.results;
             setLastFetched(Date.now());
 
             if (lastFetched) {
                 const newNews = latestNews.filter(article => 
-                    !news.some(oldArticle => oldArticle.url === article.url)
+                    !news.some(oldArticle => oldArticle.id === article.id)
                 );
 
                 if (newNews.length > 0) {
                     newNews.forEach(article => {
-                        alert(`New Article: ${article.title}\n\n${article.description}\n\nRead more: ${article.url}`);
+                        alert(`New Article: ${article.headline}\n\n${article.trailText}\n\nRead more: ${article.webUrl}`);
                     });
                 }
             }
@@ -29,7 +38,9 @@ const NewsApp = () => {
             console.error('Error fetching news:', error);
         }
     }, [lastFetched, news]);
+
     const getImageUrl = (url) => url || image;
+
     useEffect(() => {
         fetchNews();
         const interval = setInterval(fetchNews, 60000);
@@ -53,17 +64,15 @@ const NewsApp = () => {
             <h1>Latest News</h1>
             <ul>
                 {news.map((article, index) => (
-                    <li key={index} className="news-item1" onClick={() => window.open(`${article.url}`, '_blank')}>
-                       
-                            <img className='news-img' src={getImageUrl(article.urlToImage)} alt={article.title || 'News Image'} />
-                        
-                         {console.log(article)} 
-                        <a href={article.url} target="_blank" rel="noopener noreferrer">
-                            <h2>{article.title}</h2>
+                    <li key={index} className="news-item1" onClick={() => window.open(`${article.webUrl}`, '_blank')}>
+                        <img className='news-img' src={getImageUrl(article.fields.thumbnail)} alt={article.headline || 'News Image'} />
+                        {console.log(article)}
+                        <a href={article.webUrl} target="_blank" rel="noopener noreferrer">
+                            <h2>{article.headline}</h2>
                         </a>
-                        <p>{article.description}</p>
-                        <p className="source"><strong>Source:</strong> {article.source.name}</p>
-                        <p className="published"><strong>Published:</strong> {formatDate(article.publishedAt)}</p>
+                        <p>{article.trailText}</p>
+                        <p className="source"><strong>Source:</strong> The Guardian</p>
+                        <p className="published"><strong>Published:</strong> {formatDate(article.webPublicationDate)}</p>
                     </li>
                 ))}
             </ul>

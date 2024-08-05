@@ -61,17 +61,17 @@
   gap: 10px;
   text-decoration: none;
   font-size: 19px;
+ 
+ width:150px;
   
-  width: calc(100% - 40px);
-  
-  margin-bottom: 10px;
+  margin-bottom: -10px;
   width:150px;
 }
 
 .logout-button {
   display: flex;
   align-items: center;
-  background-color: lightblue;
+  background-color: black;
   cursor: pointer;
   margin-top: auto;
   width: 150px;
@@ -80,21 +80,9 @@
   justify-content: center;
   color: black;
   font-weight: bold;
+ 
 } 
-/* Sidebar container */
-/* .sidebar {
-  width: 250px;
-  background-color: #333;
-  color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  overflow: auto;
-  transition: transform 0.3s ease-in-out;
-} */
 
-/* Sidebar open and closed states */
 .sidebar.open {
   transform: translateX(0);
 }
@@ -103,22 +91,9 @@
   transform: translateX(-100%);
 }
 
-/* Sidebar header styles */
-/* .sidebar-header {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  background-color: #444;
-} */
 
-/* .globe img {
-  width: 40px;
-  height: auto;
-} */
-
-/* Hamburger button styles */
 .hamburger {
-  display: none; /* Hide hamburger button by default */
+  display: none; 
   cursor: pointer;
   padding: 10px;
 }
@@ -131,7 +106,7 @@
   margin: 5px 0;
 }
 
-/* List styles */
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -149,7 +124,7 @@ li a, .logout-button {
   display: block;
 }
 
-/* Show hamburger button on smaller screens */
+
 @media (max-width: 768px) {
   .hamburger {
     display: block;
@@ -269,27 +244,28 @@ li a, .logout-button {
   background-color: #0056b3;
 }
 
-.channels-list-container {
+.channels-list-container1 {
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
   max-width: 100%;
 }
 
-.channels-list {
+.channels-list1 {
   display: flex;
   gap: 20px;
 }
 
 .channel {
   flex: 0 0 auto;
-  width: 200px;
+  width: 1000px;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
 }
 
 .channel:hover {
@@ -298,8 +274,8 @@ li a, .logout-button {
 }
 
 .channel-img {
-  width: 100%;
-  height: 150px;
+  width: 80%;
+  height: 120px;
   object-fit: cover;
 }
 
@@ -432,6 +408,7 @@ li a, .logout-button {
   background-color: #fff;
   border-bottom: 2px solid #ccc;
   position: relative;
+  height:40px;
 }
 
 .logo {
@@ -494,7 +471,14 @@ li a, .logout-button {
 .featured-news-container::-webkit-scrollbar {
   display: none; 
 }
-
+.save-button1{
+  text-align:center;
+  margin-left:120px;
+}
+.save-button2{
+  text-align:center;
+  margin-left:120px;
+}
 .news-item1 {
   display: inline-block; 
   width: 300px; 
@@ -561,6 +545,7 @@ li a, .logout-button {
 
   .App {
     margin-left: 180px;
+    
   }
 }
 
@@ -577,10 +562,7 @@ li a, .logout-button {
   .news-item {
     width: calc(100% - 20px);
   }
-  /* .sidebar {
-    width: 160px;
-    margin-right:300px;
-  } */
+  
   .App {
     margin-left: 180px;
   }
@@ -604,9 +586,7 @@ li a, .logout-button {
   .news-item {
     width: calc(100% - 20px);
   }
-  /* .sidebar {
-    width: 150px;
-} */
+  
 .App {
   margin-left: 80px;
   width: 80%;

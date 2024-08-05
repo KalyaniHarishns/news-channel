@@ -6,8 +6,8 @@ import Sidebar from './Sidebar';
 import News from './News'; 
 import Explore from './Explore';
 import Notifications from './Notifications';
-import Saved from './Saved'; // Default import
-import { useNews } from './NewsContext'; // Correct import path
+import Saved from './Saved'; 
+import { useNews } from './NewsContext'; 
 
 const App = () => {
   const { savedNews, addSavedNews } = useNews();

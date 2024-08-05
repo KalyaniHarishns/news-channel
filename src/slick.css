@@ -2,24 +2,27 @@
 .slick-slider,
 .slick-list,
 .slick-track {
-  position: relative;
+  position: absolute;
   display: flex;
   overflow: hidden;
+  flex-direction: column;
 }
 
 
 .slick-slide {
   float: left;
-  min-height: 100px;
+  min-height: 50px;
   padding: 0 10px; 
   gap:100px;
   width:100px;
+ 
 }
 
 
 .slick-track {
   display: flex; 
   align-items: center; 
+
 }
 
 
@@ -38,7 +41,7 @@
   height:300px;
   flex-direction: column;
    */
-   display: inline-block; 
+   display:flex; 
    width: 300px; 
    margin-right: 20px; 
    background-color: #f0f0f0;
@@ -50,6 +53,7 @@
    cursor: pointer;
    box-sizing: border-box; 
    height:270px;
+   flex-direction: row;
 }
 
 
