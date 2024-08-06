@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Explore.css';  
-
 import channelImage1 from './Images/abcNews.jpg';
 import channelImage2 from './Images/ABC News.jpg';
 import channelImage3 from './Images/Aftenpost.jpg';
@@ -51,34 +50,26 @@ const App = () => {
     <div className="App1">
       <main className="App-main1">
         <section className="section">
-          <div className="section-header">
-            <h2>Explore Channels</h2>
-            <button className="see-all-button" onClick={() => setShowAllChannels(prev => !prev)}>
-              {showAllChannels ? 'See Less' : 'See All'}
-            </button>
-          </div>
-          <div className="channels-list-container">
-            <div className="channels-list">
-              {loading ? (
-                <p>Loading channels...</p>
-              ) : (
-                visibleChannels.length > 0 && visibleChannels.map((channel, index) => (
-                  <div
-                    key={channel.id || index}
-                    className="channel"
-                    onClick={() => window.open(`${channel.url}`, '_blank')}
-                  >
-                    <img 
-                      src={staticImages[index % staticImages.length]} 
-                      alt={channel.name || 'Channel Image'} 
-                      className="channel-img" 
-                    />
-                    <div className="channel-name">{channel.name}</div>
-                  </div>
-                ))
-              )}
+          <div className="ExploreChannels-Header">
+            <h1>Explore Channels</h1>
+          
+           <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', alignItems: 'center'}}> 
+            {channels.map((channel, index) => {
+              return <div
+              key={channel.id || index}
+              className="ExploreChannel"
+              onClick={() => window.open(`${channel.url}`, '_blank')}
+            >
+              <img 
+                src={staticImages[index % staticImages.length]} 
+                alt={channel.name || 'Channel Image'} 
+                className="channel-img" 
+              />
+              <div className="channel-name">{channel.name}</div>
             </div>
+            })}
           </div>
+        </div>
         </section>
       </main>
     </div>

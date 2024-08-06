@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import './Sidebar.css';
 import Sidebar from './Sidebar.js';
 import image from './NewsImage.jpg';
-import logo from './logo.png';  
+import logo from './logo.png';
 import userPhoto from './userPhoto.jpg'; 
 import { useNavigate } from 'react-router-dom';
 import { useNews } from './NewsContext'; 
@@ -39,7 +39,6 @@ const channelImages = [
   channelImage8, channelImage9, channelImage10, channelImage11, channelImage12, channelImage13, channelImage14,
   channelImage15
 ];
-
 const newsImages = [
   image1, image2, image3, image4, image5, image6
 ];
@@ -50,46 +49,48 @@ const App = () => {
   const [featuredNews, setFeaturedNews] = useState([]);
   const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(''); 
   const [filteredNews, setFilteredNews] = useState([]);
   const [showAllChannels, setShowAllChannels] = useState(false);
   const [showAllTodayNews, setShowAllTodayNews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { addSavedNews } = useNews(); 
   const navigate = useNavigate();
-
   const handleLogout = () => {
     navigate('/login'); 
   };
 
   const sliderRef = useRef(null);
 
+  const getArticles = async (query) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
+      setAllNews(response?.data?.articles || []);
+      
+      const filteredArticles = response?.data?.articles.filter(article => {
+        // console.log(article.title.toLowerCase().includes(query.toLowerCase()))
+        return article.title.toLowerCase().includes(query.toLowerCase())}
+      ) || [];
+      setFilteredNews(filteredArticles);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiKey = 'pub_50136efed078bd6a48ddbc2ceac9df0ed69e6';
-        
-        
-        const channelsResponse = await axios.get(`https://newsdata.io/api/1/news?apikey=${apiKey}`);
-        console.log('Channels Response:', channelsResponse.data); 
-        if (channelsResponse.data && channelsResponse.data.results) {
-          setChannels(channelsResponse.data.results);
-        } else {
-          console.error('Unexpected channels response structure:', channelsResponse.data);
-        }
+        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        setChannels(channelsResponse?.data?.sources);
 
-      
-const todayNewsResponse = await axios.get(`https://newsdata.io/api/1/news?country=us&apikey=${apiKey}`);
-const todayNewsData = todayNewsResponse?.data?.results || [];  
+        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        setTodayNews(todayNewsResponse?.data?.articles);
 
-
-const featuredNewsResponse = await axios.get(`https://newsdata.io/api/1/news?q=featured&apikey=${apiKey}`);
-const featuredNewsData = featuredNewsResponse?.data?.results || [];  
-
-
-        setTodayNews(todayNewsData);
-        setFeaturedNews(featuredNewsData);
-        setAllNews([...todayNewsData, ...featuredNewsData]);
+         const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+         setFeaturedNews(featuredNewsResponse?.data?.articles);
 
         setLoading(false);
       } catch (error) {
@@ -102,21 +103,15 @@ const featuredNewsData = featuredNewsResponse?.data?.results || [];
   }, []);
 
   useEffect(() => {
-    const filteredArticles = allNews.filter(article =>
-      article.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredNews(filteredArticles);
-  }, [searchQuery, allNews]);
+    getArticles(searchQuery);
+  }, [searchQuery]);
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
   const handleSearch = () => {
-    const filteredArticles = allNews.filter(article =>
-      article.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredNews(filteredArticles);
+    getArticles(searchQuery);
   };
 
   const getImageUrl = (url) => url || image;
@@ -152,7 +147,6 @@ const featuredNewsData = featuredNewsResponse?.data?.results || [];
       }
     ]
   };
-  
 
   const scrollLeft = () => {
     sliderRef.current.slickPrev();
@@ -162,10 +156,10 @@ const featuredNewsData = featuredNewsResponse?.data?.results || [];
     sliderRef.current.slickNext();
   };
 
-  const maxChannelsToShow = 15;
-  const visibleChannels = showAllChannels ? channels.slice(0, maxChannelsToShow) : channels.slice(0, Math.min(channels.length, maxChannelsToShow));
+  const visibleChannels = showAllChannels ? channels : channels.slice(0, 7);
 
   const getChannelImage = (index) => channelImages[index % channelImages.length];
+
   const getNewsImage = (index) => newsImages[index % newsImages.length];
 
   const handleLogoClick = () => {
@@ -226,6 +220,7 @@ const featuredNewsData = featuredNewsResponse?.data?.results || [];
                       alt={channel.name || 'Channel Image'} 
                       className="channel-img" 
                     />
+                    {/* {console.log(channel)} */}
                     <div className="channel-name">{channel.name}</div>
                   </div>
                 ))
@@ -257,7 +252,9 @@ const featuredNewsData = featuredNewsResponse?.data?.results || [];
                     </div>
                     <div className='news-item-content'>
                       <h3 className="news-item-title">{article.title}</h3>
-                      <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button> 
+                      <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
+                      </div> 
                     </div>
                   </div>
                 ))
@@ -277,7 +274,9 @@ const featuredNewsData = featuredNewsResponse?.data?.results || [];
                     </div>
                     <div className='news-item-content'>
                       <h3 className="news-item-title">{article.title}</h3>
-                      <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button> 
+                      <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button> 
+                      </div>
                     </div>
                   </div>
                 ))
@@ -299,7 +298,7 @@ const featuredNewsData = featuredNewsResponse?.data?.results || [];
                   <div key={index} className="news-item1" onClick={() => window.open(`${article?.url}`, '_blank')}>
                     <div className='news-item-img1'>
                       <img
-                        src={getImageUrl(article.urlToImage) || getNewsImage(index % newsImages.length)}
+                        src={getImageUrl(article.urlToImage)}
                         alt={article.title || 'News Image'}
                       />
                     </div>

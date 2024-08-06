@@ -27,8 +27,9 @@
   
 }
 .sidebar a:hover {
-  background-color:lightblue; 
-  border-radius:10px;
+  background-color: black;
+  border-radius: 10px;
+  color: white;
 }
 .sidebar-header h1 {
   margin: 0;
@@ -75,11 +76,12 @@
   cursor: pointer;
   margin-top: auto;
   width: 150px;
-  height: 30px;
+  height: 50px;
   border-radius: 20px;
   justify-content: center;
   color: black;
   font-weight: bold;
+  font-size:medium;
  
 } 
 
@@ -187,15 +189,7 @@ li a, .logout-button {
 }
 
 
-.logo {
-  cursor: pointer;
-  position: relative;
-}
 
-
-.logo {
-  cursor: pointer;
-}
 
 .App {
   font-family: Arial, sans-serif;
@@ -335,13 +329,24 @@ li a, .logout-button {
   margin: 10px 0;
 }
 
-.featured-news-container {
+/* .featured-news-container {
   position: relative;
   width: 100%;
   overflow: hidden;
   padding: 10px 0;
-}
+} */
+.featured-news-container {
+  position: relative;
+  width: 100%;
+  
+  white-space: nowrap; 
+  padding: 10px 0;
+  
+} 
 
+.featured-news-container::-webkit-scrollbar {
+  display: flex; 
+}
 .slick-slide {
   display: flex;
   justify-content: center;
@@ -357,6 +362,7 @@ li a, .logout-button {
 .slick-track {
   display: flex;
   align-items: center; 
+ 
 }
 
 
@@ -417,7 +423,7 @@ li a, .logout-button {
   cursor: pointer;
   margin-right: 20px;
   transition: transform 0.3s ease;
- 
+ margin-top:5px;
 }
 
 .logo:hover {
@@ -436,6 +442,7 @@ li a, .logout-button {
   align-items: center;
   gap: 10px;
   flex: 1 1 auto;
+  margin-top:20px;
 }
 
 .search-input {
@@ -454,33 +461,32 @@ li a, .logout-button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top:0px;
+  
 }
 
 .search-button:hover {
   background-color: #0056b3;
 }
-.featured-news-container {
-  position: relative;
-  width: 100%;
-  overflow-x: auto; 
-  white-space: nowrap; 
-  padding: 10px 0;
-} 
 
-.featured-news-container::-webkit-scrollbar {
-  display: none; 
-}
-.save-button1{
-  text-align:center;
-  margin-left:120px;
+.save-button1 ,.save-button{
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  height: 30px;
+  width: 60px;
+  border-radius: 10px;
 }
 .save-button2{
-  text-align:center;
-  margin-left:120px;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  height: 30px;
+  width: 60px;
+  border-radius: 10px;
+  
 }
 .news-item1 {
-  display: inline-block; 
+  
   width: 300px; 
   margin-right: 20px; 
   background-color: #f0f0f0;
@@ -525,7 +531,7 @@ li a, .logout-button {
     width: 80%;
     margin-bottom: 10px;
   }
-
+ 
   .search-input {
     max-width: 40%;
     margin-bottom: 10px;
@@ -571,6 +577,7 @@ li a, .logout-button {
   .search-input {
     width: 100%;
     margin-bottom: 10px;
+    margin-top:20px;
   }
   
   @media (max-width: 576px) {
@@ -579,7 +586,7 @@ li a, .logout-button {
         padding: 8px 10px;
         font-size: 14px;
         max-width: 60px;
-        margin-top:-15px;
+        margin-top:10px;
     }
 }
 
@@ -591,7 +598,12 @@ li a, .logout-button {
   margin-left: 80px;
   width: 80%;
 }
-
+@media (max-width: 576px) {
+  .App {
+    margin-left: 0px;
+    width: 100%;
+  }
+}
   .logo{
     margin-top:-50px;
     margin-left:75px;
