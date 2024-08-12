@@ -8,6 +8,7 @@ import Sidebar from './Sidebar.js';
 import image from './NewsImage.jpg';
 import logo from './logo.png';
 import userPhoto from './userPhoto.jpg'; 
+
 import { useNavigate } from 'react-router-dom';
 import { useNews } from './NewsContext'; 
 
@@ -61,6 +62,11 @@ const App = () => {
   };
 
   const sliderRef = useRef(null);
+  const users = [
+    { id: 1, name: 'Kalyani', email: 'kalyani@gmail.com', photo: userPhoto },
+   
+    
+  ];
 
   const getArticles = async (query) => {
     setLoading(true);
@@ -309,8 +315,8 @@ const App = () => {
               )}
             </Slider>
             <div className="carousel-controls">
-              <button className="carousel-control left" onClick={scrollLeft}>←</button> 
-              <button className="carousel-control right" onClick={scrollRight}>→</button> 
+              <button className="carousel-control left" onClick={scrollLeft}>{"<"}</button> 
+              <button className="carousel-control right" onClick={scrollRight}>{">"}</button> 
             </div>
           </div>
         </section>

@@ -9,8 +9,7 @@ const NewsApp = () => {
 
     const fetchNews = useCallback(async () => {
         try {
-            
-            const response = await axios.get('/api/search', {
+          const response = await axios.get('/api/search', {
                 params: {
                     'api-key': 'ba57ab6e-280b-465c-8972-89f0aece932d',
                     'show-fields': 'thumbnail,trailText,headline',

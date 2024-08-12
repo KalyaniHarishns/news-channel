@@ -329,12 +329,7 @@ li a, .logout-button {
   margin: 10px 0;
 }
 
-/* .featured-news-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding: 10px 0;
-} */
+
 .featured-news-container {
   position: relative;
   width: 100%;
@@ -371,12 +366,12 @@ li a, .logout-button {
 }
 
 .carousel-controls {
-  position: absolute;
+  position: relative;
   bottom: 5px;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+ 
 }
 
 .carousel-control {

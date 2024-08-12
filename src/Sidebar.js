@@ -50,9 +50,10 @@ const Sidebar = () => {
           <Link to="/Notifications">Notifications </Link>
         </li>
         <li>
-          <button onClick={handleLogout} className="logout-button">
-            Logout
-          </button>
+          <Link to="/Settings">Settings </Link>
+        </li>
+        <li>
+        
         </li>
       </ul>
     </div>}
