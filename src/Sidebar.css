@@ -1,6 +1,6 @@
 
  .sidebar {
-  background-color: white;
+  background-color: #f9f9f9;
   overflow: hidden;
   width: 180px;
   display: flex;
@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  background-color: black;
+  background-color: lightseagreen;
   padding: 10px;
   border-radius: 15px;
   width:130px;
@@ -27,7 +27,7 @@
   
 }
 .sidebar a:hover {
-  background-color: black;
+  background-color:lightseagreen;
   border-radius: 10px;
   color: white;
 }
@@ -36,7 +36,7 @@
   font-size: 24px;
   font-weight: italic;
   color: white;
-  background-color: black;
+  
   border-radius: 15px;
   margin-right: 10px;
 }
@@ -72,7 +72,7 @@
 .logout-button {
   display: flex;
   align-items: center;
-  background-color: black;
+  background-color: lightseagreen;
   cursor: pointer;
   margin-top: auto;
   width: 150px;
@@ -193,7 +193,7 @@ li a, .logout-button {
 
 .App {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #f9f9f9;
   padding: 20px;
   margin-left: 200px;
   box-sizing: border-box;

@@ -1,0 +1,131 @@
+.profile-page {
+    width: 60%; /* Adjust width as needed */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .profile-pic-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-pic {
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .edit-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .edit-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .save-button, .cancel-button, .edit-button, .remove-button, .create-profile-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .save-button {
+    background-color: #007bff;
+    color: #fff;
+    width:100px;
+    text-align:center;
+    height:50px;
+  }
+  
+  .cancel-button {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .edit-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .remove-button {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .create-profile-button {
+    background-color: #28a745; /* Green color for create profile */
+    color: #fff;
+  }
+  
+  .forgot-password-button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .forgot-password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    max-width: 90%;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .submit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .container{
+    display:flex;
+    gap:40px;
+  }

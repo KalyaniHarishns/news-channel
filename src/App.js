@@ -8,7 +8,7 @@ import Explore from './Explore';
 import Notifications from './Notifications';
 import Saved from './Saved'; 
 import { useNews } from './NewsContext'; 
-
+import  Settings from './Settings';
 const App = () => {
   const { savedNews, addSavedNews } = useNews();
 
@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/explore" element={<Explore />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/saved" element={<Saved savedNews={savedNews} />} />
+        <Route path="/Settings" element={<Settings/>} />
       </Routes>
     </Router>
   );
