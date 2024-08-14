@@ -9,6 +9,8 @@ import Notifications from './Notifications';
 import Saved from './Saved'; 
 import { useNews } from './NewsContext'; 
 import  Settings from './Settings';
+import ProfilePage from './ProfilePage';
+
 const App = () => {
   const { savedNews, addSavedNews } = useNews();
 
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/saved" element={<Saved savedNews={savedNews} />} />
         <Route path="/Settings" element={<Settings/>} />
+        <Route path="/ProfilePage" element={<ProfilePage/>} />
+      
       </Routes>
     </Router>
   );

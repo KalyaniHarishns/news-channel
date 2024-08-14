@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Settings.css';
-import defaultProfilePic from './Images/Icon.png';
+import defaultProfilePic from './Images/Icon.png'; // Default profile image
 
-const ProfilePage = () => {
+const API_KEY = '66bc528480be078635ab8d5b'; // Replace with your actual API key
+
+const Settings = () => {
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
@@ -13,28 +15,30 @@ const ProfilePage = () => {
   });
   const [editProfile, setEditProfile] = useState({ ...profile });
   const [profileImagePreview, setProfileImagePreview] = useState(defaultProfilePic);
-  const [isEditing, setIsEditing] = useState(false);
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [creatingProfile, setCreatingProfile] = useState(false);
+  const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
+  const [showForgotPassword, setShowForgotPassword] = useState(false); // State to control forgot password modal
+  const [creatingProfile, setCreatingProfile] = useState(false); // State to toggle create profile mode
 
   useEffect(() => {
-    fetchProfile();
+    // Fetch profile data when the component mounts
+    fetch('/api/user/profile', {
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`, // Include API key
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.profile) {
+        setProfile(data.profile);
+        setEditProfile(data.profile); // Initialize editProfile state
+        setProfileImagePreview(data.profile.profileImage || defaultProfilePic);
+      } else {
+        console.error('Profile data is missing or in an unexpected format:', data);
+      }
+    })
+    .catch(error => console.error('Error fetching profile data:', error));
   }, []);
-
-  const fetchProfile = () => {
-    fetch('/api/user/profile')
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.profile) {
-          setProfile(data.profile);
-          setEditProfile(data.profile);
-          setProfileImagePreview(data.profile.profileImage || defaultProfilePic);
-        } else {
-          console.error('Profile data is missing or in an unexpected format:', data);
-        }
-      })
-      .catch(error => console.error('Error fetching profile data:', error));
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,48 +61,55 @@ const ProfilePage = () => {
     e.preventDefault();
     const formData = new FormData();
     for (const key in editProfile) {
-      if (editProfile[key]) formData.append(key, editProfile[key]);
+      formData.append(key, editProfile[key]);
     }
 
     fetch(creatingProfile ? '/api/user/profile/create' : '/api/user/profile', {
       method: creatingProfile ? 'POST' : 'PUT',
-      body: formData
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${API_KEY}` // Include API key
+      }
     })
-      .then(response => response.json())
-      .then(data => {
-        if (creatingProfile) {
-          alert('Profile created successfully');
-          setCreatingProfile(false);
-        } else {
-          setProfile(editProfile);
-          alert('Profile updated successfully');
-        }
-        setIsEditing(false);
-      })
-      .catch(error => console.error('Error processing profile:', error));
+    .then(response => response.json())
+    .then(data => {
+      if (creatingProfile) {
+        alert('Profile created successfully');
+        setCreatingProfile(false); // Exit create mode
+      } else {
+        setProfile(editProfile); // Update profile with edited data
+        alert('Profile updated successfully');
+      }
+      setIsEditing(false); // Exit edit mode
+    })
+    .catch(error => console.error('Error processing profile:', error));
   };
 
   const handleRemove = () => {
     fetch('/api/user/profile', {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}` // Include API key
+      }
     })
-      .then(response => response.json())
-      .then(data => {
-        setProfile({
-          firstName: '',
-          lastName: '',
-          email: '',
-          password: '',
-          phoneNumber: '',
-          profileImage: ''
-        });
-        setProfileImagePreview(defaultProfilePic);
-        alert('Profile removed successfully');
-      })
-      .catch(error => console.error('Error removing profile:', error));
+    .then(response => response.json())
+    .then(() => {
+      setProfile({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        phoneNumber: '',
+        profileImage: ''
+      }); // Clear profile data
+      setProfileImagePreview(defaultProfilePic); // Reset profile image
+      alert('Profile removed successfully');
+    })
+    .catch(error => console.error('Error removing profile:', error));
   };
 
   const handleForgotPassword = () => {
+    // Logic to handle forgot password, e.g., show a modal or redirect to a password reset page
     setShowForgotPassword(true);
   };
 
@@ -108,32 +119,35 @@ const ProfilePage = () => {
 
     fetch('/api/user/forgot-password', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`, // Include API key if required
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ email })
     })
-      .then(response => response.json())
-      .then(data => {
-        alert('Password reset instructions have been sent to your email.');
-        setShowForgotPassword(false);
-      })
-      .catch(error => console.error('Error sending password reset instructions:', error));
+    .then(response => response.json())
+    .then(() => {
+      alert('Password reset instructions have been sent to your email.');
+      setShowForgotPassword(false); // Close modal or redirect
+    })
+    .catch(error => console.error('Error sending password reset instructions:', error));
   };
 
   return (
     <div className="profile-page">
       <div className="profile-header">
         <div className="profile-pic-container">
-          <img
-            src={profileImagePreview}
-            alt="Profile"
-            className="profile-pic"
-            onClick={() => document.getElementById('profile-image-upload').click()}
+          <img 
+            src={profileImagePreview} 
+            alt="Profile" 
+            className="profile-pic" 
+            onClick={() => document.getElementById('profile-image-upload').click()} // Trigger file input click on profile pic click
           />
           <input
             type="file"
             id="profile-image-upload"
             accept="image/*"
-            className="file-input"
+            className="file-input" // Hide file input but keep it accessible
             onChange={handleImageChange}
           />
         </div>
@@ -194,13 +208,13 @@ const ProfilePage = () => {
             <button type="submit" className="save-button3">
               {creatingProfile ? 'Create Profile' : 'Save Changes'}
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsEditing(false);
-                setCreatingProfile(false);
-                setEditProfile(profile);
-              }}
+            <button 
+              type="button" 
+              onClick={() => { 
+                setIsEditing(false); 
+                setCreatingProfile(false); 
+                setEditProfile(profile); // Reset editProfile to the current profile data
+              }} 
               className="cancel-button"
             >
               Cancel
@@ -220,6 +234,7 @@ const ProfilePage = () => {
 
       <button onClick={() => setCreatingProfile(true)} className="create-profile-button">Create New Profile</button>
 
+      {/* Forgot Password Modal */}
       {showForgotPassword && (
         <div className="forgot-password-modal">
           <div className="modal-content">
@@ -239,4 +254,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default Settings;

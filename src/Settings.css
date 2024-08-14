@@ -1,5 +1,5 @@
 .profile-page {
-    width: 60%; /* Adjust width as needed */
+    width: 80%;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -22,7 +22,7 @@
   }
   
   .profile-pic {
-    width: 120px; /* Adjust size as needed */
+    width: 120px; 
     height: 120px;
     border-radius: 50%;
     cursor: pointer;
@@ -44,7 +44,7 @@
     border-radius: 4px;
   }
   
-  .save-button, .cancel-button, .edit-button, .remove-button, .create-profile-button {
+  .save-button3, .cancel-button, .edit-button, .remove-button, .create-profile-button {
     margin-top: 10px;
     padding: 10px 20px;
     border: none;
@@ -53,12 +53,12 @@
     font-size: 16px;
   }
   
-  .save-button {
+  .save-button3 {
     background-color: #007bff;
     color: #fff;
-    width:100px;
+    width:100%;
     text-align:center;
-    height:50px;
+    height:40px;
   }
   
   .cancel-button {
@@ -69,6 +69,7 @@
   .edit-button {
     background-color: #007bff;
     color: #fff;
+    display:flex;
   }
   
   .remove-button {
@@ -77,14 +78,16 @@
   }
   
   .create-profile-button {
-    background-color: #28a745; /* Green color for create profile */
+    background-color: #28a745; 
     color: #fff;
   }
   
   .forgot-password-button {
-    margin-top: 10px;
+    margin-top: -10px;
     background-color: #007bff;
     color: #fff;
+    border-radius: 10px;
+    height: 30px;
   }
   
   .forgot-password-modal {
@@ -129,3 +132,33 @@
     display:flex;
     gap:40px;
   }
+  .profile-page{
+    height:100px;
+    width:300px;
+  }
+  .profile-pic-container{
+    display:flex;
+    flex-direction:flex-start;
+  }
+  .profile-header {
+    flex: 1; 
+    display: flex;
+    align-items: flex-start; 
+    justify-content: flex-start; 
+    position: relative;
+    margin-bottom: 20px;
+}
+
+
+.profile-pic-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.profile-pic {
+    width: 120px; 
+    height: 120px;
+    border-radius: 50%;
+    cursor: pointer;
+}

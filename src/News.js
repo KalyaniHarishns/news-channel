@@ -63,10 +63,7 @@ const App = () => {
 
   const sliderRef = useRef(null);
   const users = [
-    { id: 1, name: 'Kalyani', email: 'kalyani@gmail.com', photo: userPhoto },
-   
-    
-  ];
+    { id: 1, name: 'Kalyani', email: 'kalyani@gmail.com', photo: userPhoto },];
 
   const getArticles = async (query) => {
     setLoading(true);
