@@ -39,3 +39,13 @@
 .saved-news-content a:hover {
   text-decoration: underline;
 }
+
+.saved-news-section{
+  margin-left: 221px;
+}
+
+.saved-news-container{
+  display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}

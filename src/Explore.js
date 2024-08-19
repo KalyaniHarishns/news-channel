@@ -44,7 +44,7 @@ const App = () => {
   }, []);
 
   
-  const visibleChannels = showAllChannels ? channels : channels.slice(0, 8);
+  // const visibleChannels = showAllChannels ? channels : channels.slice(0, 8);
 
   return (
     <div className="App1">

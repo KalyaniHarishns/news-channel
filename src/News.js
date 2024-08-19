@@ -4,11 +4,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Sidebar.css';
-import Sidebar from './Sidebar.js';
-import image from './NewsImage.jpg';
 import logo from './logo.png';
-import userPhoto from './userPhoto.jpg'; 
-
+import userPhoto from './userPhoto.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useNews } from './NewsContext'; 
 
@@ -44,6 +41,12 @@ const newsImages = [
   image1, image2, image3, image4, image5, image6
 ];
 
+const profilesData = [
+  { name: 'Kalyani', email: 'kalyani@gmail.com' },
+  { name: 'Saanvi', email: 'saanvi@gmail.com' },
+  { name: 'Harish', email: 'harish@gmail.com' }
+];
+
 const App = () => {
   const [channels, setChannels] = useState([]);
   const [todayNews, setTodayNews] = useState([]);
@@ -55,15 +58,16 @@ const App = () => {
   const [showAllChannels, setShowAllChannels] = useState(false);
   const [showAllTodayNews, setShowAllTodayNews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedProfile, setSelectedProfile] = useState(profilesData[0]); // Default profile
+
   const { addSavedNews } = useNews(); 
   const navigate = useNavigate();
+  const sliderRef = useRef(null);
+
   const handleLogout = () => {
     navigate('/login'); 
   };
-
-  const sliderRef = useRef(null);
-  const users = [
-    { id: 1, name: 'Kalyani', email: 'kalyani@gmail.com', photo: userPhoto },];
 
   const getArticles = async (query) => {
     setLoading(true);
@@ -71,9 +75,8 @@ const App = () => {
       const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
       setAllNews(response?.data?.articles || []);
       
-      const filteredArticles = response?.data?.articles.filter(article => {
-        // console.log(article.title.toLowerCase().includes(query.toLowerCase()))
-        return article.title.toLowerCase().includes(query.toLowerCase())}
+      const filteredArticles = response?.data?.articles.filter(article =>
+        article.title.toLowerCase().includes(query.toLowerCase())
       ) || [];
       setFilteredNews(filteredArticles);
     } catch (error) {
@@ -87,13 +90,13 @@ const App = () => {
     const fetchData = async () => {
       try {
         const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
-        setChannels(channelsResponse?.data?.sources);
+        setChannels(channelsResponse?.data?.sources || []);
 
         const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
-        setTodayNews(todayNewsResponse?.data?.articles);
+        setTodayNews(todayNewsResponse?.data?.articles || []);
 
-         const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
-         setFeaturedNews(featuredNewsResponse?.data?.articles);
+        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        setFeaturedNews(featuredNewsResponse?.data?.articles || []);
 
         setLoading(false);
       } catch (error) {
@@ -117,7 +120,7 @@ const App = () => {
     getArticles(searchQuery);
   };
 
-  const getImageUrl = (url) => url || image;
+  const getImageUrl = (url) => url || image1;
   const displayedNews = searchQuery ? filteredNews : todayNews;
   const topNews = displayedNews.slice(0, showAllTodayNews ? displayedNews.length : 3);
   const bottomNews = displayedNews.slice(3, showAllTodayNews ? displayedNews.length : 6);
@@ -151,6 +154,11 @@ const App = () => {
     ]
   };
 
+  const handleAddProfile = (e) => {
+    e.stopPropagation(); 
+    setIsDropdownOpen(prev => !prev); 
+  };
+
   const scrollLeft = () => {
     sliderRef.current.slickPrev();
   };
@@ -179,9 +187,15 @@ const App = () => {
     addSavedNews(article); 
   };
 
+  const handleEmailSelect = (email) => {
+    const profile = profilesData.find(profile => profile.email === email);
+    setSelectedProfile(profile);
+    setIsDropdownOpen(false);
+    console.log('Selected Profile:', profile);
+  };
+
   return (
     <div className="App">
-      <Sidebar />
       <header className="App-header">
         <div className="header-actions">
           <div className="search-container">
@@ -223,7 +237,6 @@ const App = () => {
                       alt={channel.name || 'Channel Image'} 
                       className="channel-img" 
                     />
-                    {/* {console.log(channel)} */}
                     <div className="channel-name">{channel.name}</div>
                   </div>
                 ))
@@ -324,9 +337,21 @@ const App = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <span className="close-button" onClick={handleCloseModal}>&times;</span>
             <div className="modal-header">
-              <img src={userPhoto} alt="User" className="modal-photo" />
-              <h2>Kalyani</h2>
-              <p>kalyani@gmail.com</p>
+              <div className="profile-container">
+                <img src={userPhoto} alt="User" className="modal-photo" />
+                <button className="add-profile-button" onClick={handleAddProfile}>+</button>
+                {isDropdownOpen && (
+                  <div className="dropdown-content">
+                    {profilesData.map(profile => (
+                      <p key={profile.email} onClick={() => handleEmailSelect(profile.email)}>
+                        {profile.email}
+                      </p>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <h2>{selectedProfile.name}</h2>
+              <p>{selectedProfile.email}</p>
             </div>
             <button onClick={handleLogout} className="logout-button">Logout</button>
           </div>

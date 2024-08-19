@@ -1,19 +1,26 @@
 .profile-page {
-    width: 80%;
-    max-width: 800px;
+    width: 50%;
+    /* max-width: 800px; */
     margin: 0 auto;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: #f9f9f9;
+    /* margin-left: 228px; */
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 70px;
+    /* width: 300px; */
+    margin-left: 350px;
   }
   
   .profile-header {
     display: flex;
-    align-items: center;
+    /* align-items: center;
     justify-content: center;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 20px; */
+    flex-direction: column;
   }
   
   .profile-pic-container {
@@ -26,6 +33,7 @@
     height: 120px;
     border-radius: 50%;
     cursor: pointer;
+    object-fit: cover;
   }
   
   .file-input {
@@ -69,7 +77,8 @@
   .edit-button {
     background-color: #007bff;
     color: #fff;
-    display:flex;
+    /* display:flex; */
+    /* jus */
   }
   
   .remove-button {
@@ -106,7 +115,7 @@
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    /* width: 300px; */
     max-width: 90%;
     position: relative;
   }
@@ -133,18 +142,18 @@
     gap:40px;
   }
   .profile-page{
-    height:100px;
-    width:300px;
+    /* height:100px; */
+    /* width:300px; */
   }
   .profile-pic-container{
     display:flex;
     flex-direction:flex-start;
   }
   .profile-header {
-    flex: 1; 
+    /* flex: 1;  */
     display: flex;
-    align-items: flex-start; 
-    justify-content: flex-start; 
+    align-items: center;
+    justify-content: space-evenly;
     position: relative;
     margin-bottom: 20px;
 }
@@ -161,4 +170,14 @@
     height: 120px;
     border-radius: 50%;
     cursor: pointer;
+}
+.profile-info{
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 768px) {
+  .profile-page{
+    margin-left: 20px;
+    flex-direction: column;
+  }
 }

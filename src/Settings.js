@@ -60,7 +60,7 @@ const ProfilePage = () => {
       if (editProfile[key]) formData.append(key, editProfile[key]);
     }
 
-    fetch(creatingProfile ? '/api/user/profile/create' : '/api/user/profile', {
+    fetch(creatingProfile ? 'http://localhost:5000/api/user/profile/create' : '/api/user/profile', {
       method: creatingProfile ? 'POST' : 'PUT',
       body: formData
     })
@@ -215,10 +215,11 @@ const ProfilePage = () => {
           <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
           <button onClick={() => setIsEditing(true)} className="edit-button">Edit</button>
           <button onClick={handleRemove} className="remove-button">Remove Profile</button>
+          <button onClick={() => setCreatingProfile(true)} className="create-profile-button">Create New Profile</button>
         </div>
       )}
 
-      <button onClick={() => setCreatingProfile(true)} className="create-profile-button">Create New Profile</button>
+      
 
       {showForgotPassword && (
         <div className="forgot-password-modal">

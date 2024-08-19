@@ -1,9 +1,11 @@
+/* Base styles for larger screens */
 .App1 {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
   padding: 20px;
   box-sizing: border-box;
   height: 100vh;
+  margin-left: 200px;
 }
 
 .App-main1 {
@@ -26,10 +28,12 @@
   align-items: center;
   margin-bottom: 20px;
 }
-.ExploreChannels-Header{
-  text-align:center;
+
+.ExploreChannels-Header {
+  text-align: center;
   font-size: large;
 }
+
 .section-header h2 {
   margin: 0;
   font-size: 1.5em; /* Adjust font size if needed */
@@ -37,7 +41,6 @@
 
 .channel, .ExploreChannel {
   flex: 0 0 auto;
-  /* width: 160px; */
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -50,14 +53,16 @@
   align-items: center;
   text-align: center;
 }
-.ExploreChannel{
+
+.ExploreChannel {
   width: 220px;
 }
-.channel{
+
+.channel {
   width: 160px;
 }
 
-.channel:hover , .ExploreChannel:hover{
+.channel:hover, .ExploreChannel:hover {
   transform: translateY(-3px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
@@ -71,4 +76,60 @@
 .channel-name {
   padding: 10px;
   font-weight: bold;
+}
+
+/* Media Queries for Small Devices */
+@media (max-width: 768px) {
+  .App1 {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .App-main1 {
+    gap: 10px;
+  }
+
+  .section {
+    padding: 10px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-header h2 {
+    font-size: 1.25em; 
+  }
+
+  .channel, .ExploreChannel {
+    width: 100%; 
+    height: auto; 
+  }
+
+  .ExploreChannel {
+    width: 80%;
+  }
+
+  .channel {
+    width: 100%;
+  }
+
+  .channel-img {
+    height: 120px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header h2 {
+    font-size: 1.1em; 
+  }
+
+  .channel-img {
+    height: 100px; 
+  }
+
+  .channel-name {
+    font-size: 0.9em; 
+  }
 }
