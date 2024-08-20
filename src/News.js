@@ -72,13 +72,8 @@ const App = () => {
   const getArticles = async (query) => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
-      setAllNews(response?.data?.articles || []);
-      
-      const filteredArticles = response?.data?.articles.filter(article =>
-        article.title.toLowerCase().includes(query.toLowerCase())
-      ) || [];
-      setFilteredNews(filteredArticles);
+      const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
+      setFilteredNews(response?.data?.articles || []);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -109,7 +104,11 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    getArticles(searchQuery);
+    if (searchQuery.trim()) {
+      getArticles(searchQuery);
+    } else {
+      setFilteredNews([]);
+    }
   }, [searchQuery]);
 
   const handleSearchInputChange = (event) => {
@@ -117,7 +116,9 @@ const App = () => {
   };
 
   const handleSearch = () => {
-    getArticles(searchQuery);
+    if (searchQuery.trim()) {
+      getArticles(searchQuery);
+    }
   };
 
   const getImageUrl = (url) => url || image1;
@@ -179,6 +180,7 @@ const App = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setIsDropdownOpen(false); // Close dropdown when modal closes
   };
 
   const handleSave = (article, event) => {
@@ -190,7 +192,7 @@ const App = () => {
   const handleEmailSelect = (email) => {
     const profile = profilesData.find(profile => profile.email === email);
     setSelectedProfile(profile);
-    setIsDropdownOpen(false);
+    setIsDropdownOpen(false); // Close dropdown after selection
     console.log('Selected Profile:', profile);
   };
 
