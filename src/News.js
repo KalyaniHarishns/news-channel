@@ -59,7 +59,8 @@ const App = () => {
   const [showAllTodayNews, setShowAllTodayNews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedProfile, setSelectedProfile] = useState(profilesData[0]); // Default profile
+  const [showAddButton, setShowAddButton] = useState(false); 
+  const [selectedProfile, setSelectedProfile] = useState(profilesData[0]); 
 
   const { addSavedNews } = useNews(); 
   const navigate = useNavigate();
@@ -72,8 +73,8 @@ const App = () => {
   const getArticles = async (query) => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
-      setFilteredNews(response?.data?.articles || []);
+      // const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1`);
+      // setFilteredNews(response?.data?.articles || []);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -84,13 +85,13 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
         setChannels(channelsResponse?.data?.sources || []);
 
-        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
         setTodayNews(todayNewsResponse?.data?.articles || []);
 
-        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
         setFeaturedNews(featuredNewsResponse?.data?.articles || []);
 
         setLoading(false);
@@ -180,7 +181,8 @@ const App = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setIsDropdownOpen(false); // Close dropdown when modal closes
+    setIsDropdownOpen(false); 
+    setShowAddButton(false); 
   };
 
   const handleSave = (article, event) => {
@@ -192,8 +194,14 @@ const App = () => {
   const handleEmailSelect = (email) => {
     const profile = profilesData.find(profile => profile.email === email);
     setSelectedProfile(profile);
-    setIsDropdownOpen(false); // Close dropdown after selection
+    setIsDropdownOpen(false); 
+    setShowAddButton(false); 
     console.log('Selected Profile:', profile);
+  };
+
+  const handleProfilePicClick = () => {
+    setShowAddButton(true); 
+    setIsDropdownOpen(true); 
   };
 
   return (
@@ -216,8 +224,8 @@ const App = () => {
         </div>
       </header>
       <main className="App-main">
-        <section className="section">
-          <div className="section-header">
+        <section className="section1">
+          <div className="section-head">
             <h2>Explore Channels</h2>
             <button className="see-all-button" onClick={() => setShowAllChannels(prev => !prev)}>
               {showAllChannels ? 'See Less' : 'See All'}
@@ -248,7 +256,7 @@ const App = () => {
         </section>
 
         <section className="section">
-          <div className="section-header">
+          <div className="section-header1">
             <h2>Today's Updates</h2>
             <button className="see-all-button" onClick={() => setShowAllTodayNews(prev => !prev)}>
               {showAllTodayNews ? 'See Less' : 'See All'}
@@ -340,8 +348,15 @@ const App = () => {
             <span className="close-button" onClick={handleCloseModal}>&times;</span>
             <div className="modal-header">
               <div className="profile-container">
-                <img src={userPhoto} alt="User" className="modal-photo" />
-                <button className="add-profile-button" onClick={handleAddProfile}>+</button>
+                <img
+                  src={userPhoto}
+                  alt="User"
+                  className="modal-photo"
+                  onClick={handleProfilePicClick} // Show + button on profile pic click
+                />
+                {showAddButton && (
+                  <button className="add-profile-button" onClick={handleAddProfile}>+</button>
+                )}
                 {isDropdownOpen && (
                   <div className="dropdown-content">
                     {profilesData.map(profile => (

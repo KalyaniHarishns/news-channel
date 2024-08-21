@@ -60,7 +60,7 @@ const ProfilePage = () => {
       if (editProfile[key]) formData.append(key, editProfile[key]);
     }
 
-    fetch(creatingProfile ? 'http://localhost:5000/api/user/profile/create' : '/api/user/profile', {
+    fetch(creatingProfile ? '/api/user/profile/create' : '/api/user/profile/update', {
       method: creatingProfile ? 'POST' : 'PUT',
       body: formData
     })
@@ -79,7 +79,7 @@ const ProfilePage = () => {
   };
 
   const handleRemove = () => {
-    fetch('/api/user/profile', {
+    fetch('/api/user/profile/delete', {
       method: 'DELETE'
     })
       .then(response => response.json())
@@ -218,8 +218,6 @@ const ProfilePage = () => {
           <button onClick={() => setCreatingProfile(true)} className="create-profile-button">Create New Profile</button>
         </div>
       )}
-
-      
 
       {showForgotPassword && (
         <div className="forgot-password-modal">

@@ -255,7 +255,7 @@ li a, .logout-button {
   gap: 20px;
 }
 
-.section {
+.section1 {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -263,19 +263,20 @@ li a, .logout-button {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.section-header {
+.section-head {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.section-header h2 {
+.section-head h2 {
   margin: 0;
 }
 
 .see-all-button {
-  background-color: #007bff;
+  background-color: lightseagreen;
   color: white;
   border: none;
   border-radius: 5px;
@@ -284,10 +285,10 @@ li a, .logout-button {
 }
 
 .see-all-button:hover {
-  background-color: #0056b3;
+  background-color:lightseagreen;
 }
 
-.channels-list-container1 {
+/* .channels-list-container1 {
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
@@ -296,27 +297,25 @@ li a, .logout-button {
 
 .channels-list1 {
   display: flex;
+  width:300px;
   gap: 20px;
-}
+} */
 
-.channel {
-  flex: 0 0 auto;
-  width: 1000px;
+/* .channel {
+  
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width:fit-content;
   
-}
+} */
 
 .channel:hover {
   transform: translateY(-3px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-.channel-img {
+/* .channel-img {
   width: 80%;
   height: 120px;
   object-fit: cover;
@@ -326,6 +325,42 @@ li a, .logout-button {
   padding: 10px;
   font-weight: bold;
   text-align: center;
+} */
+.channels-list-container1 {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.channels-list1 {
+  display: flex;
+  gap: 20px;
+}
+
+.channel {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 150px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.channel-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.channel-name {
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .news-container {
@@ -424,7 +459,7 @@ li a, .logout-button {
 }
 
 .carousel-control {
-  background-color: #007bff;
+  background-color:lightseagreen;
   border: none;
   color: white;
   font-size: 24px;
@@ -500,7 +535,7 @@ li a, .logout-button {
 
 .search-button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: lightseagreen;
   color: white;
   border: none;
   border-radius: 5px;
@@ -510,39 +545,59 @@ li a, .logout-button {
 .search-button:hover {
   background-color: #0056b3;
 }
-
-.save-button1 ,.save-button{
+.section-header1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.save-button1 {
   text-align: center;
-  background-color: #007bff;
+  background-color: lightseagreen;
   color: white;
   height: 30px;
   width: 60px;
   border-radius: 10px;
+  border-color: white;
+  
+ 
+  justify-content:center;
+}
+.save-button{
+  text-align: center;
+  background-color: lightseagreen;
+  color: white;
+  height: 30px;
+  width: 60px;
+  border-radius: 10px;
+  border-color: white;
+  margin-top:-70px;
+ 
+  justify-content:center;
 }
 .save-button2{
   text-align: center;
-  background-color: #007bff;
+  background-color:lightseagreen;
   color: white;
   height: 30px;
   width: 60px;
   border-radius: 10px;
-  
+  border-color: white;
 }
 .news-item1 {
-  
-  width: 300px; 
-  margin-right: 20px; 
   background-color: #f0f0f0;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  flex: 0 0 auto;
+  width: calc(33% - 20px);
+  box-sizing: border-box;
   cursor: pointer;
-  box-sizing: border-box; 
-  height:270px;
+  height:260px;
 }
-
 .news-item1:hover {
   border: 1px solid black;
 }
@@ -574,7 +629,7 @@ li a, .logout-button {
     width: 80%;
     margin-bottom: 10px;
   }
- 
+  
   .search-input {
     max-width: 40%;
     margin-bottom: 10px;
@@ -607,7 +662,7 @@ li a, .logout-button {
   margin-top:-50px;
   margin-left:80px;
   }
- 
+  
   .news-item {
     width: calc(100% - 20px);
   }
@@ -617,6 +672,16 @@ li a, .logout-button {
   .App {
     margin-left: 180px;
   }
+  .channel-img {
+    width: 100%;
+    height: 120px;
+   
+  }
+  .channel {
+    width: 100%;
+    height: 120px;
+   
+  }
 }
 @media (max-width: 576px) {
   .search-input {
@@ -625,7 +690,7 @@ li a, .logout-button {
     margin-top:20px;
   }
   
-  @media (max-width: 576px) {
+  
     .search-button {
         width: 50%;
         padding: 8px 10px;
@@ -633,7 +698,15 @@ li a, .logout-button {
         max-width: 60px;
         margin-top:10px;
     }
-}
+    .section-header1{
+      display:flex;
+    }
+    .channel {
+      width: 100%;
+      height: 120px;
+     
+    }
+
 
   .news-item {
     width: calc(100% - 20px);
@@ -649,8 +722,75 @@ li a, .logout-button {
     width: 100%;
   }
 }
+
+
   .logo{
     margin-top:-50px;
     margin-left:75px;
     }
+   
+}
+.featured-news-container {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  white-space: nowrap;
+  overflow: hidden; /* Ensure overflow is hidden */
+}
+
+
+
+@media (max-width: 768px) {
+  .featured-news-container {
+    padding: 10px; /* Adjust padding to fit the button */
+  }
+
+  .featured-news-container .save-button {
+    right: 5px; /* Adjust button position for smaller screens */
+    top: 5px;
+    height: 25px;
+    width: 50px;
+    font-size: 12px;
+    margin-bottom:20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .featured-news-container {
+    padding: 5px; /* Further adjust padding */
+  }
+
+  .featured-news-container .save-button {
+    right: 5px; /* Keep button close to edge */
+    top: 5px;
+    height: 20px;
+    width: 40px;
+    font-size: 10px;
+  }
+}
+.see-all-button {
+  background-color: lightseagreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px; /* Adjust padding for larger screens */
+  cursor: pointer;
+  font-size: 16px; /* Default font size */
+}
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+  .see-all-button {
+      padding: 8px 16px; /* Adjust padding for tablets */
+      font-size: 14px; /* Slightly smaller font size */
+      display:flex;
+  }
+}
+
+/* Media query for mobile screens */
+@media (max-width: 576px) {
+  .see-all-button {
+      padding: 6px 12px; /* Adjust padding for mobile devices */
+      font-size: 12px; /* Smaller font size for mobile devices */
+  }
 }
