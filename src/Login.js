@@ -8,7 +8,7 @@ const Login = () => {
 
   const handleLogin = () => {
     
-      navigate('/sidebar'); 
+      navigate('/News'); 
   };
 
   return (

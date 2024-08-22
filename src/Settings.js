@@ -21,19 +21,20 @@ const ProfilePage = () => {
     fetchProfile();
   }, []);
 
-  const fetchProfile = () => {
-    fetch('/api/user/profile')
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.profile) {
-          setProfile(data.profile);
-          setEditProfile(data.profile);
-          setProfileImagePreview(data.profile.profileImage || defaultProfilePic);
-        } else {
-          console.error('Profile data is missing or in an unexpected format:', data);
-        }
-      })
-      .catch(error => console.error('Error fetching profile data:', error));
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch('/api/user/profile');
+      const data = await response.json();
+      if (data && data.profile) {
+        setProfile(data.profile);
+        setEditProfile(data.profile);
+        setProfileImagePreview(data.profile.profileImage || defaultProfilePic);
+      } else {
+        console.error('Profile data is missing or in an unexpected format:', data);
+      }
+    } catch (error) {
+      console.error('Error fetching profile data:', error);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -53,70 +54,81 @@ const ProfilePage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setCreatingProfile(true)
+    console.log("enter");
     const formData = new FormData();
     for (const key in editProfile) {
       if (editProfile[key]) formData.append(key, editProfile[key]);
     }
-
-    fetch(creatingProfile ? '/api/user/profile/create' : '/api/user/profile/update', {
-      method: creatingProfile ? 'POST' : 'PUT',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
+    
+    try {
+      const response = await fetch(creatingProfile ? '/api/user/profile/create' : '/api/user/profile/update', {
+        method: creatingProfile ? 'POST' : 'PUT',
+        body: formData,
+        // No need to set 'Content-Type' for FormData, fetch will do it automatically
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
         if (creatingProfile) {
           alert('Profile created successfully');
-          setCreatingProfile(false);
         } else {
           setProfile(editProfile);
           alert('Profile updated successfully');
         }
         setIsEditing(false);
-      })
-      .catch(error => console.error('Error processing profile:', error));
-  };
+      } else {
+        console.error('Failed to process profile:', data);
+        alert('Error processing profile.');
+      }
+    } catch (error) {
+      console.error('Error processing profile:', error);
+    }
+  }
 
-  const handleRemove = () => {
-    fetch('/api/user/profile/delete', {
-      method: 'DELETE'
-    })
-      .then(response => response.json())
-      .then(data => {
-        setProfile({
-          firstName: '',
-          lastName: '',
-          email: '',
-          password: '',
-          phoneNumber: '',
-          profileImage: ''
-        });
-        setProfileImagePreview(defaultProfilePic);
-        alert('Profile removed successfully');
-      })
-      .catch(error => console.error('Error removing profile:', error));
+  const handleRemove = async () => {
+    try {
+      const response = await fetch('/api/user/profile/delete', {
+        method: 'DELETE'
+      });
+      const data = await response.json();
+      setProfile({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        phoneNumber: '',
+        profileImage: ''
+      });
+      setProfileImagePreview(defaultProfilePic);
+      alert('Profile removed successfully');
+    } catch (error) {
+      console.error('Error removing profile:', error);
+    }
   };
 
   const handleForgotPassword = () => {
     setShowForgotPassword(true);
   };
 
-  const handleForgotPasswordSubmit = (e) => {
+  const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
 
-    fetch('/api/user/forgot-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
-    })
-      .then(response => response.json())
-      .then(data => {
-        alert('Password reset instructions have been sent to your email.');
-        setShowForgotPassword(false);
-      })
-      .catch(error => console.error('Error sending password reset instructions:', error));
+    try {
+      const response = await fetch('/api/user/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await response.json();
+      alert('Password reset instructions have been sent to your email.');
+      setShowForgotPassword(false);
+    } catch (error) {
+      console.error('Error sending password reset instructions:', error);
+    }
   };
 
   return (
@@ -215,7 +227,7 @@ const ProfilePage = () => {
           <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
           <button onClick={() => setIsEditing(true)} className="edit-button">Edit</button>
           <button onClick={handleRemove} className="remove-button">Remove Profile</button>
-          <button onClick={() => setCreatingProfile(true)} className="create-profile-button">Create New Profile</button>
+          <button onClick={handleSubmit} className="create-profile-button">Create New Profile</button>
         </div>
       )}
 

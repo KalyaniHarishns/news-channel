@@ -76,6 +76,7 @@
   background-color: #007bff;
   color: #fff;
   text-align: center;
+  
 }
 
 .remove-button {
@@ -152,6 +153,7 @@
 }
 
 /* Responsive Design */
+/* Responsive Design */
 @media (max-width: 1024px) {
   .profile-page {
     width: 80%;
@@ -165,18 +167,25 @@
     width: 100%;
     margin: 5px 0; /* Adjust margins for small screens */
     padding: 10px;
-    margin-top:-50px;
     box-shadow: none;
     overflow-y: auto; /* Enable vertical scrolling */
     display: flex;
     flex-direction: column; /* Ensure content stacks vertically */
+    align-items: center; /* Center content horizontally */
     height: auto; /* Ensure height is auto to fit content */
+    /* Adjust margin to fit content within view */
+    margin-right: 0; /* Removed margin-right */
   }
+  
   .profile-info {
     display: flex;
     flex-direction: column;
-    margin-top:-30px;
-}
+    align-items: flex-start;
+    margin-top: -30px;
+    width: 100%;
+    margin-left: 350px;
+  }
+
   .profile-header {
     flex-direction: column;
     align-items: center;
@@ -188,13 +197,13 @@
     height: 100px;
   }
 
-  .edit {
+  
+  
+  .edit-button, .remove-button, .create-profile-button {
+    width: 50%;
     justify-content: center;
   }
-  .edit-button, .remove-button, .create-profile-button{
-    width:50%;
-    justify-content: center;
-  }
+  
   .save-button3, .cancel-button {
     width: 100%; /* Full width for buttons on small screens */
     padding: 8px 16px; /* Adjusted padding */
@@ -212,6 +221,12 @@
     width: 90%;
     padding: 15px;
   }
+  .edit-form {
+    width: 80%;
+    margin-top: 0; /* Reset margin-top */
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+  }
 }
 
 @media (max-width: 480px) {
@@ -219,33 +234,51 @@
     width: 80px;
     height: 80px;
   }
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-    margin-top:-30px;
-}
+  
+ 
+    .profile-info {
+     /* Adjust height to fit within viewport, minus any header/footer height */
+      overflow-y: auto; /* Ensure scrolling if content overflows */
+    }
+  
+  
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 0;  
+        margin-left: 150px;
+        width: 100%;
+        overflow-y: auto;
+        height: calc(100vh - 100px);
+   
+    }
+
+  
   .save-button3, .cancel-button {
     padding: 6px 12px; /* Further reduced padding */
     font-size: 12px; /* Reduced font size */
     margin-top: 5px; /* Margin for buttons */
   }
-  .edit-button, .remove-button, .create-profile-button{
-    width:50%;
+  
+   .remove-button, .create-profile-button {
+    width: 50%;
     justify-content: center;
   }
+  
   .forgot-password-button {
     height: 20px;
     padding: 4px 8px; /* Further adjusted padding */
     font-size: 12px; /* Consistent font size */
   }
- 
- 
-    .edit-form {
-        width: 80%;
-        margin-top: -30px;
-        overflow-y: auto;
-    
-}
+
+  .edit-form {
+    width: 80%;
+    margin-top: 0; /* Reset margin-top */
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+  }
+  
   .modal-content {
     width: 95%;
     padding: 10px;
