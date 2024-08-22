@@ -18,8 +18,10 @@ const ProfilePage = () => {
   const [creatingProfile, setCreatingProfile] = useState(false);
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (!creatingProfile) {
+      fetchProfile();
+    }
+  }, [creatingProfile]);
 
   const fetchProfile = async () => {
     try {
@@ -56,37 +58,43 @@ const ProfilePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setCreatingProfile(true)
-    console.log("enter");
     const formData = new FormData();
     for (const key in editProfile) {
       if (editProfile[key]) formData.append(key, editProfile[key]);
     }
-    
+
     try {
-      const response = await fetch(creatingProfile ? '/api/user/profile/create' : '/api/user/profile/update', {
-        method: creatingProfile ? 'POST' : 'PUT',
-        body: formData,
-        // No need to set 'Content-Type' for FormData, fetch will do it automatically
+      const url = creatingProfile ? '/api/user/profile/create' : '/api/user/profile/update';
+      const method = creatingProfile ? 'POST' : 'PUT';
+
+      const response = await fetch(url, {
+        method,
+        body: formData
       });
+
       const data = await response.json();
-      if (response.ok) {
-        console.log(data);
-        if (creatingProfile) {
-          alert('Profile created successfully');
-        } else {
-          setProfile(editProfile);
-          alert('Profile updated successfully');
-        }
-        setIsEditing(false);
+
+      if (creatingProfile) {
+        alert('Profile created successfully');
+        setCreatingProfile(false);
+        setProfile({
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          phoneNumber: '',
+          profileImage: ''
+        });
+        setProfileImagePreview(defaultProfilePic);
       } else {
-        console.error('Failed to process profile:', data);
-        alert('Error processing profile.');
+        setProfile(editProfile);
+        alert('Profile updated successfully');
       }
+      setIsEditing(false);
     } catch (error) {
       console.error('Error processing profile:', error);
     }
-  }
+  };
 
   const handleRemove = async () => {
     try {
@@ -227,7 +235,18 @@ const ProfilePage = () => {
           <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
           <button onClick={() => setIsEditing(true)} className="edit-button">Edit</button>
           <button onClick={handleRemove} className="remove-button">Remove Profile</button>
-          <button onClick={handleSubmit} className="create-profile-button">Create New Profile</button>
+          <button onClick={() => {
+            setCreatingProfile(true);
+            setEditProfile({
+              firstName: '',
+              lastName: '',
+              email: '',
+              password: '',
+              phoneNumber: '',
+              profileImage: ''
+            });
+            setProfileImagePreview(defaultProfilePic);
+          }} className="create-profile-button">Create New Profile</button>
         </div>
       )}
 
