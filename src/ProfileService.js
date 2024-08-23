@@ -1,7 +1,7 @@
 // src/services/profileService.js
 
 export const fetchProfile = async () => {
-    const response = await fetch('http://localhost:5000/api/user/profile'); 
+    const response = await fetch('http://localhost:3001/api/user/profile'); 
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -10,7 +10,7 @@ export const fetchProfile = async () => {
 };
 
 export const createProfile = async (profileData) => {
-    const response = await fetch('http://localhost:5000/api/user/profile', {
+    const response = await fetch('http://localhost:3001/api/user/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export const createProfile = async (profileData) => {
 };
 
 export const updateProfile = async (profileData) => {
-    const response = await fetch('http://localhost:5000/api/user/profile', {
+    const response = await fetch('http://localhost:3001/api/user/profile', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export const updateProfile = async (profileData) => {
 };
 
 export const deleteProfile = async () => {
-    const response = await fetch('http://localhost:5000/api/user/profile', {
+    const response = await fetch('http://localhost:3001/api/user/profile', {
       method: 'DELETE'
     });
     if (!response.ok) {
