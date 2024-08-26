@@ -22,18 +22,48 @@ const ProfilePage = () => {
   }, []);
 
   const fetchProfile = () => {
-    fetch('/api/user/profile')
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.profile) {
-          setProfile(data.profile);
-          setEditProfile(data.profile);
-          setProfileImagePreview(data.profile.profileImage || defaultProfilePic);
-        } else {
-          console.error('Profile data is missing or in an unexpected format:', data);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No token found in localStorage');
+      return;
+    }
+
+    // Check local storage first
+    const storedProfile = localStorage.getItem('profile');
+    if (storedProfile) {
+      const profileData = JSON.parse(storedProfile);
+      setProfile(profileData);
+      setEditProfile(profileData);
+      setProfileImagePreview(profileData.profileImage || defaultProfilePic);
+    } else {
+      // Fetch from API if not in local storage
+      const apiKey = 'mySuperSecretKey123!@#';
+      fetch('/api/user/profile', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       })
-      .catch(error => console.error('Error fetching profile data:', error));
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data.profile) {
+            setProfile(data.profile);
+            setEditProfile(data.profile);
+            setProfileImagePreview(data.profile.profileImage || defaultProfilePic);
+            // Store fetched profile data in local storage
+            localStorage.setItem('profile', JSON.stringify(data.profile));
+          } else {
+            console.error('Profile data is missing or in an unexpected format:', data);
+          }
+        })
+        .catch(error => console.error('Error fetching profile data:', error));
+    }
   };
 
   const handleInputChange = (e) => {
@@ -55,14 +85,18 @@ const ProfilePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
     const formData = new FormData();
     for (const key in editProfile) {
       if (editProfile[key]) formData.append(key, editProfile[key]);
     }
 
-    fetch(creatingProfile ? 'http://localhost:3001/api/user/profile' : '/api/user/profile', {
+    fetch('/api/user/profile', {
       method: creatingProfile ? 'POST' : 'PUT',
-      body: formData
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     })
       .then(response => response.json())
       .then(data => {
@@ -72,6 +106,8 @@ const ProfilePage = () => {
         } else {
           setProfile(editProfile);
           alert('Profile updated successfully');
+          // Update local storage with new profile data
+          localStorage.setItem('profile', JSON.stringify(editProfile));
         }
         setIsEditing(false);
       })
@@ -79,8 +115,12 @@ const ProfilePage = () => {
   };
 
   const handleRemove = () => {
+    const token = localStorage.getItem('token');
     fetch('/api/user/profile', {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     })
       .then(response => response.json())
       .then(data => {
@@ -93,6 +133,8 @@ const ProfilePage = () => {
           profileImage: ''
         });
         setProfileImagePreview(defaultProfilePic);
+        // Clear profile data from local storage
+        localStorage.removeItem('profile');
         alert('Profile removed successfully');
       })
       .catch(error => console.error('Error removing profile:', error));
@@ -218,8 +260,6 @@ const ProfilePage = () => {
           <button onClick={() => setCreatingProfile(true)} className="create-profile-button">Create New Profile</button>
         </div>
       )}
-
-      
 
       {showForgotPassword && (
         <div className="forgot-password-modal">

@@ -7,19 +7,24 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
+      // Using fetch for the login request
       const response = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-// console.log('response', response);
 
       const data = await response.json();
 
       if (response.ok) {
-        login(data.token); // Update auth context and redirect
+        // If response is ok, store token using the AuthContext
+        login(data.token);
+        localStorage.setItem('token', data.token);
+        alert('Login successful');
+        // Optionally, redirect the user to another page
       } else {
         alert(data.message || 'Login failed');
       }
@@ -28,6 +33,7 @@ const Login = () => {
       alert(`Login failed: ${error.message}`);
     }
   };
+
 
   return (
     <div className="LoginContainer">

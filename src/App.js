@@ -11,6 +11,7 @@ import { useNews } from './NewsContext';
 import Settings from './Settings';
 import Layout from './Layout'; 
 import { AuthProvider } from './AuthContext';
+
 import ProtectedRoute from './ProtectedRoute';
 const App = () => {
   const { savedNews, addSavedNews } = useNews();
@@ -30,7 +31,14 @@ const App = () => {
           <Route path="notifications" element={<Notifications />} />
           <Route path="saved" element={<Saved savedNews={savedNews} />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="Profile" element={<Profile />} />
+         
+  {/* Default route if needed */}
+  <Route index element={
+                <ProtectedRoute>
+                  <News />
+                </ProtectedRoute>
+              } />
+          
           {/* Default route if needed */}
           <Route index element={<News addSavedNews={addSavedNews} />} />
         </Route>

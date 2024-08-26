@@ -13,6 +13,8 @@
   cursor: pointer;
   z-index: 1000;
   border-radius: 20px;
+  margin-top:20px;
+  
 }
 
 .sidebar-header {
@@ -186,6 +188,28 @@ li a, .logout-button {
     display: block;
   }
 }
+.sidebar {
+  /* Other properties */
+  margin-top: 20px;
+  margin-right: 20px; 
+}
+
+
+
+@media (max-width: 992px) {
+  .App {
+    margin-left: 200px; /* Adjust this value based on your design */
+    padding-left: 20px; /* Ensure consistent padding on smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .App {
+    margin-left: 80px; /* Adjust this value based on your design */
+    padding-left: 10px; /* Adjust padding for very small screens */
+  }
+}
+
 
 
 
@@ -247,6 +271,10 @@ li a, .logout-button {
   margin-left: 200px;
   box-sizing: border-box;
   height: 100vh;
+  
+    margin-left: 220px; 
+    padding-left: 30px; 
+  
 }
 
 .App-main {
@@ -494,6 +522,7 @@ li a, .logout-button {
   border-bottom: 2px solid #ccc;
   position: relative;
   height:40px;
+  margin-bottom:10px;
 }
 
 .logo {
@@ -514,6 +543,8 @@ li a, .logout-button {
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
+  margin-top:5px;
+  border-radius:10px;
 }
 
 .search-container {
