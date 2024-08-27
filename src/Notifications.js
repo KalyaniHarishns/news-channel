@@ -61,7 +61,7 @@ const NewsApp = () => {
     return (
         <div className="news-app">
             <h1>Latest News</h1>
-            <ul>
+            <ul className='list-notifications'>
                 {news.map((article, index) => (
                     <li key={index} className="news-item1" onClick={() => window.open(`${article.webUrl}`, '_blank')}>
                         <img className='news-img' src={getImageUrl(article.fields.thumbnail)} alt={article.headline || 'News Image'} />

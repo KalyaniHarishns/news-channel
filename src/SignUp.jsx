@@ -26,7 +26,7 @@ const SignUp = () => {
 
       if (response.ok) {
         alert('Sign-up successful! You can now log in.');
-        navigate('/login'); // Navigate to login page after successful sign-up
+        navigate('/login'); 
       } else {
         alert(data.message || 'Sign-up failed');
       }

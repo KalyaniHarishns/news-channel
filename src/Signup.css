@@ -1,10 +1,11 @@
 .SignUpContainer {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   margin-top: 80px;
-  margin-left: 450px;
-  width: 500px;
+  margin-left: auto; /* Center container */
+  margin-right: auto; /* Center container */
+  width: 500px; /* Default width for larger screens */
   background: #fff;
   padding-bottom: 30px;
   border-radius: 30px;
@@ -13,6 +14,7 @@
   padding-right: 100px;
 }
 
+/* Header styles */
 .SignUpContainer .header {
   display: flex;
   flex-direction: column;
@@ -20,7 +22,6 @@
   gap: 9px;
   width: 100%;
   margin-top: 30px;
-  margin-left: 120px;
 }
 
 .SignUpContainer .text {
@@ -30,12 +31,12 @@
   font-weight: 700;
 }
 
+/* Inputs styles */
 .SignUpContainer .inputs {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-left: 50px;
 }
 
 .SignUpContainer input {
@@ -45,19 +46,21 @@
   height: 50px;
   background: #eaeaee;
   border-radius: 6px;
-  margin-left: 80px;
   padding: 0 15px;
   border: none;
   outline: none;
+  margin-left:100px;
 }
 
+/* Submit button container */
 .SignUpContainer .submit-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  width: 100%; 
+  width: 100%;
 }
 
+/* Submit button */
 .SignUpContainer .submit {
   width: 200px;
   height: 50px;
@@ -70,5 +73,98 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 90px;
+  margin-left:80px;
+}
+
+/* Media Queries */
+@media (max-width: 1180px) {
+  .SignUpContainer input {
+    margin-left:50px;
+  }
+}
+ 
+
+
+/* For tablets and smaller screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .SignUpContainer {
+    width: 400px;
+    padding-right: 50px;
+  }
+
+  .SignUpContainer .header {
+    margin-left: 0; /* Center container */
+  }
+
+  .SignUpContainer .text {
+    font-size: 36px;
+  }
+
+  .SignUpContainer .inputs {
+    width: 300px;
+  }
+
+  .SignUpContainer input {
+    width: 220px;
+  }
+
+  .SignUpContainer .submit {
+    width: 180px;
+  }
+}
+
+/* For small tablets and larger phones (max-width: 768px) */
+@media (max-width: 768px) {
+  .SignUpContainer {
+    width: 90%;
+    padding-right: 20px;
+  }
+
+  .SignUpContainer .header {
+    margin-left: 0; /* Center container */
+  }
+
+  .SignUpContainer .text {
+    font-size: 28px;
+  }
+
+  .SignUpContainer .inputs {
+    width: 100%; /* Full width for inputs */
+  }
+
+  .SignUpContainer input {
+    width: 75%;
+  }
+
+  .SignUpContainer .submit {
+    width: 150px;
+  }
+}
+
+/* For mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .SignUpContainer {
+    width: 80%;
+    padding-right: 10px;
+    margin-left: 10%; /* Adjusted to center container */
+    margin-right: 10%; /* Adjusted to center container */
+  }
+
+  .SignUpContainer .text {
+    font-size: 24px;
+  }
+
+  .SignUpContainer .inputs {
+    width: 100%; /* Full width for inputs */
+  }
+
+  .SignUpContainer input {
+    width: 60%;
+    margin-left: 50px;
+}
+
+
+  .SignUpContainer .submit {
+    width: 40%; /* Full width for submit button */
+  }
 }

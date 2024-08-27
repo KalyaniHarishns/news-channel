@@ -1,283 +1,243 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Settings.css';
-import defaultProfilePic from './Images/Icon.png';
+import defaultProfilePic from './Images/Icon.png'; 
 
-const ProfilePage = () => {
-  const [profile, setProfile] = useState({
+function ProfilePage() {
+  const [profiles, setProfiles] = useState([]);
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     phoneNumber: '',
-    profileImage: ''
+    profileImage: null,
   });
-  const [editProfile, setEditProfile] = useState({ ...profile });
+  const [selectedProfile, setSelectedProfile] = useState(null);
   const [profileImagePreview, setProfileImagePreview] = useState(defaultProfilePic);
-  const [isEditing, setIsEditing] = useState(false);
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [creatingProfile, setCreatingProfile] = useState(false);
 
   useEffect(() => {
-    fetchProfile();
+    fetchProfiles();
   }, []);
 
-  const fetchProfile = () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.error('No token found in localStorage');
-      return;
-    }
-
-    // Check local storage first
-    const storedProfile = localStorage.getItem('profile');
-    if (storedProfile) {
-      const profileData = JSON.parse(storedProfile);
-      setProfile(profileData);
-      setEditProfile(profileData);
-      setProfileImagePreview(profileData.profileImage || defaultProfilePic);
-    } else {
-      // Fetch from API if not in local storage
-      const apiKey = 'mySuperSecretKey123!@#';
-      fetch('/api/user/profile', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          if (data && data.profile) {
-            setProfile(data.profile);
-            setEditProfile(data.profile);
-            setProfileImagePreview(data.profile.profileImage || defaultProfilePic);
-            // Store fetched profile data in local storage
-            localStorage.setItem('profile', JSON.stringify(data.profile));
-          } else {
-            console.error('Profile data is missing or in an unexpected format:', data);
-          }
-        })
-        .catch(error => console.error('Error fetching profile data:', error));
+  const fetchProfiles = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/profile');
+      setProfiles(response.data);
+    } catch (err) {
+      console.error('Error fetching profiles:', err);
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditProfile({ ...editProfile, [name]: value });
-  };
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value,
+    });
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+    if (name === 'profileImage' && files) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfileImagePreview(reader.result);
-        setEditProfile({ ...editProfile, profileImage: file });
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(files[0]);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
-    const formData = new FormData();
-    for (const key in editProfile) {
-      if (editProfile[key]) formData.append(key, editProfile[key]);
+    const data = new FormData();
+    for (const key in formData) {
+      if (formData[key] !== null && formData[key] !== undefined) {
+        data.append(key, formData[key]);
+      }
     }
 
-    fetch('/api/user/profile', {
-      method: creatingProfile ? 'POST' : 'PUT',
-      body: formData,
-      headers: {
-        'Authorization': `Bearer ${token}`
+    try {
+      if (selectedProfile) {
+        await axios.put(`http://localhost:3001/api/profile/${selectedProfile._id}`, data);
+      } else {
+        await axios.post('http://localhost:3001/api/profile', data);
       }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (creatingProfile) {
-          alert('Profile created successfully');
-          setCreatingProfile(false);
-        } else {
-          setProfile(editProfile);
-          alert('Profile updated successfully');
-          // Update local storage with new profile data
-          localStorage.setItem('profile', JSON.stringify(editProfile));
-        }
-        setIsEditing(false);
-      })
-      .catch(error => console.error('Error processing profile:', error));
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        phoneNumber: '',
+        profileImage: null,
+      });
+      setProfileImagePreview(defaultProfilePic);
+      setSelectedProfile(null);
+      fetchProfiles();
+    } catch (err) {
+      console.error('Error submitting form:', err);
+    }
   };
 
-  const handleRemove = () => {
-    const token = localStorage.getItem('token');
-    fetch('/api/user/profile', {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        setProfile({
-          firstName: '',
-          lastName: '',
-          email: '',
-          password: '',
-          phoneNumber: '',
-          profileImage: ''
-        });
-        setProfileImagePreview(defaultProfilePic);
-        // Clear profile data from local storage
-        localStorage.removeItem('profile');
-        alert('Profile removed successfully');
-      })
-      .catch(error => console.error('Error removing profile:', error));
+  const handleEdit = (profile) => {
+    setSelectedProfile(profile);
+    setFormData({
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      email: profile.email,
+      password: '', // Password is not pre-filled for security reasons
+      phoneNumber: profile.phoneNumber,
+      profileImage: null,
+    });
+    setProfileImagePreview(profile.profileImage || defaultProfilePic);
   };
 
-  const handleForgotPassword = () => {
-    setShowForgotPassword(true);
+  const handleDelete = async (profileId) => {
+    try {
+      await axios.delete(`http://localhost:3001/api/profile/${profileId}`);
+      fetchProfiles();
+    } catch (err) {
+      console.error('Error deleting profile:', err);
+    }
   };
 
-  const handleForgotPasswordSubmit = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
+  
+  const createButtonStyle = {
+    width: '100px',
+    backgroundColor: 'green',
+    border: 'none',
+    borderRadius: '10px',
+    height: '30px',
+    alignItems: 'center',
+    color: 'white',
+  };
 
-    fetch('/api/user/forgot-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
-    })
-      .then(response => response.json())
-      .then(data => {
-        alert('Password reset instructions have been sent to your email.');
-        setShowForgotPassword(false);
-      })
-      .catch(error => console.error('Error sending password reset instructions:', error));
+  const editButtonStyle = {
+    width: '100px',
+    backgroundColor: 'teal',
+    border: 'none',
+    borderRadius: '10px',
+    height: '30px',
+    alignItems: 'center',
+    color: 'white',
+  };
+
+  const deleteButtonStyle = {
+    width: '100px',
+    backgroundColor: 'crimson',
+    border: 'none',
+    borderRadius: '10px',
+    height: '30px',
+    alignItems: 'center',
+    color: 'white',
+  };
+  const createButtonContainerStyle = {
+    display: 'flex',
+    justifyContent: 'center', 
+    marginTop: '20px', 
+  };
+  const buttonContainerStyle = {
+    display: 'flex',
+    gap: '10px',
   };
 
   return (
     <div className="profile-page">
-      <div className="profile-header">
-        <div className="profile-pic-container">
-          <img
-            src={profileImagePreview}
-            alt="Profile"
-            className="profile-pic"
-            onClick={() => document.getElementById('profile-image-upload').click()}
-          />
-          <input
-            type="file"
-            id="profile-image-upload"
-            accept="image/*"
-            className="file-input"
-            onChange={handleImageChange}
-          />
-        </div>
-        <h1>{creatingProfile ? 'Create Profile' : 'Update Profile'}</h1>
+      <h1>Create Profile</h1>
+      <div className="profile-image-preview">
+        <img
+          src={profileImagePreview}
+          alt="Profile Preview"
+          className="profile-image"
+        />
+        <label htmlFor="profileImage"></label>
+        <input
+          type="file"
+          name="profileImage"
+          accept="image/*"
+          onChange={handleChange}
+        />
       </div>
-
-      {creatingProfile || isEditing ? (
-        <form onSubmit={handleSubmit} className="edit-form">
-          <label>
-            First Name:
-            <input
-              type="text"
-              name="firstName"
-              value={editProfile.firstName}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Last Name:
-            <input
-              type="text"
-              name="lastName"
-              value={editProfile.lastName}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={editProfile.email}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={editProfile.password}
-              onChange={handleInputChange}
-            />
-          </label>
-          <button type="button" onClick={handleForgotPassword} className="forgot-password-button">
-            Forgot Password?
+      <form className="edit-form" onSubmit={handleSubmit}>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={formData.lastName}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="phoneNumber">Phone Number</label>
+        <input
+          type="text"
+          name="phoneNumber"
+          placeholder="Phone Number"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          required
+        />
+        <div style={createButtonContainerStyle}>
+          <button
+            type="submit"
+            style={createButtonStyle}
+          >
+            Create
           </button>
-          <label>
-            Phone Number:
-            <input
-              type="text"
-              name="phoneNumber"
-              value={editProfile.phoneNumber}
-              onChange={handleInputChange}
-            />
-          </label>
-          <div className="container">
-            <button type="submit" className="save-button3">
-              {creatingProfile ? 'Create Profile' : 'Save Changes'}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsEditing(false);
-                setCreatingProfile(false);
-                setEditProfile(profile);
-              }}
-              className="cancel-button"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      ) : (
-        <div className="profile-info">
-          <p><strong>First Name:</strong> {profile.firstName}</p>
-          <p><strong>Last Name:</strong> {profile.lastName}</p>
-          <p><strong>Email:</strong> {profile.email}</p>
-          <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
-          <button onClick={() => setIsEditing(true)} className="edit-button">Edit</button>
-          <button onClick={handleRemove} className="remove-button">Remove Profile</button>
-          <button onClick={() => setCreatingProfile(true)} className="create-profile-button">Create New Profile</button>
         </div>
-      )}
-
-      {showForgotPassword && (
-        <div className="forgot-password-modal">
-          <div className="modal-content">
-            <span className="close-button" onClick={() => setShowForgotPassword(false)}>&times;</span>
-            <h2>Forgot Password</h2>
-            <form onSubmit={handleForgotPasswordSubmit}>
-              <label>
-                Enter your email:
-                <input type="email" name="email" required />
-              </label>
-              <button type="submit" className="submit-button">Send Reset Instructions</button>
-            </form>
-          </div>
-        </div>
-      )}
+      </form>
+      <div className="profile-list">
+        <h2>Profile List</h2>
+        <ul>
+          {profiles.map((profile) => (
+            <li key={profile._id}>
+              <h3>{profile.firstName} {profile.lastName}</h3>
+              <p>Email: {profile.email}</p>
+              <p>Phone: {profile.phoneNumber}</p>
+              <div style={buttonContainerStyle}>
+                <button
+                  onClick={() => handleEdit(profile)}
+                  style={editButtonStyle}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(profile._id)}
+                  style={deleteButtonStyle}
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
-};
+}
 
 export default ProfilePage;

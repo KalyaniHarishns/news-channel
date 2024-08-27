@@ -523,6 +523,7 @@ li a, .logout-button {
   position: relative;
   height:40px;
   margin-bottom:10px;
+ 
 }
 
 .logo {
@@ -619,9 +620,10 @@ li a, .logout-button {
 .news-item1 {
   background-color: #f0f0f0;
   padding: 10px;
+  margin-top:10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
+  
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   flex: 0 0 auto;
   width: calc(33% - 20px);

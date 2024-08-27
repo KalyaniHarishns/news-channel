@@ -1,286 +1,414 @@
-/* Base Styles */
-.profile-page {
-  width: 50%;
-  margin: 70px auto;
-  padding: 20px;
-  
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  display: flex;
-  justify-content: space-evenly;
-  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-  /* Ensure content doesn't overflow */
-  overflow: hidden; 
-}
+/* Settings.css */
 
-.profile-header {
+.ProfilePage {
+  font-family: Arial, sans-serif;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.profile-pic-container {
-  position: relative;
-  display: inline-block;
+.edit-form {
+  max-width: 400px;
+  margin-left: 600px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  margin-top: -220px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.profile-pic {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  cursor: pointer;
-  object-fit: cover;
+.profile-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensures it fills the remaining height */
 }
 
-.file-input {
-  display: none;
+.profile-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.profile-list li {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+h2 {
+  margin-top: 50px;
 }
 
 .edit-form label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
-.edit-form input {
+.edit-form input[type="text"],
+.edit-form input[type="email"],
+.edit-form input[type="password"],
+.edit-form input[type="file"] {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.save-button3, .cancel-button, .edit-button, .remove-button, .create-profile-button {
-  margin-top: 10px;
-  padding: 10px 20px;
+.edit-form input[type="file"] {
   border: none;
+}
+
+.profile-image {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  margin-top: 50px;
+}
+
+.profile-image-container {
+  text-align: center;
+  margin-bottom: 16px;
+  margin-left: 150px;
+}
+
+.profile-image-preview {
+  margin-left: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-image-container .profile-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.profile-image-container .profile-name {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.save-button3 {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
 }
 
-.save-button3 {
-  background-color: #007bff;
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  height: 40px;
+.save-button3:hover {
+  background-color: #0056b3;
 }
 
-.cancel-button {
-  background-color: #6c757d;
-  color: #fff;
+.button {
+  height: 30px;
 }
 
-.edit-button {
+.profile-item {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-item-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.profile-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.profile-item-details {
+  flex: 1;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button,
+.remove-button {
   background-color: #007bff;
-  color: #fff;
-  text-align: center;
-  
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .remove-button {
   background-color: #dc3545;
-  color: #fff;
 }
 
-.create-profile-button {
-  background-color: #28a745;
-  color: #fff;
+.edit-button:hover {
+  background-color: #0056b3;
 }
 
-.forgot-password-button {
-  margin-top: -10px;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 10px;
-  height: 30px;
-  padding: 5px 10px;
-  font-size: 14px;
+.remove-button:hover {
+  background-color: #c82333;
 }
-
-.forgot-password-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 90%;
-  position: relative;
-  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.submit-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.button {
-  display: flex;
-}
-
-.container {
-  display: flex;
-  gap: 40px;
-}
-
-.profile-info {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Responsive Design */
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .profile-page {
-    width: 80%;
-    margin: 70px auto;
-    height: auto; /* Ensure height is auto to fit content */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .edit-form {
+    max-width: 60%;
+    margin: 20px auto;
   }
+.hamburger{
+  display:block;
 }
-
-@media (max-width: 768px) {
-  .profile-page {
-    width: 100%;
-    margin: 5px 0; /* Adjust margins for small screens */
-    padding: 10px;
-    box-shadow: none;
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: flex;
-    flex-direction: column; /* Ensure content stacks vertically */
-    align-items: center; /* Center content horizontally */
-    height: auto; /* Ensure height is auto to fit content */
-    /* Adjust margin to fit content within view */
-    margin-right: 0; /* Removed margin-right */
-  }
-  
-  .profile-info {
-    display: flex;
+  .profile-image-preview {
+    margin-left: 20px; /* Adjust margin for better alignment on tablets */
     flex-direction: column;
-    align-items: flex-start;
-    margin-top: -30px;
-    width: 100%;
-    margin-left: 350px;
+    align-items: center; /* Center alignment for tablets */
+  }
+.profile-image{
+  align-items: center;
+}
+  .ProfilePage {
+    height: 100vh; /* Full viewport height */
   }
 
-  .profile-header {
+  h1 {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  h2 {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .profile-image-preview label {
+    font-size: 14px;
+  }
+
+  .profile-image-preview input[type="file"] {
+    margin-left:77px;
+    padding: 10px;
+  }
+
+  .profile-list {
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    max-width: 90%;
   }
 
-  .profile-pic {
-    width: 100px;
-    height: 100px;
+  .profile-list ul {
+    display: flex;
+    flex-direction: column; /* Column direction for tablets */
+    padding: 0;
+    margin-left: 0; /* Reset margin for better alignment */
+    width: 100%;
+    height:150vh;
   }
-
-  
-  
-  .edit-button, .remove-button, .create-profile-button {
-    width: 50%;
+  .profile-list li {
+    width: 60%;
+    display: flex;
+    margin: 10px 0;
+    margin-left: 150px;
+    flex-direction: column;
     justify-content: center;
-  }
-  
-  .save-button3, .cancel-button {
-    width: 100%; /* Full width for buttons on small screens */
-    padding: 8px 16px; /* Adjusted padding */
-    font-size: 14px; /* Adjusted font size */
-    margin: 5px 0; /* Margin adjustments for buttons */
-  }
-
-  .forgot-password-button {
-    height: 25px;
-    padding: 5px 10px; /* Adjusted padding */
-    font-size: 14px; /* Consistent font size */
-  }
-
-  .modal-content {
-    width: 90%;
-    padding: 15px;
-  }
-  .edit-form {
-    width: 80%;
-    margin-top: 0; /* Reset margin-top */
-    overflow-y: auto;
-    height: calc(100vh - 100px);
-  }
+    text-align: center;
+    align-items: center;
 }
 
-@media (max-width: 480px) {
-  .profile-pic {
-    width: 80px;
-    height: 80px;
-  }
-  
- 
-    .profile-info {
-     /* Adjust height to fit within viewport, minus any header/footer height */
-      overflow-y: auto; /* Ensure scrolling if content overflows */
-    }
-  
-  
-    .profile-info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 0;  
-        margin-left: 140px;
-        width: 100%;
-        overflow-y: auto;
-        height: calc(100vh - 100px);
-   
-    }
 
-  
-  .save-button3, .cancel-button {
-    padding: 6px 12px; /* Further reduced padding */
-    font-size: 12px; /* Reduced font size */
-    margin-top: 5px; /* Margin for buttons */
-  }
-  
-   .remove-button, .create-profile-button {
-    width: 50%;
-    justify-content: center;
-  }
-  
-  .forgot-password-button {
-    height: 20px;
-    padding: 4px 8px; /* Further adjusted padding */
-    font-size: 12px; /* Consistent font size */
+  .profile-item-content {
+    flex-direction: column; /* Column direction for tablets */
+    align-items: center;
+    text-align: center;
   }
 
+  .profile-item-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (max-width: 720px) {
   .edit-form {
-    width: 80%;
-    margin-top: 0; /* Reset margin-top */
-    overflow-y: auto;
-    height: calc(100vh - 100px);
+    max-width: 60%; /* Increased width for better use of space */
+    padding: 20px; /* Reduced padding */
+    margin: 0 auto; /* Centered the form */
   }
-  
-  .modal-content {
-    width: 95%;
+
+  .profile-image-preview {
+    margin: 0; /* Removed margin to reduce gap */
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-image {
+    height: 150px; /* Reduced height */
+    width: 150px; /* Reduced width */
+    object-fit: cover;
+    margin: 20px 0; /* Reduced top and bottom margins */
+  }
+
+  .profile-image-preview input[type="file"] {
+    padding: 8px; /* Reduced padding */
+    margin-left: 77px; /* Removed margin */
+  }
+
+  .profile-item-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-item-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile-list {
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 90%;
+  }
+
+  .ProfilePage {
+    height: 130vh; /* Adjusted height */
+  }
+
+  .profile-list ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 80%;
+    height: 130vh; /* Adjusted height for better fit */
+    margin-left: 50px; /* Removed margin */
+  }
+
+  .profile-list li {
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-items: center;
+    width: 300px;
+}
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
   }
 }
+
+/* Mobile screens (480px and below) */
+@media (max-width: 480px) {
+  .edit-form {
+    max-width: 60%; /* Increased width for better use of space */
+    padding: 20px; /* Reduced padding */
+    margin: 0 auto; /* Centered the form */
+  }
+
+  .profile-image-preview {
+    margin: 0; /* Removed margin to reduce gap */
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-image {
+    height: 150px; /* Reduced height */
+    width: 150px; /* Reduced width */
+    object-fit: cover;
+    margin: 20px 0; /* Reduced top and bottom margins */
+  }
+
+  .profile-image-preview input[type="file"] {
+    padding: 8px; /* Reduced padding */
+    margin-left: 77px; /* Removed margin */
+  }
+
+  .profile-item-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-item-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile-list {
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 90%;
+  }
+
+  .ProfilePage {
+    height: 130vh; /* Adjusted height */
+  }
+
+  .profile-list ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 80%;
+    height: 130vh; /* Adjusted height for better fit */
+    margin-left: 40px; /* Removed margin */
+  }
+
+  .profile-list li {
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-items: center;
+    width: 200px;
+}
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
