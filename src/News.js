@@ -268,21 +268,21 @@ const App = () => {
                 <p>No news available.</p>
               ) : (
                 topNews.map((article, index) => (
-                  <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
-                    <div className='news-item-img'>
-                      <img
-                        src={getNewsImage(index)} 
-                        alt={article.title || 'News Image'}
-                        className="news-item-img"
-                      />
-                    </div>
-                    <div className='news-item-content'>
-                      <h3 className="news-item-title">{article.title}</h3>
-                      <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
-                      </div> 
-                    </div>
+                  <div className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
+                  <div className="news-item-img-wrapper">
+                    <img
+                      src={getNewsImage(index)} 
+                      alt={article.title || 'News Image'}
+                      className="news-item-img"
+                    />
+                    <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
                   </div>
+                  <div className='news-item-content'>
+                    <h3 className="news-item-title">{article.title}</h3>
+                  </div>
+                </div>
+                
+                   //</div>
                 ))
               )}
             </div>
@@ -291,20 +291,22 @@ const App = () => {
                 <p>No news available.</p>
               ) : (
                 bottomNews.map((article, index) => (
-                  <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
-                    <div className='news-item-img'>
-                      <img
-                        src={getNewsImage(index + 3)} 
-                        alt={article.title || 'News Image'}
-                      />
-                    </div>
-                    <div className='news-item-content'>
-                      <h3 className="news-item-title">{article.title}</h3>
-                      <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button> 
-                      </div>
-                    </div>
+                  <div className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
+                    <div className="news-item-img-wrapper">
+                  
+                    <img
+                      src={getNewsImage(index)} 
+                      alt={article.title || 'News Image'}
+                      className="news-item-img"
+                    />
+                     <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button>
                   </div>
+                  <div className='news-item-content'>
+                    <h3 className="news-item-title">{article.title}</h3>
+                  </div>
+                
+                    </div>
+                  // </div>
                 ))
               )}
             </div>
@@ -325,11 +327,13 @@ const App = () => {
                     <div className='news-item-img1'>
                       <img
                         src={getImageUrl(article.urlToImage)}
-                        alt={article.title || 'News Image'}
+                         alt={article.title || 'News Image'}
                       />
                     </div>
-                    <h3 className="news-item-title1">{article.title}</h3>
+                    {/* <h3 className="news-item-title1">{article.title}</h3> */}
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
                     <button onClick={(e) => handleSave(article, e)} className="save-button">Save</button> 
+                  </div>
                   </div>
                 ))
               )}

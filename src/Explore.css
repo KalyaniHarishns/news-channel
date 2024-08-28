@@ -1,4 +1,4 @@
-/* Base styles for larger screens */
+
 .App1 {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
@@ -36,7 +36,7 @@
 
 .section-header h2 {
   margin: 0;
-  font-size: 1.5em; /* Adjust font size if needed */
+  font-size: 1.5em; 
 }
 
  .ExploreChannel {
@@ -78,7 +78,7 @@
   font-weight: bold;
 }
 
-/* Media Queries for Small Devices */
+
 @media (max-width: 768px) {
   .App1 {
     margin-left: 0;

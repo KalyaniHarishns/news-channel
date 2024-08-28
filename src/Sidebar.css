@@ -201,6 +201,9 @@ li a, .logout-button {
     margin-left: 200px; /* Adjust this value based on your design */
     padding-left: 20px; /* Ensure consistent padding on smaller screens */
   }
+  .body{
+    width:100%;
+  }
 }
 
 @media (max-width: 576px) {
@@ -281,6 +284,7 @@ li a, .logout-button {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height:300vh;
 }
 
 .section1 {
@@ -357,8 +361,9 @@ li a, .logout-button {
 .channels-list-container1 {
   display: flex;
   overflow-x: auto;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   padding: 10px 0;
+
 }
 
 .channels-list1 {
@@ -376,7 +381,9 @@ li a, .logout-button {
   align-items: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
+.channel:hover{
+  border: 1px solid lightseagreen;
+}
 .channel-img {
   width: 100%;
   height: 120px;
@@ -400,25 +407,29 @@ li a, .logout-button {
 .news-items {
   display: flex;
   overflow-x: auto;
-  white-space: nowrap;
+  
   gap: 20px;
 }
-
+.news-item-img{
+  width:500px;
+}
 .news-item {
   background-color: #f0f0f0;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid white;
+  border-radius: 10px;
   overflow: hidden;
+  display:flex;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   flex: 0 0 auto;
   width: calc(33% - 20px);
   box-sizing: border-box;
   cursor: pointer;
+  height:250px;
 }
 
 .news-item:hover {
-  border: 1px solid black;
+  border: 1px solid lightseagreen;
 }
 
 .news-item-img {
@@ -446,7 +457,7 @@ li a, .logout-button {
   position: relative;
   width: 100%;
   
-  white-space: nowrap; 
+
   padding: 10px 0;
   
 } 
@@ -498,6 +509,7 @@ li a, .logout-button {
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
+  margin-top:20px;
   transition: background-color 0.3s;
 }
 
@@ -583,56 +595,98 @@ li a, .logout-button {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  /* margin-top:-10px; */
 }
-.save-button1 {
-  text-align: center;
-  background-color: lightseagreen;
-  color: white;
-  height: 30px;
-  width: 60px;
-  border-radius: 10px;
-  border-color: white;
-  
- 
-  justify-content:center;
-}
+
 .save-button{
-  text-align: center;
+  /* text-align: center; */
   background-color: lightseagreen;
   color: white;
   height: 30px;
   width: 60px;
   border-radius: 10px;
   border-color: white;
-  margin-top:-70px;
- 
-  justify-content:center;
+  margin-top:10px;
+ display:flex;
+ align-items:center;
+ justify-content: center;
+ padding: 10px 20px;
+ border:none;
+ cursor:pointer;
 }
-.save-button2{
-  text-align: center;
-  background-color:lightseagreen;
+.news-item-img-wrapper {
+  position: relative;
+  width: 150%;
+  height: 200px; /* Fixed height for the image container */
+}
+
+.news-item-img {
+  width: 150%;
+  height: 80%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+  border-radius: 8px; /* Optional: to match the card style */
+  margin-top:20px;
+}
+
+.save-button1 {
+  /* position: absolute;  */
+  background-color: lightseagreen;
   color: white;
   height: 30px;
   width: 60px;
   border-radius: 10px;
   border-color: white;
+  margin-top:10px;
+ display:flex;
+ align-items:center;
+ justify-content: center;
+ padding: 10px 20px;
+ border:none;
+ cursor:pointer;
+   margin-left:100px;
+    margin-top:10px; 
 }
+
+/* .save-button:hover {
+  background-color: #0056b3;
+} */
+
+
+.save-button2 {
+  /* position: absolute;  */
+  background-color: lightseagreen;
+  color: white;
+  height: 30px;
+  width: 60px;
+  border-radius: 10px;
+  border-color: white;
+  margin-top:10px;
+ display:flex;
+ align-items:center;
+ justify-content: center;
+ padding: 10px 20px;
+ border:none;
+ cursor:pointer;
+   margin-left:100px;
+    margin-top:10px; 
+}
+
 .news-item1 {
   background-color: #f0f0f0;
   padding: 10px;
   margin-top:10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid white;
+  border-radius: 10px;
   
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   flex: 0 0 auto;
   width: calc(33% - 20px);
   box-sizing: border-box;
   cursor: pointer;
-  height:260px;
+  height:220px;
 }
 .news-item1:hover {
-  border: 1px solid black;
+  border: 1px solid lightseagreen;
 }
 
 .news-item-img1 {
@@ -654,8 +708,9 @@ li a, .logout-button {
 @media (max-width: 992px) {
   .header-actions {
     flex-direction: column;
-    align-items: search-container;
+    /* align-items: search-container; */
     width: 100%;
+    margin-left:280px;
   }
 
   .search-container {
@@ -665,11 +720,11 @@ li a, .logout-button {
   
   .search-input {
     max-width: 40%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
   .logo{
-    margin-top:-50px;
-    margin-left:80px;
+    margin-top:-40px;
+    margin-left:90px;
     }
   .news-item {
     width: calc(50% - 20px);
@@ -678,12 +733,43 @@ li a, .logout-button {
   .sidebar {
     width: 160px;
     margin-right:300px;
+
   }
 
-  .App {
-    margin-left: 180px;
-    
+  
+}
+@media (max-width: 1024px) {
+  .featured-news-container{
+    height:100vh;
   }
+  .hamburger{
+    display:block;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    /* align-items: search-container; */
+    width: 100%;
+    margin-left:280px;
+  }
+
+}
+  @media (max-width: 1200px) {
+  .save-button,.save-button1,.save-button2 {
+    
+    
+    display: flex;
+    align-items: center;
+  }
+  .hamburger{
+    display:block;
+  }
+  .App{
+margin-left:5px;
+width:100%;
+  }
+  
+
 }
 
 @media (max-width: 768px) {
@@ -693,9 +779,14 @@ li a, .logout-button {
   }
  .logo{
   margin-top:-50px;
-  margin-left:80px;
+  margin-left:100px;
   }
-  
+  .news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* height:70vh; */
+  }
   .news-item {
     width: calc(100% - 20px);
   }
@@ -710,13 +801,36 @@ li a, .logout-button {
     height: 120px;
    
   }
+   .App-main {
+    /* margin-left: 180px; */
+    height:100vh;
+  } 
   .channel {
     width: 100%;
     height: 120px;
    
   }
 }
+@media (max-width: 480px) {
+.slick-track {
+  display: flex;
+  align-items: center; 
+  height:80vh;
+}
+.logo{
+/* margin-left:30px; */
+height:50px;
+width:50px;
+}
+.save-button{
+  width:auto;
+}
+
+}
 @media (max-width: 576px) {
+  .App-main{
+    height:100vh;
+  }
   .search-input {
     width: 100%;
     margin-bottom: 10px;
@@ -731,9 +845,18 @@ li a, .logout-button {
         max-width: 60px;
         margin-top:10px;
     }
-    .section-header1{
-      display:flex;
+    .section-header1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+        margin-top: -30px;
     }
+.h2{
+  margin-top:40px;
+}
     .channel {
       width: 100%;
       height: 120px;
@@ -751,7 +874,7 @@ li a, .logout-button {
 }
 @media (max-width: 576px) {
   .App {
-    margin-left: 0px;
+    margin-left: 5px;
     width: 100%;
   }
 }
@@ -759,7 +882,7 @@ li a, .logout-button {
 
   .logo{
     margin-top:-50px;
-    margin-left:75px;
+    margin-right:90px;
     }
    
 }
@@ -767,19 +890,21 @@ li a, .logout-button {
   position: relative;
   width: 100%;
   padding: 10px 0;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow: hidden; /* Ensure overflow is hidden */
 }
 
 
 
+
 @media (max-width: 768px) {
   .featured-news-container {
-    padding: 10px; /* Adjust padding to fit the button */
+    padding: 10px; 
+    height:100vh;
   }
 
-  .featured-news-container .save-button {
-    right: 5px; /* Adjust button position for smaller screens */
+  .featured-news-container  {
+    right: 5px; 
     top: 5px;
     height: 25px;
     width: 50px;
@@ -790,13 +915,13 @@ li a, .logout-button {
 
 @media (max-width: 576px) {
   .featured-news-container {
-    padding: 5px; /* Further adjust padding */
+    padding: 5px; 
   }
 
-  .featured-news-container .save-button {
-    right: 5px; /* Keep button close to edge */
+  .featured-news-container {
+    right: 5px; 
     top: 5px;
-    height: 20px;
+    height: 30px;
     width: 40px;
     font-size: 10px;
   }
@@ -806,24 +931,24 @@ li a, .logout-button {
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px; /* Adjust padding for larger screens */
+  padding: 10px 20px; 
   cursor: pointer;
-  font-size: 16px; /* Default font size */
+  font-size: 16px; 
 }
 
-/* Media query for tablets and smaller screens */
+
 @media (max-width: 768px) {
   .see-all-button {
-      padding: 8px 16px; /* Adjust padding for tablets */
-      font-size: 14px; /* Slightly smaller font size */
+      padding: 8px 16px; 
+      font-size: 14px; 
       display:flex;
   }
 }
 
-/* Media query for mobile screens */
+
 @media (max-width: 576px) {
   .see-all-button {
-      padding: 6px 12px; /* Adjust padding for mobile devices */
-      font-size: 12px; /* Smaller font size for mobile devices */
+      padding: 6px 12px; 
+      font-size: 12px;
   }
 }
