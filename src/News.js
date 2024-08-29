@@ -3,7 +3,7 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './Sidebar.css';
+import './News.css';
 import logo from './logo.png';
 import userPhoto from './userPhoto.jpg';
 import { useNavigate } from 'react-router-dom';
@@ -51,7 +51,7 @@ const App = () => {
   const [channels, setChannels] = useState([]);
   const [todayNews, setTodayNews] = useState([]);
   const [featuredNews, setFeaturedNews] = useState([]);
-  const [allNews, setAllNews] = useState([]);
+  // const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(''); 
   const [filteredNews, setFilteredNews] = useState([]);
@@ -73,7 +73,7 @@ const App = () => {
   const getArticles = async (query) => {
     setLoading(true);
     try {
-      // const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1`);
+      // const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
       // setFilteredNews(response?.data?.articles || []);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -85,13 +85,13 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         setChannels(channelsResponse?.data?.sources || []);
 
-        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         setTodayNews(todayNewsResponse?.data?.articles || []);
 
-        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         setFeaturedNews(featuredNewsResponse?.data?.articles || []);
 
         setLoading(false);
@@ -227,7 +227,7 @@ const App = () => {
         <section className="section1">
           <div className="section-head">
             <h2>Explore Channels</h2>
-            <button className="see-all-button" onClick={() => setShowAllChannels(prev => !prev)}>
+            <button className="see-all-button1" onClick={() => setShowAllChannels(prev => !prev)}>
               {showAllChannels ? 'See Less' : 'See All'}
             </button>
           </div>
@@ -255,7 +255,7 @@ const App = () => {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section2">
           <div className="section-header1">
             <h2>Today's Updates</h2>
             <button className="see-all-button" onClick={() => setShowAllTodayNews(prev => !prev)}>
@@ -313,7 +313,7 @@ const App = () => {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section3">
           <div className="section-header">
             <h2>Featured News</h2>
           </div>

@@ -1,11 +1,10 @@
-
 .App1 {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
   padding: 20px;
   box-sizing: border-box;
   height: 100vh;
-  margin-left: 200px;
+  margin-left: 216px;
 }
 
 .App-main1 {
@@ -22,24 +21,15 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.section-header {
+.channel-container {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 }
 
-.ExploreChannels-Header {
-  text-align: center;
-  font-size: large;
-}
-
-.section-header h2 {
-  margin: 0;
-  font-size: 1.5em; 
-}
-
- .ExploreChannel {
+.ExploreChannel {
   flex: 0 0 auto;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -52,17 +42,11 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
-
-.ExploreChannel {
   width: 220px;
+  cursor: pointer;
 }
 
-/* .channel {
-  width: 160px;
-} */
-
- .ExploreChannel:hover {
+.ExploreChannel:hover {
   transform: translateY(-3px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
@@ -78,6 +62,24 @@
   font-weight: bold;
 }
 
+.ExploreChannels-Header {
+  text-align: center;
+  font-size: large;
+}
+
+@media (max-width: 1024px) {
+  .App1 {
+    margin-left: 40px;
+    padding: 10px;
+  }
+  .channel-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
 @media (max-width: 768px) {
   .App1 {
@@ -97,22 +99,19 @@
     flex-direction: column;
     align-items: flex-start;
   }
-
+  .channel-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
   .section-header h2 {
     font-size: 1.25em; 
   }
 
- .ExploreChannel {
-    width: 100%; 
-    height: auto; 
-  }
-
   .ExploreChannel {
     width: 80%;
-  }
-
-  .channel {
-    width: 100%;
   }
 
   .channel-img1 {
@@ -128,7 +127,13 @@
   .channel-img1 {
     height: 100px; 
   }
-
+  .channel-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
   .channel-name {
     font-size: 0.9em; 
   }

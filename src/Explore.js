@@ -43,9 +43,6 @@ const App = () => {
     fetchData();
   }, []);
 
-  
-  // const visibleChannels = showAllChannels ? channels : channels.slice(0, 8);
-
   return (
     <div className="App1">
       <main className="App-main1">
@@ -53,23 +50,25 @@ const App = () => {
           <div className="ExploreChannels-Header">
             <h1>Explore Channels</h1>
           
-           <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', alignItems: 'center'}}> 
-            {channels.map((channel, index) => {
-              return <div
-              key={channel.id || index}
-              className="ExploreChannel"
-              onClick={() => window.open(`${channel.url}`, '_blank')}
-            >
-              <img 
-                src={staticImages[index % staticImages.length]} 
-                alt={channel.name || 'Channel Image'} 
-                className="channel-img1" 
-              />
-              <div className="channel-name">{channel.name}</div>
+            <div className="channel-container"> 
+              {channels.map((channel, index) => {
+                return (
+                  <div
+                    key={channel.id || index}
+                    className="ExploreChannel"
+                    onClick={() => window.open(`${channel.url}`, '_blank')}
+                  >
+                    <img 
+                      src={staticImages[index % staticImages.length]} 
+                      alt={channel.name || 'Channel Image'} 
+                      className="channel-img1" 
+                    />
+                    <div className="channel-name">{channel.name}</div>
+                  </div>
+                );
+              })}
             </div>
-            })}
           </div>
-        </div>
         </section>
       </main>
     </div>

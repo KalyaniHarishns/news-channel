@@ -82,7 +82,7 @@ function ProfilePage() {
       firstName: profile.firstName,
       lastName: profile.lastName,
       email: profile.email,
-      password: '', // Password is not pre-filled for security reasons
+      password: '', 
       phoneNumber: profile.phoneNumber,
       profileImage: null,
     });
@@ -211,7 +211,7 @@ function ProfilePage() {
         </div>
       </form>
       <div className="profile-list">
-        <h2>Profile List</h2>
+        <h>Profile List</h>
         <ul>
           {profiles.map((profile) => (
             <li key={profile._id}>

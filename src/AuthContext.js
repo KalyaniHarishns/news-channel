@@ -8,10 +8,10 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check authentication status on component mount
+    
     const token = localStorage.getItem('token');
     if (token) {
-      // Verify token with backend if needed
+     
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
@@ -21,13 +21,13 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem('token', token);
     setIsAuthenticated(true);
-    navigate('/News'); // Redirect to profile or desired page
+    navigate('/News'); 
   };
 
   const logout = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
-    navigate('/login'); // Redirect to login page
+    navigate('/login'); 
   };
 
   return (

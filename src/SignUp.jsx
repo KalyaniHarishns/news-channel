@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Signup.css'; // Ensure this file has the CSS rules you provided
+import './Signup.css'; 
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {

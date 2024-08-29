@@ -41,11 +41,16 @@
 }
 
 .saved-news-section{
-  margin-left: 221px;
+  height: 200vh;
 }
 
 .saved-news-container{
   display: flex;
     gap: 20px;
     flex-wrap: wrap;
+}
+@media(max-width:480px){
+  .saved-news-section{
+    height: 200vh;
+  }
 }
