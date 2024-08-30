@@ -208,7 +208,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <div className="header-actions">
-          <div className="search-container">
+          {/* <div className="search-container"> */}
             <input
               type="text"
               placeholder="Search news..."
@@ -217,11 +217,12 @@ const App = () => {
               className="search-input"
             />
             <button onClick={handleSearch} className="search-button">Search</button>
-          </div>
+         
           <div className='logo' onClick={handleLogoClick}>
             <img src={logo} className='logo' alt='Logo'/>
           </div>
-        </div>
+          </div>
+        {/* </div> */}
       </header>
       <main className="App-main">
         <section className="section1">
@@ -275,10 +276,12 @@ const App = () => {
                       alt={article.title || 'News Image'}
                       className="news-item-img"
                     />
-                    <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
+                   <h3 className="news-item-title">{article.title}</h3>
                   </div>
                   <div className='news-item-content'>
-                    <h3 className="news-item-title">{article.title}</h3>
+
+                    
+                    <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
                   </div>
                 </div>
                 
@@ -299,14 +302,18 @@ const App = () => {
                       alt={article.title || 'News Image'}
                       className="news-item-img"
                     />
-                     <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button>
-                  </div>
-                  <div className='news-item-content'>
+                  
+                 
+                  {/* <div className='news-item-content'> */}
                     <h3 className="news-item-title">{article.title}</h3>
-                  </div>
+                    </div>
+                    {/* </div> */}
+                    <div className="but">
+                    <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button>
+                
                 
                     </div>
-                  // </div>
+                  </div>
                 ))
               )}
             </div>
