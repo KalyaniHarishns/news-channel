@@ -208,7 +208,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <div className="header-actions">
-          {/* <div className="search-container"> */}
+            {/* <div className="search-container">   */}
             <input
               type="text"
               placeholder="Search news..."
@@ -222,7 +222,7 @@ const App = () => {
             <img src={logo} className='logo' alt='Logo'/>
           </div>
           </div>
-        {/* </div> */}
+         {/* </div>   */}
       </header>
       <main className="App-main">
         <section className="section1">
@@ -302,7 +302,7 @@ const App = () => {
                       alt={article.title || 'News Image'}
                       className="news-item-img"
                     />
-                  
+                  console.log(article);
                  
                   {/* <div className='news-item-content'> */}
                     <h3 className="news-item-title">{article.title}</h3>
@@ -337,11 +337,11 @@ const App = () => {
                          alt={article.title || 'News Image'}
                       />
                     </div>
-                    {/* <h3 className="news-item-title1">{article.title}</h3> */}
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                     <h3 className="news-item-title1">{article.title}</h3> 
+                    {/* <div style={{display: 'flex', justifyContent: 'center'}}> */}
                     <button onClick={(e) => handleSave(article, e)} className="save-button">Save</button> 
                   </div>
-                  </div>
+                  // </div>
                 ))
               )}
             </Slider>
