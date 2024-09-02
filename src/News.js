@@ -5,9 +5,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './News.css';
 import logo from './logo.png';
-import userPhoto from './userPhoto.jpg';
-import { useNavigate } from 'react-router-dom';
-import { useNews } from './NewsContext'; 
 
 import channelImage1 from './Images/abcNews.jpg';
 import channelImage2 from './Images/ABC News.jpg';
@@ -32,49 +29,58 @@ import image4 from './Images/skyNews.jpg';
 import image5 from './Images/WorldNews.jpg';
 import image6 from './Images/Live.jpg';
 
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 const channelImages = [
   channelImage1, channelImage2, channelImage3, channelImage4, channelImage5, channelImage6, channelImage7,
   channelImage8, channelImage9, channelImage10, channelImage11, channelImage12, channelImage13, channelImage14,
   channelImage15
 ];
+
 const newsImages = [
   image1, image2, image3, image4, image5, image6
 ];
 
-const profilesData = [
-  { name: 'Kalyani', email: 'kalyani@gmail.com' },
-  { name: 'Saanvi', email: 'saanvi@gmail.com' },
-  { name: 'Harish', email: 'harish@gmail.com' }
-];
-
 const App = () => {
+  const [username, setUsername] = useState(null);
   const [channels, setChannels] = useState([]);
   const [todayNews, setTodayNews] = useState([]);
   const [featuredNews, setFeaturedNews] = useState([]);
-  // const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(''); 
   const [filteredNews, setFilteredNews] = useState([]);
   const [showAllChannels, setShowAllChannels] = useState(false);
   const [showAllTodayNews, setShowAllTodayNews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [showAddButton, setShowAddButton] = useState(false); 
-  const [selectedProfile, setSelectedProfile] = useState(profilesData[0]); 
 
-  const { addSavedNews } = useNews(); 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate
   const sliderRef = useRef(null);
 
+ 
+  const getToken =  localStorage.getItem('token');
+
   const handleLogout = () => {
-    navigate('/login'); 
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
+  useEffect(() => {
+   
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+  }, []);
+  
   const getArticles = async (query) => {
     setLoading(true);
     try {
       // const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
       // setFilteredNews(response?.data?.articles || []);
+     
+        const token = getToken();
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        };
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -85,6 +91,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+       
         const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         setChannels(channelsResponse?.data?.sources || []);
 
@@ -156,11 +163,6 @@ const App = () => {
     ]
   };
 
-  const handleAddProfile = (e) => {
-    e.stopPropagation(); 
-    setIsDropdownOpen(prev => !prev); 
-  };
-
   const scrollLeft = () => {
     sliderRef.current.slickPrev();
   };
@@ -181,48 +183,30 @@ const App = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setIsDropdownOpen(false); 
-    setShowAddButton(false); 
   };
 
   const handleSave = (article, event) => {
     event.stopPropagation();
     event.preventDefault(); 
-    addSavedNews(article); 
-  };
-
-  const handleEmailSelect = (email) => {
-    const profile = profilesData.find(profile => profile.email === email);
-    setSelectedProfile(profile);
-    setIsDropdownOpen(false); 
-    setShowAddButton(false); 
-    console.log('Selected Profile:', profile);
-  };
-
-  const handleProfilePicClick = () => {
-    setShowAddButton(true); 
-    setIsDropdownOpen(true); 
+    // Handle saving the article, if necessary
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <div className="header-actions">
-            {/* <div className="search-container">   */}
-            <input
-              type="text"
-              placeholder="Search news..."
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-              className="search-input"
-            />
-            <button onClick={handleSearch} className="search-button">Search</button>
-         
+          <input
+            type="text"
+            placeholder="Search news..."
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            className="search-input"
+          />
+          <button onClick={handleSearch} className="search-button">Search</button>
           <div className='logo' onClick={handleLogoClick}>
             <img src={logo} className='logo' alt='Logo'/>
           </div>
-          </div>
-         {/* </div>   */}
+        </div>
       </header>
       <main className="App-main">
         <section className="section1">
@@ -269,23 +253,19 @@ const App = () => {
                 <p>No news available.</p>
               ) : (
                 topNews.map((article, index) => (
-                  <div className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
-                  <div className="news-item-img-wrapper">
-                    <img
-                      src={getNewsImage(index)} 
-                      alt={article.title || 'News Image'}
-                      className="news-item-img"
-                    />
-                   <h3 className="news-item-title">{article.title}</h3>
+                  <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
+                    <div className="news-item-img-wrapper">
+                      <img
+                        src={getNewsImage(index)} 
+                        alt={article.title || 'News Image'}
+                        className="news-item-img"
+                      />
+                      <h3 className="news-item-title">{article.title}</h3>
+                    </div>
+                    <div className='news-item-content'>
+                      <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
+                    </div>
                   </div>
-                  <div className='news-item-content'>
-
-                    
-                    <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
-                  </div>
-                </div>
-                
-                   //</div>
                 ))
               )}
             </div>
@@ -294,24 +274,17 @@ const App = () => {
                 <p>No news available.</p>
               ) : (
                 bottomNews.map((article, index) => (
-                  <div className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
+                  <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
                     <div className="news-item-img-wrapper">
-                  
-                    <img
-                      src={getNewsImage(index)} 
-                      alt={article.title || 'News Image'}
-                      className="news-item-img"
-                    />
-                  console.log(article);
-                 
-                  {/* <div className='news-item-content'> */}
-                    <h3 className="news-item-title">{article.title}</h3>
+                      <img
+                        src={getNewsImage(index)} 
+                        alt={article.title || 'News Image'}
+                        className="news-item-img"
+                      />
+                      <h3 className="news-item-title">{article.title}</h3>
                     </div>
-                    {/* </div> */}
-                    <div className="but">
-                    <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button>
-                
-                
+                    <div className='but'>
+                      <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button>
                     </div>
                   </div>
                 ))
@@ -334,14 +307,12 @@ const App = () => {
                     <div className='news-item-img1'>
                       <img
                         src={getImageUrl(article.urlToImage)}
-                         alt={article.title || 'News Image'}
+                        alt={article.title || 'News Image'}
                       />
                     </div>
-                     <h3 className="news-item-title1">{article.title}</h3> 
-                    {/* <div style={{display: 'flex', justifyContent: 'center'}}> */}
+                    <h3 className="news-item-title1">{article.title}</h3> 
                     <button onClick={(e) => handleSave(article, e)} className="save-button">Save</button> 
                   </div>
-                  // </div>
                 ))
               )}
             </Slider>
@@ -358,28 +329,7 @@ const App = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <span className="close-button" onClick={handleCloseModal}>&times;</span>
             <div className="modal-header">
-              <div className="profile-container">
-                <img
-                  src={userPhoto}
-                  alt="User"
-                  className="modal-photo"
-                  onClick={handleProfilePicClick} // Show + button on profile pic click
-                />
-                {showAddButton && (
-                  <button className="add-profile-button" onClick={handleAddProfile}>+</button>
-                )}
-                {isDropdownOpen && (
-                  <div className="dropdown-content">
-                    {profilesData.map(profile => (
-                      <p key={profile.email} onClick={() => handleEmailSelect(profile.email)}>
-                        {profile.email}
-                      </p>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <h2>{selectedProfile.name}</h2>
-              <p>{selectedProfile.email}</p>
+              <h2>Logout</h2>
             </div>
             <button onClick={handleLogout} className="logout-button">Logout</button>
           </div>

@@ -42,7 +42,7 @@ const SignUp = () => {
         <div className="text">Sign Up</div>
       </div>
 
-      <div className="inputs">
+      <div className="input2">
       <div className="input">
           <input
             placeholder="Name"

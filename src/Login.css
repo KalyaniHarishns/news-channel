@@ -1,170 +1,160 @@
+/* Login.css */
 .LoginContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 80px;
-    margin-left: auto; 
-    margin-right: auto; 
-    width: 500px; 
-    background: #fff;
-    padding-bottom: 30px;
-    border-radius: 30px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    padding-right: 100px;
-  }
-  
-  
-  .LoginContainer .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
-    width: 100%;
-    margin-top: 30px;
-    margin-left:80px;
-  }
-  
-  .LoginContainer .text {
-    color: black;
-    text-align: center;
-    font-size: 48px;
-    font-weight: 700;
-  }
-  
-  
-  .LoginContainer .inputs {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  background: #fff;
+  padding-bottom: 30px;
+  border-radius: 30px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding-right: 100px;
+}
+
+.LoginContainer .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.LoginContainer .text {
+  color: black;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.LoginContainer .input1 {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.LoginContainer input {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 50px;
+  background: #eaeaee;
+  border-radius: 6px;
+  padding: 0 15px;
+  border: none;
+  outline: none;
+  margin-left: 100px;
+}
+
+.LoginContainer .submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.LoginContainer .submit {
+  width: 200px;
+  height: 50px;
+  background: black;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 80px;
+}
+
+@media (max-width: 1180px) {
   .LoginContainer input {
-    display: flex;
-    align-items: center;
-    width: 300px;
-    height: 50px;
-    background: #eaeaee;
-    border-radius: 6px;
-    padding: 0 15px;
-    border: none;
-    outline: none;
-    margin-left:100px;
+    margin-left: 50px;
   }
-  
-  .LoginContainer .submit-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  .LoginContainer {
+    width: 400px;
+    padding-right: 50px;
+  }
+
+  .LoginContainer .header {
+    margin-left: 0;
+  }
+
+  .LoginContainer .text {
+    font-size: 36px;
+  }
+
+  .LoginContainer .inputs {
+    width: 300px;
+  }
+
+  .LoginContainer input {
+    width: 220px;
+  }
+
+  .LoginContainer .submit {
+    width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .LoginContainer {
+    width: 90%;
+    padding-right: 20px;
+  }
+
+  .LoginContainer .header {
+    margin-left: 0;
+  }
+
+  .LoginContainer .text {
+    font-size: 28px;
+  }
+
+  .LoginContainer .inputs {
     width: 100%;
   }
-  
-  
+
+  .LoginContainer input {
+    width: 75%;
+  }
+
   .LoginContainer .submit {
-    width: 200px;
-    height: 50px;
-    background: black;
-    color: #fff;
-    font-size: 19px;
-    font-weight: 700;
-    border-radius: 50px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left:80px;
+    width: 150px;
   }
-  
- 
-  @media (max-width: 1180px) {
-    .LoginContainer input {
-      margin-left:50px;
-    }
+}
+
+@media (max-width: 480px) {
+  .LoginContainer {
+    width: 80%;
+    padding-right: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
   }
-  
-  
-  @media (max-width: 1024px) {
-    .LoginContainer {
-      width: 400px;
-      padding-right: 50px;
-    }
-  
-    .LoginContainer .header {
-      margin-left: 0; 
-    }
-  
-    .LoginContainer .text {
-      font-size: 36px;
-    }
-  
-    .LoginContainer .inputs {
-      width: 300px;
-    }
-  
-    .LoginContainer input {
-      width: 220px;
-    }
-  
-    .LoginContainer .submit {
-      width: 130px;
-      margin-left:20px;
-    }
+
+  .LoginContainer .text {
+    font-size: 24px;
   }
-  
-  
-  @media (max-width: 768px) {
-    .LoginContainer {
-      width: 90%;
-      padding-right: 20px;
-    }
-  
-    .LoginContainer .header {
-      margin-left: 0; 
-    }
-  
-    .LoginContainer .text {
-      font-size: 28px;
-    }
-  
-    .LoginContainer .inputs {
-      width: 100%; 
-    }
-  
-    .LoginContainer input {
-      width: 75%;
-    }
-  
-    .LoginContainer .submit {
-      width: 150px;
-    }
+
+  .LoginContainer .inputs {
+    width: 100%;
   }
-  
-  
-  @media (max-width: 480px) {
-    .LoginContainer {
-      width: 80%;
-      padding-right: 10px;
-      margin-left: 10%; 
-      margin-right: 10%; 
-    }
-  
-    .LoginContainer .text {
-      font-size: 24px;
-    }
-  
-    .LoginContainer .inputs {
-      width: 100%; 
-    }
-  
-    .LoginContainer input {
-      width: 60%;
-      margin-left: 50px;
-    }
-  
-    .LoginContainer .submit {
-      width: 40%; 
-      margin-left:0px;
-    }
+
+  .LoginContainer input {
+    width: 60%;
+    margin-left: 50px;
   }
-  
+
+  .LoginContainer .submit {
+    width: 40%;
+  }
+}

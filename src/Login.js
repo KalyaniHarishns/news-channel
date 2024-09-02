@@ -9,8 +9,8 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
-      // Using fetch for the login request
       const response = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -20,11 +20,19 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // If response is ok, store token using the AuthContext
+        // Save user details and token in local storage
+        localStorage.setItem('userId', data.user._id); // Save user ID
+        localStorage.setItem('userEmail', data.user.email); // Save user email
+        localStorage.setItem('userName', data.user.name); // Save user name
+        localStorage.setItem('userProfileImage', data.user.profileImage || ''); // Save profile image URL if available
+
+        // Call login function from context (if needed)
         login(data.token);
-        localStorage.setItem('token', data.token);
+
         alert('Login successful');
-        // Optionally, redirect the user to another page
+        // Optionally, fetch user details
+        fetchUserDetails(data.user._id);
+
       } else {
         alert(data.message || 'Login failed');
       }
@@ -34,6 +42,21 @@ const Login = () => {
     }
   };
 
+  const fetchUserDetails = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/users/${userId}`);
+      const userDetails = await response.json();
+
+      if (response.ok) {
+        console.log('User details:', userDetails);
+        // Handle user details as needed
+      } else {
+        console.error('Failed to fetch user details:', userDetails.message);
+      }
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
+  };
 
   return (
     <div className="LoginContainer">
@@ -41,7 +64,7 @@ const Login = () => {
         <div className="text">Login</div>
       </div>
 
-      <div className="inputs">
+      <div className="input1">
         <div className="input">
           <input
             placeholder="Email"
