@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import defaultProfilePic from './Images/Icon.png'; 
 import './Settings.css';
 
 const Settings = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
   const [dataId, setDataId] = useState(null);
   const [details, setDetails] = useState({
     name: '',
@@ -16,6 +14,7 @@ const Settings = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [profileImagePreview, setProfileImagePreview] = useState(defaultProfilePic); 
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -52,11 +51,12 @@ const Settings = () => {
       setDetails({
         name: response.data.name,
         email: response.data.email,
-        password: '', // Do not pre-fill password for security reasons
+        password: '',
       });
       setProfileImagePreview(response.data.profileImage || defaultProfilePic); 
     } catch (error) {
       console.error("Error fetching data:", error);
+      setError('Error fetching user data.');
     }
   };
 
@@ -78,36 +78,37 @@ const Settings = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log("Data updated successfully");
+      setSuccessMessage('Profile updated successfully!');
+      setError('');
       setIsEditMode(false);
     } catch (error) {
       console.error("Error updating data:", error);
       setError(error.response?.data?.message || 'An error occurred while updating the profile.');
+      setSuccessMessage('');
     }
   };
 
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:3001/api/users/${dataId}`);
-      console.log("Profile deleted successfully");
-      // Clear local storage and state
-      localStorage.removeItem('userId');
+      setSuccessMessage('Profile deleted successfully!');
+      setError('');
       setDetails({
         name: '',
         email: '',
         password: '',
       });
       setDataId(null);
-      setProfileImagePreview(defaultProfilePic); // Reset to default image
-      // Redirect to signup page
-      navigate('/signup'); // Redirect to signup page
+      setProfileImagePreview(defaultProfilePic); 
     } catch (error) {
       console.error("Error deleting profile:", error);
+      setError('Error deleting profile.');
+      setSuccessMessage('');
     }
   };
 
   return (
-    <div>
+    <div className="full-container">
       <div className="settings-container">
         <div className="setting-card">
           <h1>{isEditMode ? 'Edit Profile' : 'Create Profile'}</h1>
@@ -165,19 +166,20 @@ const Settings = () => {
             />
           </div>
         
-          <button className='settings-save' type="submit">
-            Save Changes
-          </button>
-        </form>
-        {dataId && (
           <div className="button-group">
-            <button 
-              className='settings-delete' 
-              onClick={handleDelete}>
-              Delete Profile
+            <button className='settings-save' type="submit">
+              Save Changes
             </button>
+            {dataId && (
+              <button 
+                className='settings-delete' 
+                onClick={handleDelete}>
+                Delete Profile
+              </button>
+            )}
           </div>
-        )}
+        </form>
+        {successMessage && <p className="success-message">{successMessage}</p>}
         {error && <p className="error-message">{error}</p>}
       </div>
     </div>

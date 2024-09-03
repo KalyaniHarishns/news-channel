@@ -1,69 +1,129 @@
-.settings-container {
-  /* padding: 10px; */
-  background-color: #f4f4f4;
-}
+
 
 .setting-card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top:20px;
   text-align: center;
-  margin-bottom: 20px;
+ 
 }
 
 .signup-containers {
   display: flex;
-  flex-direction: row;
-  align-items: center; 
+  align-items: flex-start; 
   justify-content: center;
-  gap: 20px; 
+  gap: 60px;
   margin: 20px;
-  margin-top:100px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  
+}
+.profile-image-preview{
+  height:200px;
+  width:200px;
+  margin-left:40px;
+}
+.profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* .profile-image-preview {
-  margin-bottom: 20px;
-} */
-
 .profile-image {
-  width: 200px; /* Adjust width as needed */
-  height: 200px; /* Adjust height as needed */
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out form elements */
+  max-width: 600px;
+  width: 100%;
+}
+
+.messages {
+  width: 100%;
+  margin-bottom: 20px; /* Margin to separate from form */
+  text-align: center; /* Center aligned */
+}
+
+.success-message {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* .error-message {
+  color: #dc3545;
+  font-weight: bold;
+} */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px; /* Added margin for spacing */
+}
+
+button.settings-save,
+button.settings-delete {
+  width: 150px; /* Set a fixed width for buttons */
+  padding: 10px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.settings-save {
+  background-color: #4CAF50;
+}
+
+button.settings-save:hover {
+  background-color: #45a049;
+}
+
+button.settings-delete {
+  background-color: #dc3545;
+}
+
+button.settings-delete:hover {
+  background-color: #c82333;
 }
 
 .inputt {
   margin-bottom: 15px;
   width: 100%;
-  max-width: 600px;
 }
 
 .labe {
   font-weight: bold;
   display: block;
+  
   margin-bottom: 5px;
 }
 
 input[type="text"],
 input[type="password"],
 input[type="file"] {
-  width: 165%;
+  width: 100%; 
   padding: 10px;
   border-radius: 5px;
- 
+  box-sizing: border-box; 
 }
 
 button.settings-save {
-  width: 100%;
+  width: 150px;
   max-width: 200px;
   padding: 10px;
+  height:45px;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 10px;
+  
 }
 
 button.settings-save:hover {
@@ -71,21 +131,28 @@ button.settings-save:hover {
 }
 
 .button-group {
-  margin-top: 20px;
   display: flex;
   gap: 10px;
+  
 }
-
+.butt{
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  justify-content: space-between;
+}
 button.settings-edit,
 button.settings-delete {
-  width: 100px;
+  width: 150px;
   padding: 10px;
+  height: 45px;
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
   font-size: 16px;
 }
+
 
 button.settings-edit {
   background-color: #007bff;
@@ -103,7 +170,361 @@ button.settings-delete:hover {
   background-color: #c82333;
 }
 
-.error-message {
-  color: #dc3545;
+@media (max-width: 1024px) {
+.signup-containers {
+  display: flex;
+  align-items: flex-start; 
+  justify-content: center;
+  gap: 60px;
+  margin: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  margin-left:300px; 
+}
+.profile-image-preview{
+  height:200px;
+  width:200px;
+  margin-left:40px;
+}
+.profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out form elements */
+  max-width: 600px;
+  width: 100%;
+}
+.inputt {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.labe {
   font-weight: bold;
+  display: block;
+  
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+  width: 146%; 
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+
+button.settings-save {
+  width: 150px;
+  max-width: 200px;
+  padding: 10px;
+  height:45px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  
+}
+
+button.settings-save:hover {
+  background-color: #45a049;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: -34px; /* Space above buttons */
+}
+.butt{
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  justify-content: space-between;
+}
+button.settings-edit,
+button.settings-delete {
+  width: 150px;
+  padding: 10px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+}
+@media (max-width: 576px) {
+  .full-container{
+    height:128vh;
+  }
+}
+@media (max-width: 780px) {
+  .signup-containers {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+    gap: 30px; /* Adjusted gap for tablets */
+    margin: 20px; /* Reduced margin for smaller screens */
+    margin-left: 0; /* Removed left margin for better alignment */
+  }
+
+  .labe {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px; 
+  }
+
+  .profile-image-preview {
+    height: 180px;
+    width: 150px;
+    margin-bottom: 20px;
+   }
+
+  .profile-image {
+    width: 200px; /* Adjusted size */
+    height: 200px;
+  }
+
+  .inputs {
+    margin-bottom: 15px; 
+    width: 119%;
+    margin-left: 0; 
+  }
+
+  .form-container {
+    /* width: 100%; */
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 64px;
+  
+}
+
+
+  .full-container {
+    height: 130vh; 
+  }
+
+  .inputt {
+    margin-bottom: 15px; 
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center;
+    gap: 15px; 
+   
+  }
+
+  .settings-card {
+    margin-top: 20px; 
+  }
+
+  button.settings-save {
+   
+    font-size: 16px; /* Slightly larger font size for readability */
+  }
+
+  button.settings-edit,
+  button.settings-delete {
+    width: 100%; 
+    max-width: 140px; 
+    font-size: 16px; 
+  }
+}
+@media (max-width: 1024px) {
+  .signup-containers {
+    flex-direction: column; 
+    align-items: center; 
+    gap: 30px; 
+    margin: 20px; 
+    margin-left: -102px;
+  }
+
+  .labe {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px; /* Ensure space below the label */
+  }
+
+  .profile-image-preview {
+    height: 180px; /* Adjusted size for tablets */
+    width: 150px;
+    margin-bottom: 57px; /* Added space below profile image */
+  }
+
+  .profile-image {
+    width: 200px; /* Adjusted size */
+    height: 200px;
+  }
+
+  .inputs {
+    margin-bottom: 15px; /* Consistent margin below input fields */
+    width: 119%;
+    margin-left: 0; /* Reset left margin adjustment */
+  }
+
+  .form-container {
+    /* width: 100%; */
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 64px;
+    /* padding: 0 20px; */
+    /* margin-left: 0; */
+}
+
+
+  .full-container {
+    height: 138vh; /* Adjust height to fit content on smaller screens */
+  }
+
+  .inputt {
+    margin-bottom: 15px; /* Consistent margin below input fields */
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: row; /* Keep buttons in a row */
+    align-items: center; /* Center buttons vertically */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 15px; /* Adjusted gap for better spacing */
+   margin-top:10px;
+  }
+
+  .settings-card {
+    margin-top: 20px; /* Increased margin for better spacing */
+  }
+
+  button.settings-save {
+   
+    font-size: 16px; /* Slightly larger font size for readability */
+  }
+
+  button.settings-edit,
+  button.settings-delete {
+    width: 100%; /* Full width for buttons on smaller screens */
+    max-width: 140px; /* Adjusted max-width */
+    font-size: 16px; /* Slightly larger font size for readability */
+  }
+}
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .signup-containers {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+   
+    margin: 10px; /* Reduced margin */
+    margin-left: 10px; /* Removed left margin */
+  }
+  .labe {
+    font-weight: bold;
+    display: block;
+    height:8px;
+    margin-bottom: 5px;
+  }
+  .profile-image-preview {
+    height: 204px;
+    width: 166px;
+}
+  .profile-image {
+    width: 160px; /* Adjusted size */
+    height: 160px;
+  }
+  /* Style for text and password inputs */
+input[type="text"], 
+input[type="password"] {
+    width: 84%;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px; /* Ensure consistent spacing */
+}
+
+/* Style for file inputs (profile image) */
+input[type="file"] {
+    width: 124%;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px; /* Ensure consistent spacing */
+}
+
+/* Additional styles to ensure layout consistency */
+.inputt {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.labe {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+  .inputs {
+    margin-bottom: 15px;
+    width: 100%;
+    margin-left:-20px;
+  }
+  .form-container {
+    width: 100%; 
+    max-width: 100%; 
+    padding: 0 10px;
+    margin-top:-5px;
+    margin-left:20px;
+  }
+.full-container{
+  height:130vh;
+}
+  .inputt {
+    margin-bottom: 10px; /* Reduced margin */
+  }
+.profile-image-preview{
+  margin-bottom:38px;
+  margin-left:-25px;
+}
+  .button-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top:10px;
+    margin-left:-27px;
+}
+.settings-card{
+  margin-top:10px;
+}
+  button.settings-save {
+    width: 100%; /* Full width on mobile */
+    max-width: 120px; /* Further reduced width */
+    font-size: 14px; /* Reduced font size */
+  }
+
+  button.settings-edit,
+  button.settings-delete {
+    width: 100%; /* Full width on mobile */
+    max-width: 120px; /* Further reduced width */
+    font-size: 14px; /* Reduced font size */
+  }
 }
