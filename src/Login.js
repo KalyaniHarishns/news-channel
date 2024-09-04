@@ -28,7 +28,9 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:3001/studylogins', loginDetails);
       if (response.status === 200) { 
-        localStorage.setItem('userId', response.data.userId); 
+        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('email', response.data.email); 
         navigate('/News'); 
       } else {
         setError('Invalid email or password'); 
@@ -38,13 +40,14 @@ const Login = () => {
       setError('An error occurred. Please try again.');
     }
   };
-
+  
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
       const response = await axios.post('http://localhost:3001/studysignups', signupDetails);
       console.log('Signup successful:', response.data);
+      navigate('/login'); 
       setSignupDetails({
         name: '',
         email: '',

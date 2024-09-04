@@ -412,29 +412,29 @@ button.settings-delete {
   }
 
   .settings-card {
-    margin-top: 20px; /* Increased margin for better spacing */
+    margin-top: 20px; 
   }
 
   button.settings-save {
    
-    font-size: 16px; /* Slightly larger font size for readability */
+    font-size: 16px; 
   }
 
   button.settings-edit,
   button.settings-delete {
-    width: 100%; /* Full width for buttons on smaller screens */
-    max-width: 140px; /* Adjusted max-width */
-    font-size: 16px; /* Slightly larger font size for readability */
+    width: 100%; 
+    max-width: 140px; 
+    font-size: 16px; 
   }
 }
-/* Mobile Devices */
+
 @media (max-width: 480px) {
   .signup-containers {
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items */
+    flex-direction: column;
+    align-items: center; 
    
-    margin: 10px; /* Reduced margin */
-    margin-left: 10px; /* Removed left margin */
+    margin: 10px; 
+    margin-left: 10px; 
   }
   .labe {
     font-weight: bold;
@@ -447,29 +447,28 @@ button.settings-delete {
     width: 166px;
 }
   .profile-image {
-    width: 160px; /* Adjusted size */
+    width: 160px; 
     height: 160px;
   }
-  /* Style for text and password inputs */
-input[type="text"], 
+  
 input[type="password"] {
     width: 84%;
     padding: 10px;
     border-radius: 5px;
     box-sizing: border-box;
-    margin-bottom: 15px; /* Ensure consistent spacing */
+    margin-bottom: 15px; 
 }
 
-/* Style for file inputs (profile image) */
+
 input[type="file"] {
     width: 124%;
     padding: 10px;
     border-radius: 5px;
     box-sizing: border-box;
-    margin-bottom: 15px; /* Ensure consistent spacing */
+    margin-bottom: 15px; 
 }
 
-/* Additional styles to ensure layout consistency */
+
 .inputt {
     margin-bottom: 15px;
     width: 100%;
@@ -497,7 +496,7 @@ input[type="file"] {
   height:130vh;
 }
   .inputt {
-    margin-bottom: 10px; /* Reduced margin */
+    margin-bottom: 10px; 
   }
 .profile-image-preview{
   margin-bottom:38px;
@@ -516,15 +515,15 @@ input[type="file"] {
   margin-top:10px;
 }
   button.settings-save {
-    width: 100%; /* Full width on mobile */
-    max-width: 120px; /* Further reduced width */
-    font-size: 14px; /* Reduced font size */
+    width: 100%; 
+    max-width: 120px; 
+    font-size: 14px; 
   }
 
   button.settings-edit,
   button.settings-delete {
-    width: 100%; /* Full width on mobile */
-    max-width: 120px; /* Further reduced width */
-    font-size: 14px; /* Reduced font size */
+    width: 100%; 
+    max-width: 120px; 
+    font-size: 14px; 
   }
 }

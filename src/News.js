@@ -5,6 +5,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './News.css';
 import logo from './logo.png';
+import { useNews } from './NewsContext'; 
+import { useNavigate } from 'react-router-dom';
 
 import channelImage1 from './Images/abcNews.jpg';
 import channelImage2 from './Images/ABC News.jpg';
@@ -29,8 +31,6 @@ import image4 from './Images/skyNews.jpg';
 import image5 from './Images/WorldNews.jpg';
 import image6 from './Images/Live.jpg';
 
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
 const channelImages = [
   channelImage1, channelImage2, channelImage3, channelImage4, channelImage5, channelImage6, channelImage7,
   channelImage8, channelImage9, channelImage10, channelImage11, channelImage12, channelImage13, channelImage14,
@@ -42,7 +42,9 @@ const newsImages = [
 ];
 
 const App = () => {
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [profileImage, setProfileImage] = useState();
   const [channels, setChannels] = useState([]);
   const [todayNews, setTodayNews] = useState([]);
   const [featuredNews, setFeaturedNews] = useState([]);
@@ -52,35 +54,47 @@ const App = () => {
   const [showAllChannels, setShowAllChannels] = useState(false);
   const [showAllTodayNews, setShowAllTodayNews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [showDetails, setShowDetails] = useState(false);
+  const { addSavedNews } = useNews(); 
+  const navigate = useNavigate(); 
   const sliderRef = useRef(null);
 
- 
-  const getToken =  localStorage.getItem('token');
+  const getToken = () => localStorage.getItem('token');
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('profileImage'); 
     navigate('/login');
   };
 
+  const toggleDetails = () => {
+    setShowDetails(!showDetails); 
+  };
+
   useEffect(() => {
-   
     const storedUsername = localStorage.getItem('username');
+    const storedEmail = localStorage.getItem('email');
+    const storedProfileImage = localStorage.getItem('profileImage'); 
+    console.log('Stored email:', storedEmail); 
     setUsername(storedUsername);
+    setEmail(storedEmail);
+    setProfileImage(storedProfileImage);
   }, []);
-  
+
   const getArticles = async (query) => {
     setLoading(true);
     try {
-      // const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=bfdf4cb923be4950b2e30557ea76c65e`);
-      // setFilteredNews(response?.data?.articles || []);
-     
-        const token = getToken();
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        };
+      const token = getToken();
+      console.log('Token:', token);
+      const headers = token ? {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      } : { 'Content-Type': 'application/json' };
+
+      const response = await axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1`, { headers });
+      setFilteredNews(response?.data?.articles || []);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -91,14 +105,13 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-       
-        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
         setChannels(channelsResponse?.data?.sources || []);
 
-        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
         setTodayNews(todayNewsResponse?.data?.articles || []);
 
-        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
+        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
         setFeaturedNews(featuredNewsResponse?.data?.articles || []);
 
         setLoading(false);
@@ -129,7 +142,13 @@ const App = () => {
     }
   };
 
-  const getImageUrl = (url) => url || image1;
+  const handleSave = (article, event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    addSavedNews(article); // Save article using context
+  };
+
+  const getImageUrl = (url) => url || newsImages[0];
   const displayedNews = searchQuery ? filteredNews : todayNews;
   const topNews = displayedNews.slice(0, showAllTodayNews ? displayedNews.length : 3);
   const bottomNews = displayedNews.slice(3, showAllTodayNews ? displayedNews.length : 6);
@@ -174,7 +193,6 @@ const App = () => {
   const visibleChannels = showAllChannels ? channels : channels.slice(0, 7);
 
   const getChannelImage = (index) => channelImages[index % channelImages.length];
-
   const getNewsImage = (index) => newsImages[index % newsImages.length];
 
   const handleLogoClick = () => {
@@ -183,12 +201,6 @@ const App = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-  };
-
-  const handleSave = (article, event) => {
-    event.stopPropagation();
-    event.preventDefault(); 
-    // Handle saving the article, if necessary
   };
 
   return (
@@ -200,15 +212,24 @@ const App = () => {
             placeholder="Search news..."
             value={searchQuery}
             onChange={handleSearchInputChange}
-            className="search-input"
+            className="search-input1"
           />
           <button onClick={handleSearch} className="search-button">Search</button>
-          <div className='logo' onClick={handleLogoClick}>
-            <img src={logo} className='logo' alt='Logo'/>
+          <div className='logo-container'>
+            <img src={logo} className='logo-image' alt='Logo' onClick={toggleDetails}/>
+            {showDetails && (
+              <div className="dropdown">
+                {/* {profileImage && <img src={profileImage} className='profile-image' alt='Profile' />} */}
+                {username && <div className="dropdown-item">{username}</div>}
+                {email && <div className="dropdown-item">{email}</div>}
+                <button onClick={handleLogout} className="dropdown-button">Logout</button>
+              </div>
+            )}
           </div>
         </div>
       </header>
       <main className="App-main">
+        {/* Explore Channels Section */}
         <section className="section1">
           <div className="section-head">
             <h2>Explore Channels</h2>
@@ -240,6 +261,7 @@ const App = () => {
           </div>
         </section>
 
+        {/* Today's Updates Section */}
         <section className="section2">
           <div className="section-header1">
             <h2>Today's Updates</h2>
@@ -293,6 +315,7 @@ const App = () => {
           </div>
         </section>
 
+        {/* Featured News Section */}
         <section className="section3">
           <div className="section-header">
             <h2>Featured News</h2>
@@ -324,6 +347,7 @@ const App = () => {
         </section>
       </main>
 
+   
       {isModalOpen && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

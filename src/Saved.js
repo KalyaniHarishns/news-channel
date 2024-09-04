@@ -7,7 +7,7 @@ const Saved = () => {
   const { savedNews } = useNews(); 
 
   return (
-    <section className="section saved-news-section">
+    <section className="sect">
       <div className="section-header">
         <h2>Saved News</h2>
       </div>

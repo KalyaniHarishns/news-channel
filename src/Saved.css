@@ -1,8 +1,11 @@
 .saved-container {
   padding: 20px;
   background-color: #f9f9f9;
+  
 }
-
+.sect{
+  margin-left:221px;
+}
 .saved-news-list {
   display: flex;
   flex-wrap: wrap;
@@ -52,5 +55,8 @@
 @media(max-width:480px){
   .saved-news-section{
     height: 200vh;
+  }
+  .sect{
+    margin-left:0px;
   }
 }

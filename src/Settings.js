@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import defaultProfilePic from './Images/Icon.png'; 
+
 import './Settings.css';
 
 const Settings = () => {
+  const navigate = useNavigate();
   const [dataId, setDataId] = useState(null);
   const [details, setDetails] = useState({
     name: '',
@@ -53,7 +56,8 @@ const Settings = () => {
         email: response.data.email,
         password: '',
       });
-      setProfileImagePreview(response.data.profileImage || defaultProfilePic); 
+      console.log(response.data.name)
+      // setProfileImagePreview(response.data.profileImage || defaultProfilePic); 
     } catch (error) {
       console.error("Error fetching data:", error);
       setError('Error fetching user data.');
@@ -99,7 +103,9 @@ const Settings = () => {
         password: '',
       });
       setDataId(null);
-      setProfileImagePreview(defaultProfilePic); 
+      setProfileImagePreview(defaultProfilePic);
+      localStorage.removeItem('userId'); // Remove userId from local storage
+      navigate('/login'); 
     } catch (error) {
       console.error("Error deleting profile:", error);
       setError('Error deleting profile.');
