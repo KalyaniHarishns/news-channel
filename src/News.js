@@ -105,13 +105,17 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        
         const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        console.log('Channels Response:', channelsResponse.data);
         setChannels(channelsResponse?.data?.sources || []);
 
         const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        console.log('Today News Response:', todayNewsResponse.data);
         setTodayNews(todayNewsResponse?.data?.articles || []);
 
         const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        console.log('Featured News Response:', featuredNewsResponse.data);
         setFeaturedNews(featuredNewsResponse?.data?.articles || []);
 
         setLoading(false);
@@ -263,57 +267,58 @@ const App = () => {
 
         {/* Today's Updates Section */}
         <section className="section2">
-          <div className="section-header1">
-            <h2>Today's Updates</h2>
-            <button className="see-all-button" onClick={() => setShowAllTodayNews(prev => !prev)}>
-              {showAllTodayNews ? 'See Less' : 'See All'}
-            </button>
-          </div>
-          <div className="news-container">
-            <div className="news-items">
-              {topNews.length === 0 ? (
-                <p>No news available.</p>
-              ) : (
-                topNews.map((article, index) => (
-                  <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
-                    <div className="news-item-img-wrapper">
-                      <img
-                        src={getNewsImage(index)} 
-                        alt={article.title || 'News Image'}
-                        className="news-item-img"
-                      />
-                      <h3 className="news-item-title">{article.title}</h3>
-                    </div>
-                    <div className='news-item-content'>
-                      <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
-                    </div>
-                  </div>
-                ))
-              )}
+  <div className="section-header1">
+    <h2>Today's Updates</h2>
+    <button className="see-all-button" onClick={() => setShowAllTodayNews(prev => !prev)}>
+      {showAllTodayNews ? 'See Less' : 'See All'}
+    </button>
+  </div>
+  <div className="news-container">
+    <div className="news-items">
+      {topNews.length === 0 ? (
+        <p>No news available.</p>
+      ) : (
+        topNews.map((article, index) => (
+          <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
+            <div className="news-item-img-wrapper">
+              <img
+                src={article.urlToImage || "https://kubrick.htvapps.com/vidthumb/f6865cb1-d77d-4a31-ba83-d57c4b2324d8/4b9c9d8f-ad14-47ea-bcf4-bf24ee0bb1f3.jpg?crop=0.383xw:0.383xh;0.517xw,0.252xh&resize=1200:*"} 
+                alt={article.title || 'News Image'}
+                className="news-item-img"
+              />
+              <h3 className="news-item-title">{article.title}</h3>
             </div>
-            <div className="news-items">
-              {bottomNews.length === 0 ? (
-                <p>No news available.</p>
-              ) : (
-                bottomNews.map((article, index) => (
-                  <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
-                    <div className="news-item-img-wrapper">
-                      <img
-                        src={getNewsImage(index)} 
-                        alt={article.title || 'News Image'}
-                        className="news-item-img"
-                      />
-                      <h3 className="news-item-title">{article.title}</h3>
-                    </div>
-                    <div className='but'>
-                      <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button>
-                    </div>
-                  </div>
-                ))
-              )}
+            <div className='news-item-content'>
+              <button onClick={(e) => handleSave(article, e)} className="save-button1">Save</button>
             </div>
           </div>
-        </section>
+        ))
+      )}
+    </div>
+    <div className="news-items">
+      {bottomNews.length === 0 ? (
+        <p>No news available.</p>
+      ) : (
+        bottomNews.map((article, index) => (
+          <div key={index} className="news-item" onClick={() => window.open(`${article?.url}`, '_blank')}>
+            <div className="news-item-img-wrapper">
+              <img
+                src={article.urlToImage || "https://kubrick.htvapps.com/vidthumb/f6865cb1-d77d-4a31-ba83-d57c4b2324d8/4b9c9d8f-ad14-47ea-bcf4-bf24ee0bb1f3.jpg?crop=0.383xw:0.383xh;0.517xw,0.252xh&resize=1200:*"} 
+                alt={article.title || 'News Image'}
+                className="news-item-img"
+              />
+              <h3 className="news-item-title">{article.title}</h3>
+            </div>
+            <div className='but'>
+              <button onClick={(e) => handleSave(article, e)} className="save-button2">Save</button>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  </div>
+</section>
+
 
         {/* Featured News Section */}
         <section className="section3">
