@@ -735,21 +735,20 @@ h2{
 }
 .save-button {
   position: absolute;
-  bottom: 20px; /* Adjust this value to move the button closer or further from the bottom */
-  left: 50%;
+  bottom: 20px; 
   transform: translateX(-50%);
   padding: 10px 20px;
   background-color: lightseagreen;
   color: white;
   border: none;
-  
+  left:50%;
   cursor: pointer;
 }
 
 
 
 
-/* Medium Screens (Tablets) */
+
 @media (max-width: 1024px) {
   .section3 {
     padding: 15px;
@@ -771,7 +770,7 @@ h2{
   }
 }
 
-/* Small Screens (Phones) */
+
 @media (max-width: 768px) {
   .section3 {
     padding: 10px;
@@ -793,7 +792,7 @@ h2{
   }
 }
 
-/* Extra Small Screens (Small Phones) */
+
 @media (max-width: 480px) {
   .section3 {
     padding: 5px;
@@ -802,7 +801,7 @@ h2{
   .news-item1 {
     padding: 8px;
     margin-bottom: 5px;
-    height: auto; /* Adjust height if needed */
+    height: auto; 
   }
 .h2{
   height:20px;
@@ -851,20 +850,20 @@ h2{
     width:100%;
   } */
   .save-button1, .save-button2 {
-    width: 60px; /* Adjust width for tablet screens */
+    width: 60px; 
     height: 26px;
   }
 }
 
 @media (max-width: 480px) {
   .save-button1, .save-button2 {
-    width: 61px; /* Adjust width for mobile screens */
+    width: 61px; 
     height: 34px;
       margin-top:-10px; 
   }
 }
 .save-button2 {
-  width: 64px; /* Adjust width for mobile screens */
+  width: 64px;
   height: 34px;
   
 }
@@ -1109,7 +1108,7 @@ margin-top:20px;
   }
   .App{
 margin-left:5px;
-height:100vh;
+height:170vh;
 /* width:100%; */
   }
   
@@ -1514,7 +1513,7 @@ flex-basis: 100%;
   .App {
      margin-left: 16px; 
     width: 89%;
-    height:250vh;
+    height:242vh;
   }
 
 
@@ -1653,11 +1652,10 @@ flex-basis: 100%;
 
 }
 
-/* General Styles for Header */
 .App-header {
   padding: 10px 20px;
   display: flex;
-  justify-content: center; /* Centering header elements horizontally */
+  justify-content: center; 
   align-items: center;
   color: white;
 }
@@ -1669,7 +1667,7 @@ flex-basis: 100%;
   width: 100%;
 }
 
-/* Styles for Search Input and Button */
+
 .search-input1 {
   padding: 8px;
   border-radius: 4px;
@@ -1681,15 +1679,15 @@ flex-basis: 100%;
 
 .search-button {
   padding: 8px 16px;
-  background-color: lightseagreen; /* Updated color */
-  color: white; /* Ensuring text is visible */
+  background-color: lightseagreen; 
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-top:-9px;
 }
 
-/* Styles for Logo */
+
 .logo {
   width: 50px;
   height: 50px;
@@ -1697,30 +1695,28 @@ flex-basis: 100%;
   margin-top:-3px;
 }
 
-/* Media Queries */
 
-/* Medium Screens (Tablets) */
 @media (max-width: 1024px) {
   .App-header {
-    flex-direction: row; /* Keeping flex-direction: row */
+    flex-direction: row; 
     justify-content: flex-end;
   }
 
   .header-actions {
-    flex-direction: row; /* Keeping flex-direction: row */
+    flex-direction: row; 
     width: 100%;
   }
 
   .search-input1, .search-button, .logo {
-    margin: 0 5px; /* Adding spacing between elements */
+    margin: 0 5px; 
   }
 }
 
-/* Small Screens (Phones) */
+
 @media (max-width: 768px) {
   .App-header {
     padding: 10px;
-    flex-direction: row; /* Keeping flex-direction: row */
+    flex-direction: row; 
     justify-content: center;
     width:117%;
 
@@ -1728,13 +1724,13 @@ flex-basis: 100%;
   }
 
   .header-actions {
-    flex-direction: row; /* Keeping flex-direction: row */
+    flex-direction: row; 
     justify-content: center;
     width: 50%;
   }
 
   .search-input1 {
-    width: 70%; /* Adjusting width for smaller screens */
+    width: 70%; 
     padding: 6px;
   }
 
@@ -1749,22 +1745,22 @@ flex-basis: 100%;
   }
 }
 
-/* Extra Small Screens (Small Phones) */
+
 @media (max-width: 480px) {
   .App-header {
     padding: 8px;
-    flex-direction: row; /* Keeping flex-direction: row */
+    flex-direction: row; 
     justify-content: space-around;
   }
 
   .header-actions {
-    flex-direction: row; /* Keeping flex-direction: row */
+    flex-direction: row;
     justify-content: center;
     width: 66%;
   }
 
   .search-input1 {
-    width: 36%; /* Further adjusting width for extra small screens */
+    width: 36%; 
     padding: 4px;
   }
 

@@ -106,15 +106,15 @@ const App = () => {
     const fetchData = async () => {
       try {
         
-        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        const channelsResponse = await axios.get('https://newsapi.org/v2/sources?apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         console.log('Channels Response:', channelsResponse.data);
         setChannels(channelsResponse?.data?.sources || []);
 
-        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        const todayNewsResponse = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         console.log('Today News Response:', todayNewsResponse.data);
         setTodayNews(todayNewsResponse?.data?.articles || []);
 
-        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=eb1be1c8ad3c4d948afcf48ca3908dc1');
+        const featuredNewsResponse = await axios.get('https://newsapi.org/v2/everything?q=featured&apiKey=bfdf4cb923be4950b2e30557ea76c65e');
         console.log('Featured News Response:', featuredNewsResponse.data);
         setFeaturedNews(featuredNewsResponse?.data?.articles || []);
 
@@ -149,7 +149,7 @@ const App = () => {
   const handleSave = (article, event) => {
     event.stopPropagation();
     event.preventDefault();
-    addSavedNews(article); // Save article using context
+    addSavedNews(article); 
   };
 
    const getImageUrl = (url) => url;
