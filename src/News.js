@@ -24,12 +24,12 @@ import channelImage13 from './Images/BBCSport.png';
 import channelImage14 from './Images/Bild.jpg';
 import channelImage15 from './Images/BlastingNewsBR.png';
 
-import image1 from './Images/BreakingNews1.jpg';
-import image2 from './Images/MorningNews.jpg';
-import image3 from './Images/stockImage.jpg';
-import image4 from './Images/skyNews.jpg';
-import image5 from './Images/WorldNews.jpg';
-import image6 from './Images/Live.jpg';
+// import image1 from './Images/BreakingNews1.jpg';
+// import image2 from './Images/MorningNews.jpg';
+// import image3 from './Images/stockImage.jpg';
+// import image4 from './Images/skyNews.jpg';
+// import image5 from './Images/WorldNews.jpg';
+// import image6 from './Images/Live.jpg';
 
 const channelImages = [
   channelImage1, channelImage2, channelImage3, channelImage4, channelImage5, channelImage6, channelImage7,
@@ -37,9 +37,9 @@ const channelImages = [
   channelImage15
 ];
 
-const newsImages = [
-  image1, image2, image3, image4, image5, image6
-];
+// const newsImages = [
+//   image1, image2, image3, image4, image5, image6
+// ];
 
 const App = () => {
   const [username, setUsername] = useState();
@@ -152,7 +152,8 @@ const App = () => {
     addSavedNews(article); // Save article using context
   };
 
-  const getImageUrl = (url) => url || newsImages[0];
+   const getImageUrl = (url) => url;
+  //  || newsImages[0];
   const displayedNews = searchQuery ? filteredNews : todayNews;
   const topNews = displayedNews.slice(0, showAllTodayNews ? displayedNews.length : 3);
   const bottomNews = displayedNews.slice(3, showAllTodayNews ? displayedNews.length : 6);
@@ -197,7 +198,7 @@ const App = () => {
   const visibleChannels = showAllChannels ? channels : channels.slice(0, 7);
 
   const getChannelImage = (index) => channelImages[index % channelImages.length];
-  const getNewsImage = (index) => newsImages[index % newsImages.length];
+  // const getNewsImage = (index) => newsImages[index % newsImages.length];
 
   const handleLogoClick = () => {
     setIsModalOpen(true);
@@ -233,7 +234,7 @@ const App = () => {
         </div>
       </header>
       <main className="App-main">
-        {/* Explore Channels Section */}
+       
         <section className="section1">
           <div className="section-head">
             <h2>Explore Channels</h2>
@@ -248,7 +249,7 @@ const App = () => {
               ) : (
                 visibleChannels.length > 0 && visibleChannels.map((channel, index) => (
                   <div
-                    key={channel.id || index}
+                  key={channel.id || index}
                     className="channel"
                     onClick={() => window.open(`${channel.url}`, '_blank')}
                   >
@@ -265,7 +266,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* Today's Updates Section */}
+       
         <section className="section2">
   <div className="section-header1">
     <h2>Today's Updates</h2>
@@ -318,10 +319,7 @@ const App = () => {
     </div>
   </div>
 </section>
-
-
-        {/* Featured News Section */}
-        <section className="section3">
+<section className="section3">
           <div className="section-header">
             <h2>Featured News</h2>
           </div>

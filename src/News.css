@@ -270,6 +270,7 @@ li a, .logout-button {
 }
 
 .logo-image {
+  margin-top:-5px;
   width: 50px;
   height: 50px;
 }
@@ -336,7 +337,7 @@ li a, .logout-button {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height:300vh;
+  /* height:300vh; */
 }
 
 .section1 {
@@ -1108,6 +1109,7 @@ margin-top:20px;
   }
   .App{
 margin-left:5px;
+height:100vh;
 /* width:100%; */
   }
   
@@ -1758,7 +1760,7 @@ flex-basis: 100%;
   .header-actions {
     flex-direction: row; /* Keeping flex-direction: row */
     justify-content: center;
-    width: 100%;
+    width: 66%;
   }
 
   .search-input1 {
