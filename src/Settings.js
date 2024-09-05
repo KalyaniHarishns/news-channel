@@ -56,8 +56,9 @@ const Settings = () => {
         email: response.data.email,
         password: '',
       });
-      console.log(response.data.name)
-      // setProfileImagePreview(response.data.profileImage || defaultProfilePic); 
+      console.log(response.data.profileImage)
+      
+      setProfileImagePreview(response.data.profileImage || defaultProfilePic); 
     } catch (error) {
       console.error("Error fetching data:", error);
       setError('Error fetching user data.');
@@ -104,7 +105,7 @@ const Settings = () => {
       });
       setDataId(null);
       setProfileImagePreview(defaultProfilePic);
-      localStorage.removeItem('userId'); // Remove userId from local storage
+      localStorage.removeItem('userId'); 
       navigate('/login'); 
     } catch (error) {
       console.error("Error deleting profile:", error);
@@ -122,11 +123,11 @@ const Settings = () => {
       </div>
       <div className='signup-containers'>
         <div className="profile-image-preview">
-          <img
-            src={profileImagePreview}
-            alt="Profile Preview"
-            className="profile-image"
-          />
+        <img
+  src={`http://localhost:3001/${profileImagePreview}`}
+  alt="Profile Preview"
+  className="profile-image"
+/>
           <div className="inputt">
             <label htmlFor="profileImage" className="labe">Profile Image:</label><br />
             <input
