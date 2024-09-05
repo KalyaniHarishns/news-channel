@@ -68,7 +68,7 @@ const Login = () => {
       <form onSubmit={isLogin ? handleLoginSubmit : handleSignupSubmit}>
         {!isLogin && (
           <input
-            type="text"
+            type="text1"
             name="name"
             placeholder="Username"
             value={signupDetails.name}
@@ -77,7 +77,7 @@ const Login = () => {
           />
         )}
         <input
-          type="email"
+          type="email1"
           name="email"
           placeholder="Email"
           value={isLogin ? loginDetails.email : signupDetails.email}
@@ -85,7 +85,7 @@ const Login = () => {
           required
         />
         <input
-          type="password"
+          type="password1"
           name="password"
           placeholder="Password"
           value={isLogin ? loginDetails.password : signupDetails.password}

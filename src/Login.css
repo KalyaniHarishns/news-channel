@@ -1,11 +1,22 @@
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f4f4f4;
-  padding: 20px;
+  width: 100%;
+  
+  padding: 40px; 
+  margin-top:-50px;
+  background-color: #C8F2FC;
 }
 
 .auth-buttons {
@@ -13,40 +24,50 @@
 }
 
 .auth-buttons button {
-  padding: 10px 20px;
+  padding: 12px 24px; 
   margin: 0 5px;
-  border: 1px solid #007bff;
+  border: 2px solid #007bff; 
   background-color: #007bff;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, border-color 0.3s; 
 }
 
 .auth-buttons .active {
   background-color: #0056b3;
+  border-color: #0056b3;
 }
 
 form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px; 
+  background-color: #fff; 
+  padding: 30px; 
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 input {
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 15px; 
+  padding: 12px; 
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 16px; 
 }
 
 button {
-  padding: 10px;
+  padding: 12px;
   border: none;
   background-color: #007bff;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px; 
 }
 
 button:hover {
@@ -56,4 +77,33 @@ button:hover {
 .error-message {
   color: #d9534f;
   margin-top: 10px;
+}
+
+
+
+@media (max-width: 600px) {
+  .auth-buttons {
+    flex-direction: column;
+  }
+
+  .auth-buttons button {
+    margin-bottom: 10px;
+  }
+  
+  form {
+    width: 90%; 
+    padding: 25px; 
+  }
+}
+
+@media (max-width: 400px) {
+  form {
+    width: 100%; 
+    padding: 20px; 
+  }
+
+  input, button {
+    font-size: 14px; 
+    padding: 10px; 
+  }
 }
