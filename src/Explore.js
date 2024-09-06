@@ -26,7 +26,7 @@ const staticImages = [
 const App = () => {
   const [channels, setChannels] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showAllChannels, setShowAllChannels] = useState(false);
+  // const [showAllChannels, setShowAllChannels] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
