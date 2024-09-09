@@ -1,9 +1,6 @@
-
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  
 }
 
 .login-container {
@@ -13,10 +10,9 @@ body {
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  
   padding: 40px; 
-  margin-top:-50px;
-  background-color: #bedde7;
+  margin-top: -50px;
+  background: url('./Images/signuploginimage.jpg') no-repeat center center/cover; /* Set the background image */
 }
 
 .auth-buttons {
@@ -45,7 +41,7 @@ form {
   flex-direction: column;
   width: 100%;
   max-width: 350px; 
-  background-color: #fff; 
+  /* background-color: #fff;  */
   padding: 30px; 
   border: 1px solid #ddd; 
   border-radius: 8px; 
@@ -79,8 +75,6 @@ button:hover {
   margin-top: 10px;
 }
 
-
-
 @media (max-width: 480px) {
   .auth-buttons {
     flex-direction: column;
@@ -89,17 +83,12 @@ button:hover {
   .auth-buttons button {
     margin-bottom: 10px;
   }
+
   .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
     padding: 40px;
-    margin-top: -50px;
-    
-}
+    margin-top: 0;
+  }
+
   form {
     width: 90%; 
     padding: 25px; 
@@ -110,22 +99,24 @@ button:hover {
   form {
     width: 100%; 
     padding: 20px; 
-    margin-bottom:500px;
   }
-
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px; 
+    /* background-color: #fff;  */
+    padding: 30px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
   input, button {
     font-size: 14px; 
     padding: 10px; 
   }
   .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
     padding: 40px;
-    margin-top: -50px;
-
-}
+    margin-top: 0;
+  }
 }

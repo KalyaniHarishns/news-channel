@@ -37,15 +37,15 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space out form elements */
+  justify-content: space-between; 
   max-width: 600px;
   width: 100%;
 }
 
 .messages {
   width: 100%;
-  margin-bottom: 20px; /* Margin to separate from form */
-  text-align: center; /* Center aligned */
+  margin-bottom: 20px; 
+  text-align: center; 
 }
 
 .success-message {
@@ -60,12 +60,12 @@
 .button-group {
   display: flex;
   gap: 10px;
-  margin-top: 20px; /* Added margin for spacing */
+  margin-top: 20px; 
 }
 
 button.settings-save,
 button.settings-delete {
-  width: 150px; /* Set a fixed width for buttons */
+  width: 150px; 
   padding: 10px;
   height: 45px;
   border: none;
