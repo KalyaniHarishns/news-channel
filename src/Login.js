@@ -65,7 +65,7 @@ const Login = () => {
         <button onClick={handleToggle} className={isLogin ? 'active' : ''}>Login</button>
         <button onClick={handleToggle} className={!isLogin ? 'active' : ''}>Signup</button>
       </div>
-      <form onSubmit={isLogin ? handleLoginSubmit : handleSignupSubmit}>
+      <forms onSubmit={isLogin ? handleLoginSubmit : handleSignupSubmit}>
         {!isLogin && (
           <input
             type="text1"
@@ -94,7 +94,7 @@ const Login = () => {
         />
         <button type="submit">{isLogin ? 'Login' : 'Signup'}</button>
         {error && <p className="error-message">{error}</p>}
-      </form>
+      </forms>
     </div>
   );
 };

@@ -1,6 +1,11 @@
+/* Base styles for Login page */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+}
+
+html, body {
+  height: 100%; /* Ensure the body takes the full height */
 }
 
 .login-container {
@@ -8,11 +13,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 100vh; 
   width: 100%;
-  padding: 40px; 
-  margin-top: -50px;
-  background: url('./Images/signuploginimage.jpg') no-repeat center center/cover; /* Set the background image */
+  padding: 20px;
+  background: url('./Images/signuploginimage.jpg') no-repeat center center/cover; 
 }
 
 .auth-buttons {
@@ -36,16 +40,16 @@ body {
   border-color: #0056b3;
 }
 
-form {
+forms {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 350px; 
-  /* background-color: #fff;  */
   padding: 30px; 
   border: 1px solid #ddd; 
   border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  margin: 0 auto; /* Center the form horizontally */
 }
 
 input {
@@ -75,48 +79,78 @@ button:hover {
   margin-top: 10px;
 }
 
-@media (max-width: 480px) {
-  .auth-buttons {
-    flex-direction: column;
-  }
+/* Media Queries */
 
-  .auth-buttons button {
-    margin-bottom: 10px;
-  }
-
+/* For devices with a width of 768px or less (tablets and small screens) */
+@media (max-width: 768px) {
   .login-container {
-    padding: 40px;
-    margin-top: 0;
+    padding: 20px;
+    min-height:60vh;
+    /* Ensure the form is centered vertically within the container */
   }
 
-  form {
-    width: 90%; 
-    padding: 25px; 
+  forms {
+    max-width: 300px; /* Decrease the width of the form */
+    padding: 20px; 
+  }
+
+  input {
+    font-size: 14px; 
+  }
+
+  button {
+    font-size: 14px; 
   }
 }
 
-@media (max-width: 768px) {
-  form {
-    width: 100%; 
-    padding: 20px; 
-  }
-  form {
+
+@media (max-width: 480px) {
+  .login-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; 
     width: 100%;
-    max-width: 350px; 
-    /* background-color: #fff;  */
-    padding: 30px; 
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+  
   }
-  input, button {
+
+  forms {
+    max-width: 280px; 
+    padding: 15px; 
+    /* margin-bottom:250px; */
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  button {
     font-size: 14px; 
-    padding: 10px; 
+  }
+}
+@media (max-width: 1024px) {
+  .login-container {
+    padding: 20px;
+     min-height:70vh; 
+    
+  }
+  forms {
+    /* max-width: 280px;  */
+    padding: 15px; 
+    margin-bottom:250px;
+  }
+}
+@media (max-width: 1200px) {
+  forms {
+      /* max-width: 280px; */
+      padding: 15px;
+      margin-bottom: 367px;
   }
   .login-container {
-    padding: 40px;
-    margin-top: 0;
+    padding: 20px;
+     min-height:70vh; 
+    
   }
 }

@@ -10,16 +10,16 @@
   display: flex;
   align-items: flex-start; 
   justify-content: center;
-  gap: 60px;
+  gap: 90px;
   margin: 20px;
-  margin-top: 20px;
+  margin-top: 80px;
   flex-wrap: wrap;
   
 }
 .profile-image-preview{
   height:200px;
   width:200px;
-  margin-left:40px;
+ 
 }
 .profile-image-container {
   display: flex;
@@ -40,6 +40,7 @@
   justify-content: space-between; 
   max-width: 600px;
   width: 100%;
+
 }
 
 .messages {
@@ -91,7 +92,7 @@ button.settings-delete:hover {
   background-color: #c82333;
 }
 
-.inputt {
+.inpu {
   margin-bottom: 15px;
   width: 100%;
 }
@@ -170,42 +171,17 @@ button.settings-delete:hover {
   background-color: #c82333;
 }
 
-@media (max-width: 1024px) {
-.signup-containers {
-  display: flex;
-  align-items: flex-start; 
-  justify-content: center;
-  gap: 60px;
-  margin: 20px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-  margin-left:300px; 
-}
-.profile-image-preview{
-  height:200px;
-  width:200px;
-  margin-left:40px;
-}
-.profile-image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* General input styling */
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+  width: 120%; 
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box; 
 }
 
-.profile-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Space out form elements */
-  max-width: 600px;
-  width: 100%;
-}
+/* Styles for .inputt class */
 .inputt {
   margin-bottom: 15px;
   width: 100%;
@@ -214,312 +190,215 @@ button.settings-delete:hover {
 .labe {
   font-weight: bold;
   display: block;
-  
   margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="file"] {
-  width: 146%; 
-  padding: 10px;
-  border-radius: 5px;
-  box-sizing: border-box; 
+@media (max-width: 1200px) {
+.signup-containers {
+  flex-direction: column; 
+  align-items: center; 
+  gap: 150px; 
+  margin: 20px; 
+  /* margin-left: -102px; */
 }
-
-button.settings-save {
-  width: 150px;
-  max-width: 200px;
-  padding: 10px;
-  height:45px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  
+.full-container{
+  height:130vh;
 }
-
-button.settings-save:hover {
-  background-color: #45a049;
 }
-
-.button-group {
-  display: flex;
-  gap: 10px;
-  margin-top: -34px; /* Space above buttons */
-}
-.butt{
-  display:flex;
-  flex-direction:column;
-  text-align:center;
-  justify-content: space-between;
-}
-button.settings-edit,
-button.settings-delete {
-  width: 150px;
-  padding: 10px;
-  height: 45px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-}
-@media (max-width: 576px) {
-  .full-container{
-    height:128vh;
-  }
-}
-@media (max-width: 780px) {
+@media (max-width: 1024px) {
   .signup-containers {
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items */
-    gap: 30px; /* Adjusted gap for tablets */
-    margin: 20px; /* Reduced margin for smaller screens */
-    margin-left: 0; /* Removed left margin for better alignment */
-  }
-
-  .labe {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 90px; 
+    margin: 20px; 
+    /* margin-left: -102px; */
   }
 
   .profile-image-preview {
     height: 180px;
     width: 150px;
-    margin-bottom: 20px;
-   }
+    margin-bottom: 57px; 
+  }
 
   .profile-image {
-    width: 200px; /* Adjusted size */
+    width: 200px;
     height: 200px;
   }
 
-  .inputs {
-    margin-bottom: 15px; 
-    width: 119%;
-    margin-left: 0; 
+  .inputt {
+    width: 100%; /* Ensures width consistency */
   }
 
-  .form-container {
-    /* width: 100%; */
+  input[type="text"],
+  input[type="password"] {
+    width: 140%; /* Ensures width consistency */
+  }
+  .full-container {
+    height: 120vh;
+  }
+  input[type="text"], input[type="password"], input[type="file"] {
+    width: 145%;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+  .Form {
     max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 64px;
-  
-}
-
-
-  .full-container {
-    height: 130vh; 
-  }
-
-  .inputt {
-    margin-bottom: 15px; 
   }
 
   .button-group {
     display: flex;
     flex-direction: row; 
     align-items: center; 
-    justify-content: center;
+    justify-content: center; 
     gap: 15px; 
-   
+    margin-top: 10px;
   }
 
-  .settings-card {
-    margin-top: 20px; 
-  }
-
-  button.settings-save {
-   
-    font-size: 16px; /* Slightly larger font size for readability */
+  button.settings-save,
+  button.settings-edit,
+  button.settings-delete {
+    font-size: 16px;
   }
 
   button.settings-edit,
   button.settings-delete {
     width: 100%; 
-    max-width: 140px; 
-    font-size: 16px; 
+    max-width: 140px;
   }
 }
-@media (max-width: 1024px) {
-  .signup-containers {
-    flex-direction: column; 
-    align-items: center; 
-    gap: 30px; 
-    margin: 20px; 
-    margin-left: -102px;
-  }
 
-  .labe {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px; /* Ensure space below the label */
-  }
+/* For screen widths up to 780px */
+@media (max-width: 780px) {
+  .signup-containers {
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    gap:85px;
+    width: 350px;
+    margin-left: 200px;
+}
+.full-container{
+  height:120vh;
+}
+
 
   .profile-image-preview {
-    height: 180px; /* Adjusted size for tablets */
+    height: 180px;
     width: 150px;
-    margin-bottom: 57px; /* Added space below profile image */
+   
   }
 
   .profile-image {
-    width: 200px; /* Adjusted size */
+    width: 200px; 
     height: 200px;
   }
 
-  .inputs {
-    margin-bottom: 15px; /* Consistent margin below input fields */
-    width: 119%;
-    margin-left: 0; /* Reset left margin adjustment */
+  .inputt {
+    width: 100%; /* Ensures width consistency */
   }
 
-  .form-container {
-    /* width: 100%; */
+  input[type="text"],
+  input[type="password"] {
+    width: 140%; /* Ensures width consistency */
+  }
+  .full-container {
+    height: 135vh;
+  }
+
+  .Form {
     max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 64px;
-    /* padding: 0 20px; */
-    /* margin-left: 0; */
-}
-
-
-  .full-container {
-    height: 138vh; /* Adjust height to fit content on smaller screens */
-  }
-
-  .inputt {
-    margin-bottom: 15px; /* Consistent margin below input fields */
   }
 
   .button-group {
     display: flex;
-    flex-direction: row; /* Keep buttons in a row */
-    align-items: center; /* Center buttons vertically */
-    justify-content: center; /* Center buttons horizontally */
-    gap: 15px; /* Adjusted gap for better spacing */
-   margin-top:10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
   }
 
-  .settings-card {
-    margin-top: 20px; 
-  }
-
-  button.settings-save {
-   
-    font-size: 16px; 
+  button.settings-save,
+  button.settings-edit,
+  button.settings-delete {
+    font-size: 16px;
   }
 
   button.settings-edit,
   button.settings-delete {
-    width: 100%; 
-    max-width: 140px; 
-    font-size: 16px; 
+    width: 100%;
+    max-width: 140px;
   }
 }
 
-@media (max-width: 480px) {
+
+@media (max-width: 576px) {
+  .full-container {
+    height: 140vh;
+  }
+
   .signup-containers {
     flex-direction: column;
-    align-items: center; 
-   
-    margin: 10px; 
-    margin-left: 10px; 
+    align-items: center;
+    margin: 10px;
+    width:291px; 
+    margin-left: 40px; 
   }
-  .labe {
-    font-weight: bold;
-    display: block;
-    height:8px;
-    margin-bottom: 5px;
-  }
+
   .profile-image-preview {
     height: 204px;
     width: 166px;
-}
+    margin-left:95px;
+  }
+
   .profile-image {
     width: 160px; 
     height: 160px;
+    margin-left:-38px;
   }
-  
-input[type="password"] {
-    width: 84%;
+
+  .inputt {
+    width: 100%; 
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 113%; 
+  }
+  input[type="file"] {
+    width: 136%;
     padding: 10px;
     border-radius: 5px;
+    margin-left: -53px;
     box-sizing: border-box;
-    margin-bottom: 15px; 
 }
 
-
-input[type="file"] {
-    width: 124%;
-    padding: 10px;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-bottom: 15px; 
-}
-
-
-.inputt {
-    margin-bottom: 15px;
-    width: 100%;
-}
-
-.labe {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-  .inputs {
-    margin-bottom: 15px;
-    width: 100%;
-    margin-left:-20px;
-  }
-  .form-container {
+  .Form {
     width: 100%; 
     max-width: 100%; 
     padding: 0 10px;
-    margin-top:-5px;
-    margin-left:20px;
+    margin-top: -5px;
+    margin-left: 20px;
   }
-.full-container{
-  height:130vh;
-}
-  .inputt {
-    margin-bottom: 10px; 
-  }
-.profile-image-preview{
-  margin-bottom:38px;
-  margin-left:-25px;
-}
+
   .button-group {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-top:10px;
-    margin-left:-27px;
-}
-.settings-card{
-  margin-top:10px;
-}
-  button.settings-save {
-    width: 100%; 
-    max-width: 120px; 
-    font-size: 14px; 
+    margin-top: 10px;
   }
 
+  button.settings-save,
   button.settings-edit,
   button.settings-delete {
     width: 100%; 

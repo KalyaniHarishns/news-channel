@@ -15,17 +15,19 @@ const Settings = () => {
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
-  const [profileImagePreview, setProfileImagePreview] = useState(defaultProfilePic); 
+   const [profileImagePreview, setProfileImagePreview] = useState(defaultProfilePic); 
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-
+const[saveChanges,setSaveChanges]=useState(false);
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
       setDataId(userId);
       updateData(userId);
+      setSaveChanges(false);
+      
     }
-  }, []);
+  }, [saveChanges]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -86,6 +88,7 @@ const Settings = () => {
       setSuccessMessage('Profile updated successfully!');
       setError('');
       setIsEditMode(false);
+      setSaveChanges(true);
     } catch (error) {
       console.error("Error updating data:", error);
       setError(error.response?.data?.message || 'An error occurred while updating the profile.');
@@ -124,10 +127,10 @@ const Settings = () => {
       <div className='signup-containers'>
         <div className="profile-image-preview">
         <img
-  src={`http://localhost:3001/${profileImagePreview}`}
-  alt="Profile Preview"
-  className="profile-image"
-/>
+            src={`http://localhost:3001/${profileImagePreview}`}
+                alt="Profile Preview"
+                 className="profile-image"
+                     />
           <div className="inputt">
             <label htmlFor="profileImage" className="labe">Profile Image:</label><br />
             <input
@@ -138,6 +141,7 @@ const Settings = () => {
             />
           </div>
         </div>
+      
         <form onSubmit={handleUpdate}>
           <div className="inputt">
             <label htmlFor="name" className="labe">Name:</label><br />
@@ -172,7 +176,7 @@ const Settings = () => {
               placeholder="Enter password"
             />
           </div>
-        
+         
           <div className="button-group">
             <button className='settings-save' type="submit">
               Save Changes
@@ -186,6 +190,7 @@ const Settings = () => {
             )}
           </div>
         </form>
+        
         {successMessage && <p className="success-message">{successMessage}</p>}
         {error && <p className="error-message">{error}</p>}
       </div>
