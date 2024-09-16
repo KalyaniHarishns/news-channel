@@ -61,7 +61,7 @@
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  gap: 10px;
+  gap: 20px;
   text-decoration: none;
   font-size: 19px;
  
@@ -166,7 +166,7 @@ ul {
 }
 
 li {
-  padding: 10px;
+  padding: 1px;
   width: 100%;
   margin-left: -20px;
 }
