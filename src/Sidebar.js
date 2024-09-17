@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaHome, FaBookmark, FaCompass, FaBell, FaCog, FaGift } from 'react-icons/fa'; // Import an icon for subscriptions
+import { FaHome, FaBookmark, FaCompass, FaBell, FaCog } from 'react-icons/fa'; // Import an icon for subscriptions
 
 import './News.css';
 import globe from './globe.jpg';
@@ -63,11 +63,7 @@ const Sidebar = () => {
                 <FaCog className="icon" /> Settings
               </Link>
             </li>
-            <li>
-              <Link to="/Subscriptions"> {/* Add the new link here */}
-                <FaGift className="icon" /> Subscriptions
-              </Link>
-            </li>
+          
           </ul>
         </div>
       }
